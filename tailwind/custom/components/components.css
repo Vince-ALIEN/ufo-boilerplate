@@ -1,0 +1,111 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `components` layer
+ *
+ * “Use the `components` layer for any more complicated classes you want to add
+ *  to your project that you'd still like to be able to override with utility
+ *  classes.”
+ *
+ *  — from https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes
+ */
+
+/**
+ * Post title styles
+ *
+ * These will be applied to all headings with a `page-title` or `entry-title`
+ * class on the frontend and to the post title in the block editor.
+ *
+ * The supplied styles are meant to match the default `h1` classes from
+ * Tailwind Typography.
+ */
+.page-title,
+.entry-title {
+	@apply max-w-content mx-auto text-4xl font-semibold tracking-tight text-balance sm:text-5xl;
+}
+
+/**
+ * Post meta and footer styles
+ *
+ * These will be applied to the post-specific elements to keep the post itself
+ * at content width pending custom styling.
+ */
+.entry-meta,
+.entry-footer,
+.post-navigation,
+#comments {
+	@apply max-w-content mx-auto mb-6;
+}
+
+/**
+ * Layout styles for centered content areas
+ *
+ * If you are controlling the width of your content area with styles applied
+ * to its container, you can delete the following styles whose selectors begin
+ * with `.page-content >` and `.entry-content >`. For more details, please see
+ * the following:
+ *
+ * https://make.wordpress.org/core/2021/06/29/on-layout-and-content-width-in-wordpress-5-8/
+ */
+.page-content > *,
+.entry-content > * {
+	/* Content width from the `theme.json` file */
+	@apply max-w-content mx-auto;
+}
+
+.entry-content > .alignwide {
+	/* Wide width from the `theme.json` file */
+	@apply max-w-wide;
+}
+
+.entry-content > .alignfull {
+	@apply max-w-none;
+}
+
+.entry-content > .alignleft {
+	@apply float-left mr-8;
+}
+
+.entry-content > .alignright {
+	@apply float-right ml-8;
+}
+
+/* ── UFO Button ────────────────────────────────────────────────────────────── */
+.btn {
+	padding-inline: var(--spacing-6);
+	padding-block: 0.625rem;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	font-size: 0.875rem;
+	font-weight: 500;
+	transition-property: all;
+	transition-timing-function: ease-in-out;
+	transition-duration: 400ms;
+	&:active {
+		scale: 0.95;
+	}
+}
+
+.btn.is-style-primary {
+	background-color: var(--color-barossa-700);
+	color: white;
+	border-radius: 0.375rem;
+	&:hover {
+		background-color: var(--color-primary);
+	}
+}
+
+.btn.is-style-primary:hover .btn__icon {
+	opacity: 1;
+	translate: 0 0;
+}
+
+.btn.is-style-secondary {
+	color: var(--color-tertiary);
+	border: 2px solid var(--color-tertiary);
+	border-radius: 0.5rem;
+	background-color: transparent;
+	&:hover {
+		background-color: var(--color-secondary);
+		color: white;
+	}
+}
