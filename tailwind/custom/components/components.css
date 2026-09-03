@@ -109,3 +109,7 @@
 		color: white;
 	}
 }
+
+p.wp-block-paragraph {
+	padding: var(--wp--preset--spacing--4);
+}

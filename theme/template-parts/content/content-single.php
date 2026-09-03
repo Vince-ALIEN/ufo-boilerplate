@@ -34,9 +34,9 @@
 
             <div class="absolute mx-0 left-0 right-0 top-0 z-20 flex w-full h-full items-end">
                 <div class="not-prose font-sans my-8 ml-10 mr-10 flex flex-col gap-y-3">
-                    <?php if (function_exists('_ufo_get_breadcrumb')) : ?>
+                    <?php if (function_exists('_ufo_the_breadcrumb')) : ?>
                     <div class="text-background font-semibold italic flex overflow-x-auto no-scrollbar items-center text-sm">
-                        <?php echo _ufo_get_breadcrumb(); ?>
+                        <?php _ufo_the_breadcrumb(); ?>
                     </div>
                     <?php endif; ?>
                     <?php the_title('<h1 class="entry-title text-background my-0" itemprop="name" data-anime-heading>', '</h1>'); ?>
@@ -77,7 +77,7 @@ echo esc_html(strip_tags($title));
                                 }
                                 echo '</ul>';
                             } else {
-                                echo '<p>Aucun titre trouvé dans l\'article</p>';
+                                echo '<p>' . esc_html__( 'Aucun titre trouvé dans l\'article', 'ufo-boilerplate' ) . '</p>';
                             }
                             ?>
                         </div>
@@ -85,21 +85,21 @@ echo esc_html(strip_tags($title));
 
                     <!-- Call to Action -->
                     <div class="mt-6 bg-primary p-6 rounded-lg">
-                        <h3 class="font-chillax font-semibold text-lg text-background mb-2">Des questions ?</h3>
-                        <p class="mb-4 text-sm text-background">Nous sommes là pour vous accompagner dans vos projets.</p>
-                        <a href="/contact/" class="inline-flex items-center justify-center gap-2 bg-background hover:bg-slate-200 text-primary btn rounded-md">
+                        <h3 class="font-chillax font-semibold text-lg text-background mb-2"><?php esc_html_e( 'Des questions ?', 'ufo-boilerplate' ); ?></h3>
+                        <p class="mb-4 text-sm text-background"><?php esc_html_e( 'Nous sommes là pour vous accompagner dans vos projets.', 'ufo-boilerplate' ); ?></p>
+                        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center justify-center gap-2 bg-background hover:bg-slate-200 text-primary btn rounded-md">
                             <i data-lucide="message-circle" class="size-4"></i>
-                            Contactez nous !
+                            <?php esc_html_e( 'Contactez nous !', 'ufo-boilerplate' ); ?>
                         </a>
                     </div>
                     <div class="w-full my-1 grid grid-cols-2 gap-2 items-center justify-start">
-                        <div class="h-8 col-span-1 items-center"><span class="text-base font-semibold uppercase">Partager</span></div>
+                        <div class="h-8 col-span-1 items-center"><span class="text-base font-semibold uppercase"><?php esc_html_e( 'Partager', 'ufo-boilerplate' ); ?></span></div>
                         <div class="col-span-1 flex justify-start gap-1">
-                            <a target="_blank" rel="noopener noreferrer" aria-label="Partager sur LinkedIn" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-barossa-800" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo rawurlencode( get_permalink() ); ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-background" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.605 0 4.276 2.372 4.276 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            <a target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Partager sur LinkedIn', 'ufo-boilerplate' ); ?>" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-barossa-800" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo rawurlencode( get_permalink() ); ?>">
+                                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-background" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.605 0 4.276 2.372 4.276 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                             </a>
-                            <a target="_blank" rel="noopener noreferrer" aria-label="Partager sur Facebook" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-barossa-800" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-background" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>
+                            <a target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Partager sur Facebook', 'ufo-boilerplate' ); ?>" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-barossa-800" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>">
+                                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-background" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>
                             </a>
                         </div>
                     </div>
@@ -109,14 +109,32 @@ echo esc_html(strip_tags($title));
             <!-- Contenu principal -->
             <div class="prose prose-ufo-boilerplate max-w-none lg:col-span-2 pt-8">
                 <?php
-                // Modifier le contenu pour ajouter des IDs aux titres h2
+                // Ajouter un ID d'ancre à chaque <h2> pour la table des matières.
+                // L'ID est dérivé du texte du titre (même logique que la TOC
+                // ci-dessus) puis injecté via WP_HTML_Tag_Processor : aucun
+                // fragment du contenu de l'article n'est réémis sans échappement
+                // (protection XSS). the_content n'est appliqué qu'une seule fois
+                // en aval — pas de double filtrage.
                 $content = get_the_content();
-                $content = preg_replace_callback('/<h2(.*?)>(.*?)<\/h2>/i', function($matches) {
-                    $id = sanitize_title($matches[2]);
-                    return '<h2' . $matches[1] . ' id="' . $id . '">' . $matches[2] . '</h2>';
-                }, $content);
 
-                echo apply_filters('the_content', $content);
+                if ( class_exists( 'WP_HTML_Tag_Processor' ) ) {
+                    preg_match_all( '/<h2.*?>(.*?)<\/h2>/i', $content, $h2_matches );
+                    $processor = new WP_HTML_Tag_Processor( $content );
+                    $h2_index  = 0;
+                    while ( $processor->next_tag( 'h2' ) ) {
+                        // Strip any inline event handler that slipped into the heading markup.
+                        foreach ( (array) $processor->get_attribute_names_with_prefix( 'on' ) as $handler ) {
+                            $processor->remove_attribute( $handler );
+                        }
+                        if ( isset( $h2_matches[1][ $h2_index ] ) && null === $processor->get_attribute( 'id' ) ) {
+                            $processor->set_attribute( 'id', sanitize_title( $h2_matches[1][ $h2_index ] ) );
+                        }
+                        ++$h2_index;
+                    }
+                    $content = $processor->get_updated_html();
+                }
+
+                echo apply_filters( 'the_content', $content );
 
                 wp_link_pages(
                     array(

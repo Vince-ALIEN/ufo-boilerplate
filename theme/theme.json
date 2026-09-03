@@ -2,6 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 3,
 	"settings": {
+		"useRootPaddingAwareAlignments": true,
 		"color": {
 			"palette": [
 				{
@@ -423,7 +424,13 @@
 			"lineHeight": "1.7"
 		},
 		"spacing": {
-			"blockGap": "var(--wp--preset--spacing--8)"
+			"blockGap": "var(--wp--preset--spacing--8)",
+			"padding": {
+				"top": "0",
+				"bottom": "0",
+				"left": "var(--wp--preset--spacing--4)",
+				"right": "var(--wp--preset--spacing--4)"
+			}
 		},
 		"elements": {
 			"heading": {
@@ -526,10 +533,6 @@
 					"margin": {
 						"top": "0",
 						"bottom": "var(--wp--preset--spacing--4)"
-					},
-					"padding": {
-						"left": "var(--wp--preset--spacing--4)",
-						"right": "var(--wp--preset--spacing--4)"
 					}
 				}
 			},

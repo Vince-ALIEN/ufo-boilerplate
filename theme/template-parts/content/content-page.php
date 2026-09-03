@@ -10,10 +10,10 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
+	<header class="entry-header px-2 mb-4">
 		<div class="bg-background">
-		  <div class="entry-content py-24 sm:px-6 sm:py-32 lg:px-8">
-		    <div class="relative isolate overflow-hidden bg-slate-900 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-16">
+		  <div class="entry-content py-22 sm:px-6 sm:py-28 lg:px-8">
+		    <div class="relative isolate overflow-hidden bg-slate-900 px-6 py-24 shadow-2xl rounded-2xl sm:px-16">
 				<?php if ( _ufo_can_show_post_thumbnail() ) : ?>
 				<div class="absolute inset-0 -z-10">
 					<?php the_post_thumbnail( 'full', array( 'class' => 'w-full h-full object-cover' ) ); ?>
@@ -27,17 +27,17 @@
 				}
 				?>
 				<div class="text-background px-4">
-				<?php if (function_exists('_ufo_get_breadcrumb')) echo _ufo_get_breadcrumb(); ?>
+				<?php if (function_exists('_ufo_the_breadcrumb')) _ufo_the_breadcrumb(); ?>
 				</div>
 		      <?php if ( has_excerpt() ) : ?>
-		      <p class="max-w-xl text-lg/8 text-pretty text-slate-100"><?php echo esc_html( get_the_excerpt() ); ?></p>
+		      <p class="max-w-xl text-lg/8 text-pretty text-slate-100 px-4"><?php echo esc_html( get_the_excerpt() ); ?></p>
 		      <?php endif; ?>
 		      <?php
 		      $_ufo_cta_primary_url   = _ufo_get_cta_field( '_ufo_cta_primary_url' );
 		      $_ufo_cta_secondary_url = _ufo_get_cta_field( '_ufo_cta_secondary_url' );
 		      ?>
 		      <?php if ( $_ufo_cta_primary_url || $_ufo_cta_secondary_url ) : ?>
-		      <div class="mt-10 flex items-center gap-x-6">
+		      <div class="mt-10 flex items-center gap-x-6 px-4">
 		        <?php if ( $_ufo_cta_primary_url ) : ?>
 		        <a href="<?php echo esc_url( $_ufo_cta_primary_url ); ?>" class="rounded-md bg-background px-3.5 py-2.5 text-sm font-semibold text-slate-900 shadow-xs hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white dark:bg-white/10 dark:text-white dark:shadow-none dark:inset-ring dark:inset-ring-white/5 dark:hover:bg-white/15 dark:focus-visible:outline-white"> <?php echo esc_html( _ufo_get_cta_field( '_ufo_cta_primary_label' ) ); ?> </a>
 		        <?php endif; ?>

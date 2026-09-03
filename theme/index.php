@@ -17,7 +17,7 @@ get_header();
         </h1>
 
         <div class="mb-4 font-semibold pt-2">
-            <?php if (function_exists('_ufo_get_breadcrumb')) echo _ufo_get_breadcrumb(); ?>
+            <?php if (function_exists('_ufo_the_breadcrumb')) _ufo_the_breadcrumb(); ?>
         </div>
 
                 <?php

@@ -19,7 +19,7 @@
 			background (applied to `nav`, see utilities.css) narrower than the
 			full-width `#masthead`, with transparent gaps on both sides.
 		-->
-		<div class="mx-auto flex max-w-content items-center justify-between gap-x-6 p-3 lg:relative lg:px-8">
+		<div class="mx-auto flex max-w-content items-center justify-between gap-x-6 p-2 lg:relative">
 			<div class="flex lg:flex-1">
 				<?php if ( has_custom_logo() ) : ?>
 					<div class="-m-1.5 p-1.5">
