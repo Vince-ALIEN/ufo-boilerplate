@@ -9,13 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Charger la classe principale
+// Charger la classe principale.
 require_once get_template_directory() . '/inc/ajax-filter/class-ajax-filter.php';
 
-// Charger les fonctions additionnelles
+// Charger les fonctions additionnelles.
 require_once get_template_directory() . '/inc/ajax-filter/functions.php';
 
-// Initialiser le filtre
+// Initialiser le filtre.
 if ( class_exists( '_Ufo_Ajax_Filter' ) ) {
 	_Ufo_Ajax_Filter::get_instance();
 }

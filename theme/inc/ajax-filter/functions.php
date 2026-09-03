@@ -27,11 +27,16 @@ add_filter(
 );
 
 /**
- * Modification des requêtes de filtrage si nécessaire
+ * Point d'accroche pour modifier les arguments WP_Query du filtre.
+ *
+ * Enregistré sans effet par défaut ; à surcharger dans un thème enfant.
+ *
+ * @param array $args       Arguments WP_Query.
+ * @param array $attributes Attributs de filtrage validés (non utilisés ici).
  */
 add_filter(
-	'ajax_filter_query_args',
-	function ( $args, $attributes ) {
+	'_ufo_ajax_filter_query_args',
+	function ( $args, $attributes ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- signature du filtre conservée.
 		return $args;
 	},
 	10,
@@ -44,7 +49,7 @@ add_filter(
 add_action(
 	'wp_enqueue_scripts',
 	function () {
-		// Uniquement la localisation des textes
+		// Uniquement la localisation des textes.
 		wp_localize_script(
 			'ajax-filter',
 			'ajaxFilterTheme',
@@ -59,7 +64,10 @@ add_action(
 
 if ( ! function_exists( '_ufo_display_ajax_filter' ) ) :
 	/**
-	 * Fonction d'aide pour afficher le filtre
+	 * Fonction d'aide pour afficher le filtre.
+	 *
+	 * @param array $args Arguments passés à _Ufo_Ajax_Filter (fusionnés avec les valeurs par défaut).
+	 * @return string
 	 */
 	function _ufo_display_ajax_filter( $args = array() ) {
 		if ( ! class_exists( '_Ufo_Ajax_Filter' ) ) {

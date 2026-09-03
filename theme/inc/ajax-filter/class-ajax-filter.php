@@ -15,9 +15,26 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class _Ufo_Ajax_Filter {
 
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
 	private static $instance = null;
-	protected $name          = 'ajax-filter';
-	protected $version       = '1.0.0';
+
+	/**
+	 * Handle used for the enqueued script/style.
+	 *
+	 * @var string
+	 */
+	protected $name = 'ajax-filter';
+
+	/**
+	 * Asset version, for cache busting.
+	 *
+	 * @var string
+	 */
+	protected $version = '1.0.0';
 
 	/**
 	 * Default arguments that can be overwritten.
@@ -166,7 +183,7 @@ class _Ufo_Ajax_Filter {
 		check_ajax_referer( 'filter-posts-nonce', 'nonce' );
 
 		$allowed_templates = apply_filters(
-			'ajax_filter_allowed_templates',
+			'_ufo_ajax_filter_allowed_templates',
 			array(
 				'template-parts/content/content',
 				'template-parts/content/content-realisation',
@@ -281,13 +298,13 @@ class _Ufo_Ajax_Filter {
 
 		// Validate post types and status.
 		$is_post_type_viewable = apply_filters(
-			'ajax_filter_is_post_type_viewable',
+			'_ufo_ajax_filter_is_post_type_viewable',
 			$this->is_every_post_type_viewable( $attributes['post_type'] ),
 			$attributes
 		);
 
 		$is_post_status_viewable = apply_filters(
-			'ajax_filter_is_post_status_viewable',
+			'_ufo_ajax_filter_is_post_status_viewable',
 			$this->is_every_post_status_viewable( $attributes['post_status'] ),
 			$attributes
 		);
@@ -441,7 +458,7 @@ class _Ufo_Ajax_Filter {
 	 * @param array $attributes Validated filter attributes.
 	 */
 	protected function query_posts( $args, $attributes ) {
-		$query_args = apply_filters( 'ajax_filter_query_args', $args, $attributes );
+		$query_args = apply_filters( '_ufo_ajax_filter_query_args', $args, $attributes );
 		return new WP_Query( $query_args );
 	}
 

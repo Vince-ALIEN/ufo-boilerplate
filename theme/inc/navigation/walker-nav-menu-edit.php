@@ -19,12 +19,26 @@ if ( ! class_exists( 'Walker_Nav_Menu_Edit' ) ) {
 }
 
 if ( ! class_exists( '_Ufo_Walker_Nav_Menu_Edit' ) ) {
+
+	/**
+	 * Menu-editor walker kept as an explicit extension point.
+	 *
+	 * Core's Walker_Nav_Menu_Edit already renders the fields registered via
+	 * `wp_nav_menu_item_custom_fields`, so `start_el()` only forwards to the
+	 * parent for now; override it here if the edit box needs bespoke markup.
+	 */
 	class _Ufo_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 
 		/**
-		 * @see Walker_Nav_Menu_Edit::start_el()
+		 * Start the element output for one menu item's edit box.
+		 *
+		 * @param string   $output Passed by reference. Used to append additional content.
+		 * @param WP_Post  $item   Menu item data object.
+		 * @param int      $depth  Depth of menu item. Used for padding.
+		 * @param stdClass $args   Not used.
+		 * @param int      $id     Not used.
 		 */
-		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) { // phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod.Found -- kept as a documented seam.
 			parent::start_el( $output, $item, $depth, $args, $id );
 		}
 	}
