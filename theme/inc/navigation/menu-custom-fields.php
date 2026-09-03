@@ -86,7 +86,8 @@ if ( ! function_exists( '_ufo_get_post_options' ) ) :
 				'post_status'      => 'publish',
 				'orderby'          => 'date',
 				'order'            => 'DESC',
-				'numberposts'      => 200,
+				// Liste déroulante de l'éditeur de menu : plafond volontaire.
+				'numberposts'      => 200, // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_numberposts
 				'suppress_filters' => false,
 			)
 		);
@@ -144,7 +145,7 @@ if ( ! function_exists( '_ufo_menu_custom_fields' ) ) :
 	 * @param int   $depth   Menu item depth.
 	 * @param array $args    Menu item arguments.
 	 */
-	function _ufo_menu_custom_fields( $item_id, $item, $depth, $args ) {
+	function _ufo_menu_custom_fields( $item_id, $item, $depth, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- signature imposée par le hook wp_nav_menu_item_custom_fields.
 		$fields = _ufo_menu_fields_list();
 		$icons  = _ufo_get_lucide_icons();
 		$posts  = null; // Lazily fetched only if a select-post field is actually rendered.
@@ -242,7 +243,7 @@ if ( ! function_exists( '_ufo_menu_custom_fields_save' ) ) :
 	 * @param int   $menu_item_db_id Menu item ID.
 	 * @param array $args            Menu item arguments.
 	 */
-	function _ufo_menu_custom_fields_save( $menu_id, $menu_item_db_id, $args ) {
+	function _ufo_menu_custom_fields_save( $menu_id, $menu_item_db_id, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- signature imposée par le hook wp_update_nav_menu_item.
 		// Skip during REST API requests — $_POST is empty, which would erase custom meta.
 		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
 			return;
@@ -292,7 +293,7 @@ if ( ! function_exists( '_ufo_load_custom_walker' ) ) :
 	 * @param string $walker Walker class name.
 	 * @return string
 	 */
-	function _ufo_load_custom_walker( $walker ) {
+	function _ufo_load_custom_walker( $walker ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- signature imposée par le filtre wp_edit_nav_menu_walker.
 		return '_Ufo_Walker_Nav_Menu_Edit';
 	}
 endif;
