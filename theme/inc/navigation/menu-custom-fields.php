@@ -244,6 +244,21 @@ if ( ! function_exists( '_ufo_menu_custom_fields_save' ) ) :
 			return;
 		}
 
+		// Verify capability and nonce. WordPress core already verifies this same
+		// nonce ( 'update-nav_menu' / 'update-nav-menu-nonce' ) before the
+		// wp_update_nav_menu_item hook fires — this is defence in depth and also
+		// guards programmatic calls where the nonce is absent.
+		if ( ! current_user_can( 'edit_theme_options' ) ) {
+			return;
+		}
+
+		if (
+			! isset( $_POST['update-nav-menu-nonce'] )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['update-nav-menu-nonce'] ) ), 'update-nav_menu' )
+		) {
+			return;
+		}
+
 		$fields = _ufo_menu_fields_list();
 
 		foreach ( $fields as $field_key => $field ) {

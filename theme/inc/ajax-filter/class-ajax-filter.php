@@ -174,7 +174,7 @@ class _Ufo_Ajax_Filter {
 		);
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce verified above via check_ajax_referer().
-		$params = isset( $_POST['params'] ) && is_array( $_POST['params'] ) ? wp_unslash( $_POST['params'] ) : array();
+		$params = isset( $_POST['params'] ) && is_array( $_POST['params'] ) ? $this->sanitize_params( $_POST['params'] ) : array();
 
 		$requested_template = ! empty( $params['template'] ) ? sanitize_text_field( $params['template'] ) : 'template-parts/content/content';
 		$template           = in_array( $requested_template, $allowed_templates, true ) ? $requested_template : 'template-parts/content/content';
@@ -237,6 +237,35 @@ class _Ufo_Ajax_Filter {
 		);
 
 		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Deep-sanitize the client-supplied params array.
+	 *
+	 * Recursively applies sanitize_text_field() to every scalar value,
+	 * ensuring nested arrays (such as the tax map) are fully cleaned.
+	 *
+	 * @param mixed $value Value to sanitize.
+	 * @return mixed
+	 */
+	protected function sanitize_params( $value ) {
+		if ( is_array( $value ) ) {
+			$sanitized = array();
+			foreach ( $value as $key => $item ) {
+				$sanitized[ sanitize_text_field( (string) $key ) ] = $this->sanitize_params( $item );
+			}
+			return $sanitized;
+		}
+
+		if ( is_string( $value ) ) {
+			return sanitize_text_field( wp_unslash( $value ) );
+		}
+
+		if ( is_int( $value ) || is_float( $value ) || is_bool( $value ) ) {
+			return $value;
+		}
+
+		return '';
 	}
 
 	/**

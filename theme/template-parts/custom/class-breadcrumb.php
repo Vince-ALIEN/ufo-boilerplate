@@ -253,3 +253,55 @@ function _ufo_get_breadcrumb() {
     return $breadcrumb;
 }
 endif;
+
+if ( ! function_exists( '_ufo_the_breadcrumb' ) ) :
+/**
+ * Echo the breadcrumb trail.
+ *
+ * The markup is already escaped inside _ufo_get_breadcrumb() (esc_html / esc_url).
+ * It is passed through wp_kses() with an explicit allowlist that keeps the
+ * schema.org microdata (itemscope / itemtype / itemprop and the <meta> position
+ * elements) that wp_kses_post() would otherwise strip, breaking the
+ * BreadcrumbList structured data.
+ */
+function _ufo_the_breadcrumb() {
+    $allowed = array(
+        'nav'  => array(
+            'aria-label' => true,
+            'class'      => true,
+        ),
+        'ol'   => array(
+            'class'     => true,
+            'itemscope' => true,
+            'itemtype'  => true,
+        ),
+        'li'   => array(
+            'class'        => true,
+            'itemprop'     => true,
+            'itemscope'    => true,
+            'itemtype'     => true,
+            'aria-current' => true,
+        ),
+        'a'    => array(
+            'href'     => true,
+            'class'    => true,
+            'itemprop' => true,
+        ),
+        'span' => array(
+            'class'    => true,
+            'itemprop' => true,
+        ),
+        'meta' => array(
+            'itemprop' => true,
+            'content'  => true,
+        ),
+        'i'    => array(
+            'class'       => true,
+            'data-lucide' => true,
+            'aria-hidden' => true,
+        ),
+    );
+
+    echo wp_kses( _ufo_get_breadcrumb(), $allowed );
+}
+endif;

@@ -37,14 +37,17 @@ class UFO_Contact_Form7 {
                 if ($submission) {
                     $posted_data = $submission->get_posted_data();
 
-                    if (empty($_SERVER['HTTP_USER_AGENT']) ||
-                        empty($_SERVER['HTTP_ACCEPT']) ||
+                    $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
+                    $accept     = isset($_SERVER['HTTP_ACCEPT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_ACCEPT'])) : '';
+
+                    if (empty($user_agent) ||
+                        empty($accept) ||
                         !empty($posted_data['honeypot'])) {
                         $spam = true;
                     }
 
                     $time = time();
-                    $form_time = isset($_POST['_wpcf7_time']) ? (int)$_POST['_wpcf7_time'] : 0;
+                    $form_time = isset($_POST['_wpcf7_time']) ? (int) sanitize_text_field(wp_unslash($_POST['_wpcf7_time'])) : 0;
                     if ($time - $form_time < 5) {
                         $spam = true;
                     }
@@ -168,7 +171,7 @@ class UFO_Contact_Form7 {
                 continue;
             }
 
-            $label = $submit->getAttribute('value') ?: 'Envoyer';
+            $label = $submit->getAttribute('value') ?: __('Envoyer', 'ufo-boilerplate');
 
             $button = $dom->createElement('button');
             $button->setAttribute('type', 'submit');
@@ -205,8 +208,9 @@ class UFO_Contact_Form7 {
     }
 
     public function validate_honeypot($result, $tag) {
-        if ('honeypot' == $tag->name && !empty($_POST['honeypot'])) {
-            $result->invalidate($tag, 'Spam détecté');
+        $honeypot = isset($_POST['honeypot']) ? sanitize_text_field(wp_unslash($_POST['honeypot'])) : '';
+        if ('honeypot' == $tag->name && !empty($honeypot)) {
+            $result->invalidate($tag, __('Spam détecté', 'ufo-boilerplate'));
         }
         return $result;
     }
@@ -221,7 +225,7 @@ add_action('wpcf7_validate_textarea','cwpai_custom_textarea_validation_filter', 
 if (!function_exists('cwpai_custom_textarea_validation_filter')) :
 function cwpai_custom_textarea_validation_filter($result, $tag) {
     // Get the form input
-    $form_input = isset($_POST[$tag->name]) ? $_POST[$tag->name] : '';
+    $form_input = isset($_POST[$tag->name]) ? sanitize_text_field(wp_unslash($_POST[$tag->name])) : '';
 
     // Define spam words
     $spam_words = array('spam', 'sex', 'escort', 'viagra', 'cialis', 'xanax', 'loan', 'credit', 'claim', 'won', 'selected', 'congratulations', 'free', 'off', 'save', 'plans', 'sex');
@@ -230,7 +234,7 @@ function cwpai_custom_textarea_validation_filter($result, $tag) {
     foreach($spam_words as $spam_word) {
         if(stripos($form_input, $spam_word) !== false) {
             // Add validation error
-            $result->invalidate($tag, 'Please remove inappropriate words from your message.');
+            $result->invalidate($tag, __('Please remove inappropriate words from your message.', 'ufo-boilerplate'));
             break;
         }
     }
