@@ -8,31 +8,40 @@
  */
 
 if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
+	/**
+	 * Build the breadcrumb trail markup (schema.org BreadcrumbList).
+	 *
+	 * Every dynamic value is escaped here; the caller (_ufo_the_breadcrumb())
+	 * only runs it through wp_kses() to keep the microdata attributes.
+	 *
+	 * @return string
+	 */
 	function _ufo_get_breadcrumb() {
-		// Configuration de base
+		// Configuration de base. `list_class` omet volontairement `space-x-2`
+		// pour éviter les soucis de lecture d'écran.
 		$config = array(
 			'home_link'     => home_url( '/' ),
 			'home_text'     => __( 'Accueil', 'ufo-boilerplate' ),
 			'wrapper_class' => 'text-sm',
 			'current_class' => 'font-semibold',
 			'link_class'    => 'hover:text-primary transition-colors duration-200',
-			'list_class'    => 'py-2 whitespace-nowrap flex flex-wrap', // Suppression de space-x-2 pour éviter les problèmes avec les lecteurs d'écran
+			'list_class'    => 'py-2 whitespace-nowrap flex flex-wrap',
 			'item_class'    => 'flex items-center',
 		);
 
-		// Récupération du category base depuis les options
+		// Récupération du category base depuis les options.
 		$category_base = get_option( 'category_base' );
 
-		// Initialisation du breadcrumb avec les microdata schema.org
+		// Initialisation du breadcrumb avec les microdata schema.org.
 		$breadcrumb  = '<nav aria-label="Breadcrumb">';
 		$breadcrumb .= '<ol class="' . $config['list_class'] . '" itemscope itemtype="https://schema.org/BreadcrumbList">';
 
-		// Fonction pour créer un élément du breadcrumb
+		// Fabrique d'un élément du breadcrumb.
 		$create_item = function ( $position, $url, $text, $is_current = false, $is_last = false ) use ( $config ) {
 			$item_class = $config['item_class'];
 			$text       = esc_html( $text );
 
-			// Ajouter aria-current pour l'élément actuel
+			// Ajouter aria-current pour l'élément actuel.
 			$aria_current = $is_current ? ' aria-current="page"' : '';
 
 			$item = '<li class="' . $item_class . '"' . $aria_current . ' itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
@@ -50,9 +59,8 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 
 			$item .= sprintf( '<meta itemprop="position" content="%d">', $position );
 
-			// Ajouter le séparateur après chaque élément sauf le dernier
+			// Séparateur visuel après chaque élément sauf le dernier (aria-hidden).
 			if ( ! $is_last ) {
-				// Utilisation d'un pseudo-élément CSS pour le séparateur visuel avec aria-hidden pour les lecteurs d'écran
 				$item .= '<i class="size-4 mx-2" data-lucide="chevron-right"></i>';
 			}
 
@@ -61,31 +69,30 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 			return $item;
 		};
 
-		// Ajout de l'accueil
+		// Ajout de l'accueil.
 		$items = array();
 		if ( ! is_front_page() ) {
 			$items[] = $create_item( 1, $config['home_link'], $config['home_text'], false, false );
 		}
 
-		// Gestion des différents types de pages
+		// Gestion des différents types de pages.
 		$position = count( $items ) + 1;
 
-		// Gestion spéciale pour index.php
 		if ( is_home() && ! is_front_page() ) {
+			// Cas particulier de la page des articles (index.php).
 			$page_for_posts = get_option( 'page_for_posts' );
 			if ( $page_for_posts ) {
 				$items[] = $create_item( $position, get_permalink( $page_for_posts ), get_the_title( $page_for_posts ), true, true );
 			} else {
 				$items[] = $create_item( $position, '', __( 'Blog', 'ufo-boilerplate' ), true, true );
 			}
-		}
-		// Posts et CPT
-		elseif ( is_singular() ) {
+		} elseif ( is_singular() ) {
+			// Articles et CPT.
 			$post = get_queried_object();
 
-			// Gestion commune pour les posts et CPT
-			if ( 'post' === $post->post_type || ! in_array( $post->post_type, array( 'page', 'attachment' ) ) ) {
-				// Récupération des catégories (pour posts et CPT)
+			// Gestion commune pour les posts et CPT.
+			if ( 'post' === $post->post_type || ! in_array( $post->post_type, array( 'page', 'attachment' ), true ) ) {
+				// Récupération des catégories (pour posts et CPT).
 				$categories = 'post' === $post->post_type ?
 				get_the_category() :
 				get_the_terms( $post->ID, 'category' );
@@ -93,7 +100,7 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 				if ( $categories && ! is_wp_error( $categories ) ) {
 					$category = $categories[0];
 
-					// Ajout du category base si défini
+					// Ajout du category base si défini.
 					if ( $category_base ) {
 						$items[] = $create_item(
 							$position++,
@@ -104,7 +111,7 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 						);
 					}
 
-					// Ajout des catégories ancêtres
+					// Ajout des catégories ancêtres.
 					$cat_ancestors = array_reverse( get_ancestors( $category->term_id, 'category' ) );
 					foreach ( $cat_ancestors as $cat_id ) {
 						$category_ancestor = get_term( $cat_id, 'category' );
@@ -117,7 +124,7 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 						);
 					}
 
-					// Ajout de la catégorie courante
+					// Ajout de la catégorie courante.
 					$items[] = $create_item(
 						$position++,
 						get_term_link( $category ),
@@ -127,8 +134,8 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 					);
 				}
 
-				// Pour les CPT, ajout de l'archive du type de contenu si elle existe
-				if ( $post->post_type !== 'post' ) {
+				// Pour les CPT, ajout de l'archive du type de contenu si elle existe.
+				if ( 'post' !== $post->post_type ) {
 					$post_type_obj = get_post_type_object( $post->post_type );
 					if ( $post_type_obj && $post_type_obj->has_archive ) {
 						$items[] = $create_item(
@@ -142,7 +149,7 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 				}
 			}
 
-			// Gestion des parents pour les pages et CPT
+			// Gestion des parents pour les pages et CPT.
 			if ( $post->post_parent ) {
 				$ancestors = array_reverse( get_post_ancestors( $post ) );
 				foreach ( $ancestors as $ancestor ) {
@@ -156,16 +163,14 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 				}
 			}
 
-			// Ajout de la page/post/CPT courant
+			// Ajout de la page/post/CPT courant.
 			$items[] = $create_item( $position, get_permalink(), get_the_title(), true, true );
-		}
-
-		// Archives
-		elseif ( is_archive() ) {
+		} elseif ( is_archive() ) {
+			// Archives.
 			if ( is_category() ) {
 				$term = get_queried_object();
 
-				// Ajout du category base si défini
+				// Ajout du category base si défini.
 				if ( $category_base ) {
 					$items[] = $create_item(
 						$position++,
@@ -176,7 +181,7 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 					);
 				}
 
-				// Ajout des catégories ancêtres
+				// Ajout des catégories ancêtres.
 				if ( $term->parent ) {
 					$ancestors = array_reverse( get_ancestors( $term->term_id, 'category' ) );
 					foreach ( $ancestors as $ancestor_id ) {
@@ -191,7 +196,7 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 					}
 				}
 
-				// Ajout de la catégorie courante
+				// Ajout de la catégorie courante.
 				$items[] = $create_item(
 					$position,
 					get_term_link( $term ),
@@ -217,7 +222,7 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 			} elseif ( is_post_type_archive() ) {
 				$post_type = get_post_type_object( get_post_type() );
 
-				// Ajout du category base pour les archives de CPT si défini
+				// Ajout du category base pour les archives de CPT si défini.
 				if ( $category_base ) {
 					$items[] = $create_item(
 						$position++,
@@ -232,19 +237,22 @@ if ( ! function_exists( '_ufo_get_breadcrumb' ) ) :
 					$items[] = $create_item( $position, get_post_type_archive_link( get_post_type() ), $post_type->labels->name, true, true );
 				}
 			}
-		}
-
-		// Recherche
-		elseif ( is_search() ) {
-			$items[] = $create_item( $position, '', sprintf( __( 'Résultats pour : %s', 'ufo-boilerplate' ), get_search_query() ), true, true );
-		}
-
-		// 404
-		elseif ( is_404() ) {
+		} elseif ( is_search() ) {
+			// Recherche.
+			$items[] = $create_item(
+				$position,
+				'',
+				/* translators: %s: search query. */
+				sprintf( __( 'Résultats pour : %s', 'ufo-boilerplate' ), get_search_query() ),
+				true,
+				true
+			);
+		} elseif ( is_404() ) {
+			// 404.
 			$items[] = $create_item( $position, '', __( 'Page non trouvée', 'ufo-boilerplate' ), true, true );
 		}
 
-		// Construction du HTML final
+		// Construction du HTML final.
 		$breadcrumb .= implode( '', $items );
 		$breadcrumb .= '</ol></nav>';
 
