@@ -105,7 +105,10 @@ class _Ufo_Ajax_Filter {
 			get_template_directory_uri() . '/js/ajax-filter.min.js',
 			array(),
 			$this->version,
-			true
+			array(
+				'strategy'  => 'defer',
+				'in_footer' => true,
+			)
 		);
 
 		wp_localize_script( 'ajax-filter', 'filterPosts', $script_vars );
