@@ -5,10 +5,9 @@
  * @package Ufo_Boilerplate
  */
 
-// Récupérer la catégorie principale
-$categories    = get_the_category();
-$category      = ! empty( $categories ) ? $categories[0] : null;
-$category_slug = $category ? $category->slug : '';
+// Récupérer la catégorie principale.
+$_ufo_categories = get_the_category();
+$_ufo_category   = ! empty( $_ufo_categories ) ? $_ufo_categories[0] : null;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 px-8 pb-8 min-h-[480px]' ); ?>>
@@ -34,10 +33,10 @@ $category_slug = $category ? $category->slug : '';
 		<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>" class="mr-8">
 			<?php echo esc_html( get_the_date() ); ?>
 		</time>
-		<?php if ( $category ) : ?>
+		<?php if ( $_ufo_category ) : ?>
 			<div class="-ml-4 flex items-center gap-x-4">
 				<svg viewBox="0 0 2 2" class="-ml-0.5 size-0.5 flex-none fill-white/50" aria-hidden="true"><circle r="1" cx="1" cy="1" /></svg>
-				<span><?php echo esc_html( $category->name ); ?></span>
+				<span><?php echo esc_html( $_ufo_category->name ); ?></span>
 			</div>
 		<?php endif; ?>
 	</div>

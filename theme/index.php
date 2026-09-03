@@ -24,22 +24,22 @@ get_header();
 		</div>
 
 				<?php
-				$sticky_ids     = get_option( 'sticky_posts' );
-				$featured_query = new WP_Query(
+				$_ufo_sticky_ids     = get_option( 'sticky_posts' );
+				$_ufo_featured_query = new WP_Query(
 					array(
 						'posts_per_page' => 1,
-						'post__in'       => ! empty( $sticky_ids ) ? $sticky_ids : array( 0 ),
+						'post__in'       => ! empty( $_ufo_sticky_ids ) ? $_ufo_sticky_ids : array( 0 ),
 						'orderby'        => 'date',
 						'order'          => 'DESC',
 					)
 				);
-				if ( ! $featured_query->have_posts() ) {
-					$featured_query = new WP_Query( array( 'posts_per_page' => 1 ) );
+				if ( ! $_ufo_featured_query->have_posts() ) {
+					$_ufo_featured_query = new WP_Query( array( 'posts_per_page' => 1 ) );
 				}
-				if ( $featured_query->have_posts() ) :
-					$featured_query->the_post();
-					$feat_categories = get_the_category();
-					$feat_category   = ! empty( $feat_categories ) ? $feat_categories[0] : null;
+				if ( $_ufo_featured_query->have_posts() ) :
+					$_ufo_featured_query->the_post();
+					$_ufo_feat_categories = get_the_category();
+					$_ufo_feat_category   = ! empty( $_ufo_feat_categories ) ? $_ufo_feat_categories[0] : null;
 					?>
 				<article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 px-8 pb-8 min-h-[600px] mb-8">
 					<?php if ( has_post_thumbnail() ) : ?>
@@ -66,10 +66,10 @@ get_header();
 						<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>" class="mr-8">
 							<?php echo esc_html( get_the_date() ); ?>
 						</time>
-						<?php if ( $feat_category ) : ?>
+						<?php if ( $_ufo_feat_category ) : ?>
 							<div class="-ml-4 flex items-center gap-x-4">
 								<svg viewBox="0 0 2 2" class="-ml-0.5 size-0.5 flex-none fill-white/50" aria-hidden="true"><circle r="1" cx="1" cy="1" /></svg>
-								<span><?php echo esc_html( $feat_category->name ); ?></span>
+								<span><?php echo esc_html( $_ufo_feat_category->name ); ?></span>
 							</div>
 						<?php endif; ?>
 					</div>
@@ -93,7 +93,9 @@ get_header();
 
 	<main id="main">
 		<?php
-		echo _Ufo_Ajax_Filter::get_instance()->init_filter(
+		// init_filter() returns the already-rendered template-parts/ajax-filter/base
+		// markup (escaped at the point of output in that template).
+		echo _Ufo_Ajax_Filter::get_instance()->init_filter( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			array(
 				'post_type'      => 'post',
 				'posts_per_page' => 9,
