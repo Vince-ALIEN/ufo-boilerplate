@@ -203,7 +203,16 @@ add_filter( 'register_block_type_args', '_ufo_modify_heading_levels', 10, 2 );
  */
 function _ufo_scripts() {
 	wp_enqueue_style( 'ufo-boilerplate-style', get_stylesheet_uri(), array(), _UFO_VERSION );
-	wp_enqueue_script( 'ufo-boilerplate-script', get_template_directory_uri() . '/js/script.min.js', array(), _UFO_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+	wp_enqueue_script(
+		'ufo-boilerplate-script',
+		get_template_directory_uri() . '/js/script.min.js',
+		array(),
+		_UFO_VERSION,
+		array(
+			'strategy'  => 'defer',
+			'in_footer' => true,
+		)
+	);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

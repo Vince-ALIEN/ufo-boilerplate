@@ -21,7 +21,10 @@ get_header();
 	<article class="page-content" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<?php if ( have_posts() ) : ?>
-		<?php while ( have_posts() ) : the_post(); ?>
+		<?php
+		while ( have_posts() ) :
+			the_post();
+			?>
 
 		<div <?php _ufo_content_class( 'entry-content' ); ?>>
 			<?php
@@ -36,7 +39,7 @@ get_header();
 			?>
 		</div><!-- .entry-content -->
 
-		<?php if ( get_edit_post_link() ) : ?>
+			<?php if ( get_edit_post_link() ) : ?>
 			<footer class="entry-footer">
 				<?php
 				edit_post_link(

@@ -161,14 +161,14 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 			$panel_position_classes = $is_mega_menu
 				? 'lg:inset-x-0'
 				: 'lg:left-1/2 lg:-translate-x-1/2';
-			$output .= '<div data-dropdown-panel class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible mt-4 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-1">';
+			$output                .= '<div data-dropdown-panel class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible mt-4 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-1">';
 
 			// Inner card wrapper: mega menus cap at the same `max-w-content` used
 			// for the rest of the site so the card matches the page's content
 			// column exactly (its `md:w-screen` base would otherwise stay full
 			// viewport width). Regular dropdowns keep their narrower cap.
 			$panel_max_width = $is_mega_menu ? 'lg:max-w-content' : 'lg:max-w-3xl';
-			$output          .= '<div class="md:w-screen max-w-md mt-4 flex-auto overflow-hidden md:rounded-3xl bg-background text-sm/6 md:shadow-lg md:outline-1 outline-foreground/10 ' . $panel_max_width . '">';
+			$output         .= '<div class="md:w-screen max-w-md mt-4 flex-auto overflow-hidden md:rounded-3xl bg-background text-sm/6 md:shadow-lg md:outline-1 outline-foreground/10 ' . $panel_max_width . '">';
 
 			if ( $is_mega_menu ) {
 				$output .= '<div class="grid grid-cols-1 gap-x-8 gap-y-6 p-4 lg:grid-cols-2 lg:p-6">';
@@ -224,9 +224,9 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 					$li_class = $this->is_mega_menu( $item ) ? 'list-none' : 'relative list-none';
 					$output  .= '<li class="' . esc_attr( $li_class ) . '" data-dropdown-item>';
 					$output  .= '<button type="button" data-dropdown-btn aria-expanded="false" aria-haspopup="true" class="inline-flex items-center gap-x-1 cursor-pointer ' . esc_attr( $this->link_class ) . '">';
-					$output .= esc_html( $item->title );
-					$output .= '<i data-lucide="chevron-down" data-chevron class="size-4 transition-transform duration-200" aria-hidden="true"></i>';
-					$output .= '</button>';
+					$output  .= esc_html( $item->title );
+					$output  .= '<i data-lucide="chevron-down" data-chevron class="size-4 transition-transform duration-200" aria-hidden="true"></i>';
+					$output  .= '</button>';
 				} else {
 					$output .= '<li class="list-none">';
 					$output .= '<a href="' . esc_url( $item->url ) . '" class="' . esc_attr( $this->link_class ) . '">' . esc_html( $item->title ) . '</a>';

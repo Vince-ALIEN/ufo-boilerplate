@@ -82,12 +82,12 @@ if ( ! function_exists( '_ufo_get_post_options' ) ) :
 	function _ufo_get_post_options() {
 		$posts = get_posts(
 			array(
-				'post_type'         => 'post',
-				'post_status'       => 'publish',
-				'orderby'           => 'date',
-				'order'             => 'DESC',
-				'numberposts'       => 200,
-				'suppress_filters'  => false,
+				'post_type'        => 'post',
+				'post_status'      => 'publish',
+				'orderby'          => 'date',
+				'order'            => 'DESC',
+				'numberposts'      => 200,
+				'suppress_filters' => false,
 			)
 		);
 
@@ -178,7 +178,11 @@ if ( ! function_exists( '_ufo_menu_custom_fields' ) ) :
 								<?php endforeach; ?>
 							</select>
 						<?php elseif ( 'select-post' === $field['type'] ) : ?>
-							<?php if ( null === $posts ) : $posts = _ufo_get_post_options(); endif; ?>
+							<?php
+							if ( null === $posts ) :
+								$posts = _ufo_get_post_options();
+endif;
+							?>
 							<select id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" class="widefat">
 								<?php foreach ( $posts as $post_id => $post_title ) : ?>
 									<option value="<?php echo esc_attr( $post_id ); ?>" <?php selected( (string) $value, (string) $post_id ); ?>>

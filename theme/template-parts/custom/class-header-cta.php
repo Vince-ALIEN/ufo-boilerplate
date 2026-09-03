@@ -11,7 +11,7 @@
 if ( ! class_exists( '_Ufo_Header_Cta' ) ) {
 	class _Ufo_Header_Cta {
 
-		const SECTION_ID = 'ufo_header_cta';
+		const SECTION_ID   = 'ufo_header_cta';
 		const TEXT_SETTING = 'ufo_header_cta_text';
 		const URL_SETTING  = 'ufo_header_cta_url';
 
