@@ -29,6 +29,18 @@ if ( ! function_exists( '_ufo_custom_scripts' ) ) :
 				'in_footer' => true,
 			)
 		);
+
+		// Website Carbon badge, rendered by the `#wcb` element in the footer.
+		wp_enqueue_script(
+			'website-carbon-badge',
+			'https://unpkg.com/website-carbon-badges@1.1.3/b.min.js',
+			array(),
+			'1.1.3',
+			array(
+				'strategy'  => 'defer',
+				'in_footer' => true,
+			)
+		);
 	}
 endif;
 add_action( 'wp_enqueue_scripts', '_ufo_custom_scripts' );

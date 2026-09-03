@@ -10,105 +10,112 @@
 $_ufo_tagline = get_bloginfo( 'description', 'display' );
 
 ?>
+<!-- ========== FOOTER ========== -->
+<footer id="colophon" class="mt-auto text-background!">
 
-<footer id="colophon" class="bg-background">
-	<div class="mx-auto max-w-content px-6 pt-16 pb-8 sm:pt-24 lg:px-8 lg:pt-32">
-		<div class="xl:grid xl:grid-cols-3 xl:gap-8">
-			<div class="space-y-8">
-				<?php echo _Ufo_Options::footer_logo_html( '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<div class="entry-content bg-barossa-950 p-6 sm:p-8 lg:p-12 text-background!">
 
+		<!-- Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6">
+
+			<div class="lg:col-span-1">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mb-6 inline-block">
+					<?php echo _Ufo_Options::footer_logo_html( 'h-auto max-w-[170px]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Markup built and escaped inside _Ufo_Options. ?>
+				</a>
 				<?php if ( $_ufo_tagline ) : ?>
-					<p class="text-sm/6 text-balance text-foreground my-4"><?php echo esc_html( $_ufo_tagline ); ?></p>
+					<p class="not-prose text-background text-sm"><?php echo esc_html( $_ufo_tagline ); ?></p>
 				<?php endif; ?>
+			</div>
+			<!-- End Col -->
 
-				<div class="flex gap-x-6">
-					<?php _Ufo_Social_Media::the_links( 'text-foreground/70 hover:text-foreground', 'size-6' ); ?>
+			<div class="lg:col-span-1">
+				<p class="not-prose mb-2 text-background font-chillax"><?php esc_html_e( 'Contact', 'ufo-boilerplate' ); ?></p>
+				<?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
+					<aside class="mt-3 grid space-y-1 not-prose text-sm text-background!" role="complementary" aria-label="<?php esc_attr_e( 'Footer contact', 'ufo-boilerplate' ); ?>">
+						<?php dynamic_sidebar( 'sidebar-2' ); ?>
+					</aside>
+				<?php endif; ?>
+			</div>
+			<!-- End Col -->
+
+			<div class="lg:col-span-1">
+				<p class="not-prose mb-2 text-background font-chillax"><?php esc_html_e( 'Services', 'ufo-boilerplate' ); ?></p>
+				<?php if ( has_nav_menu( 'menu-2' ) ) : ?>
+					<nav class="mt-3" aria-label="<?php esc_attr_e( 'Footer menu', 'ufo-boilerplate' ); ?>">
+						<?php
+						wp_nav_menu(
+							array(
+								'theme_location' => 'menu-2',
+								'container'      => false,
+								'items_wrap'     => '<ul class="group space-y-1">%3$s</ul>',
+								'depth'          => 1,
+								'fallback_cb'    => false,
+								'link_before'    => '<span class="not-prose text-background hover:text-primary transition-colors">',
+								'link_after'     => '</span>',
+							)
+						);
+						?>
+					</nav>
+				<?php endif; ?>
+			</div>
+			<!-- End Col -->
+
+			<div class="lg:col-span-2">
+				<div class="w-full lg:w-2/3 lg:float-right">
+					<p class="not-prose mb-2 text-background font-chillax"><?php esc_html_e( 'Me suivre', 'ufo-boilerplate' ); ?></p>
+
+					<?php if ( is_active_sidebar( 'sidebar-3' ) ) : ?>
+						<aside role="complementary" aria-label="<?php esc_attr_e( 'Footer newsletter', 'ufo-boilerplate' ); ?>">
+							<?php dynamic_sidebar( 'sidebar-3' ); ?>
+						</aside>
+					<?php endif; ?>
+
+					<!-- Social Brands -->
+					<div class="my-4 flex flex-wrap gap-2">
+						<?php _Ufo_Social_Media::the_links( 'inline-flex items-center justify-center p-2 rounded-full bg-primary text-background hover:bg-barossa-800', 'size-5' ); ?>
+					</div>
+					<!-- End Social Brands -->
+
+					<div id="wcb" class="ufo-carbonbadge wcb-d p-4"></div>
 				</div>
 			</div>
+			<!-- End Col -->
 
-			<div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-				<div class="md:grid md:grid-cols-2 md:gap-8">
-					<?php if ( has_nav_menu( 'menu-solutions' ) ) : ?>
-						<div>
-							<h3 class="text-sm/6 font-semibold text-foreground"><?php esc_html_e( 'Solutions', 'ufo-boilerplate' ); ?></h3>
-							<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'menu-solutions',
-									'container'      => false,
-									'items_wrap'     => '<ul role="list" class="mt-6 space-y-2">%3$s</ul>',
-									'depth'          => 1,
-								)
-							);
-							?>
-						</div>
-					<?php endif; ?>
-
-					<?php if ( has_nav_menu( 'menu-support' ) ) : ?>
-						<div class="mt-10 md:mt-0">
-							<h3 class="text-sm/6 font-semibold text-foreground"><?php esc_html_e( 'Support', 'ufo-boilerplate' ); ?></h3>
-							<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'menu-support',
-									'container'      => false,
-									'items_wrap'     => '<ul role="list" class="mt-6 space-y-2">%3$s</ul>',
-									'depth'          => 1,
-								)
-							);
-							?>
-						</div>
-					<?php endif; ?>
-				</div>
-
-				<div class="md:grid md:grid-cols-2 md:gap-8">
-					<?php if ( has_nav_menu( 'menu-2' ) ) : ?>
-						<div>
-							<h3 class="text-sm/6 font-semibold text-foreground"><?php esc_html_e( 'Company', 'ufo-boilerplate' ); ?></h3>
-							<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'menu-2',
-									'container'      => false,
-									'items_wrap'     => '<ul role="list" class="mt-6 space-y-2">%3$s</ul>',
-									'depth'          => 1,
-								)
-							);
-							?>
-						</div>
-					<?php endif; ?>
-					<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-						<div class="">
-							<?php dynamic_sidebar( 'sidebar-1' ); ?>
-						</div>
-					<?php endif; ?>
-				</div>
-			</div>
 		</div>
+		<!-- End Grid -->
 
-		<div class="mt-16 border-t border-foreground/10 pt-8 sm:mt-20 lg:mt-24 lg:flex gap-y-2 sm:gap-y-0 sm:justify-between items-end sm:items-center">
-			<p class="text-sm font-semibold text-foreground/70">
+		<div class="mt-10 lg:flex gap-y-2 sm:gap-y-0 sm:justify-between items-end sm:items-center">
+			<p class="not-prose text-sm text-background font-chillax">
 				<?php
 				printf(
-					/* translators: 1: Current year, 2: Site name. */
-					esc_html__( '© %1$s %2$s. All rights reserved.', 'ufo-boilerplate' ),
-					esc_html( gmdate( 'Y' ) ),
-					esc_html( get_bloginfo( 'name' ) )
+					/* translators: 1: site name, 2: copyright notice, 3: current year. */
+					esc_html__( '%1$s. %2$s © %3$s', 'ufo-boilerplate' ),
+					esc_html( get_bloginfo( 'name' ) ),
+					esc_html( get_theme_mod( 'ufo_copyright_text', __( 'Tous droits réservés', 'ufo-boilerplate' ) ) ),
+					esc_html( gmdate( 'Y' ) )
 				);
 				?>
 			</p>
 			<?php if ( has_nav_menu( 'menu-3' ) ) : ?>
+				<nav aria-label="<?php esc_attr_e( 'Footer legal', 'ufo-boilerplate' ); ?>">
 					<?php
 					wp_nav_menu(
 						array(
 							'theme_location' => 'menu-3',
 							'container'      => false,
-							'items_wrap'     => '<ul role="list" class="not-prose flex space-x-3 pb-4">%3$s</ul>',
+							'items_wrap'     => '<ul class="flex flex-wrap gap-x-4 gap-y-1">%3$s</ul>',
 							'depth'          => 1,
+							'fallback_cb'    => false,
+							'link_before'    => '<span class="text-xs text-slate-100 hover:text-white transition-colors">',
+							'link_after'     => '</span>',
 						)
 					);
 					?>
+				</nav>
 			<?php endif; ?>
 		</div>
+
 	</div>
-</footer><!-- #colophon -->
+
+</footer>
+<!-- ========== END FOOTER ========== -->
