@@ -89,6 +89,18 @@
 		</properties>
 	</rule>
 
+	<rule ref="WordPress.NamingConventions.ValidVariableName">
+		<properties>
+			<!-- PHP DOM extension property names are fixed by the API. -->
+			<property name="allowed_custom_properties" type="array">
+				<element value="parentNode"/>
+				<element value="firstChild"/>
+				<element value="nodeValue"/>
+				<element value="textContent"/>
+			</property>
+		</properties>
+	</rule>
+
 	<rule ref="WordPress.Files.FileName">
 		<properties>
 			<property name="is_theme" value="true"/>

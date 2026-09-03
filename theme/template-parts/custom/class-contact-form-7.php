@@ -9,10 +9,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
-	class UFO_Contact_Form7 {
+if ( ! class_exists( '_Ufo_Contact_Form7' ) ) :
+
+	/**
+	 * Restyles Contact Form 7 output and adds lightweight spam protection.
+	 */
+	class _Ufo_Contact_Form7 {
+
+		/**
+		 * Singleton instance.
+		 *
+		 * @var self|null
+		 */
 		private static $instance = null;
 
+		/**
+		 * Get the singleton instance.
+		 *
+		 * @return self
+		 */
 		public static function get_instance() {
 			if ( null === self::$instance ) {
 				self::$instance = new self();
@@ -20,21 +35,30 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 			return self::$instance;
 		}
 
+		/**
+		 * Register hooks.
+		 */
 		public function init() {
 			add_filter( 'wpcf7_form_elements', array( $this, 'customize_cf7_elements' ) );
 			add_filter( 'wpcf7_validate_text', array( $this, 'validate_honeypot' ), 20, 2 );
 			add_filter( 'wpcf7_validate_text*', array( $this, 'validate_honeypot' ), 20, 2 );
+			add_filter( 'wpcf7_validate_textarea', array( $this, 'validate_textarea_spam' ), 10, 2 );
+			add_filter( 'wpcf7_validate_textarea*', array( $this, 'validate_textarea_spam' ), 10, 2 );
 			add_action( 'wp_enqueue_scripts', array( $this, 'handle_cf7_loading' ), 77 );
 
 			$this->setup_spam_protection();
 		}
 
+		/**
+		 * Flag a submission as spam on a missing UA/Accept header, a filled
+		 * honeypot, or a sub-5-second fill time.
+		 */
 		private function setup_spam_protection() {
 			add_filter(
 				'wpcf7_spam',
 				function ( $spam ) {
 					if ( ! $spam ) {
-						/** @suppress P1009 WPCF7_Submission is defined by the Contact Form 7 plugin */
+						// WPCF7_Submission is provided by the Contact Form 7 plugin.
 						$submission = WPCF7_Submission::get_instance();
 						if ( $submission ) {
 							$posted_data = $submission->get_posted_data();
@@ -48,8 +72,9 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 								$spam = true;
 							}
 
-							$time      = time();
-							$form_time = isset( $_POST['_wpcf7_time'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['_wpcf7_time'] ) ) : 0;
+							$time = time();
+							// Nonce/validation is handled by Contact Form 7 before this filter runs.
+							$form_time = isset( $_POST['_wpcf7_time'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['_wpcf7_time'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 							if ( $time - $form_time < 5 ) {
 								$spam = true;
 							}
@@ -60,30 +85,40 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 			);
 		}
 
+		/**
+		 * Dequeue the Contact Form 7 assets on pages that have no form.
+		 */
 		public function handle_cf7_loading() {
 			global $post;
 
 			$has_cf7 = false;
 
 			if ( $post ) {
-				// Vérifier si le contenu contient un shortcode CF7
+				// Vérifier si le contenu contient un shortcode CF7.
 				if ( has_shortcode( $post->post_content, 'contact-form-7' ) ) {
 					$has_cf7 = true;
 				}
 
-				// Vérifier si le contenu contient un bloc CF7
+				// Vérifier si le contenu contient un bloc CF7.
 				if ( has_block( 'contact-form-7/contact-form-selector', $post ) ) {
 					$has_cf7 = true;
 				}
 			}
 
-			// Désactiver CF7 si aucun formulaire n'est présent sur la page
+			// Désactiver CF7 si aucun formulaire n'est présent sur la page.
 			if ( ! $has_cf7 ) {
 				wp_dequeue_script( 'contact-form-7' );
 				wp_dequeue_style( 'contact-form-7' );
 			}
 		}
 
+		/**
+		 * Rewrite the form markup: Tailwind classes, a real submit button,
+		 * a hidden honeypot, and a compact layout for newsletter forms.
+		 *
+		 * @param string $content Raw form HTML from Contact Form 7.
+		 * @return string
+		 */
 		public function customize_cf7_elements( $content ) {
 			if ( empty( $content ) ) {
 				return '';
@@ -104,7 +139,7 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 
 			$xpath = new DOMXPath( $dom );
 
-			/** @suppress P1009 WPCF7_ContactForm is defined by the Contact Form 7 plugin */
+			// WPCF7_ContactForm is provided by the Contact Form 7 plugin.
 			$current_form  = class_exists( 'WPCF7_ContactForm' ) ? WPCF7_ContactForm::get_current() : null;
 			$is_newsletter = $current_form && str_contains( (string) $current_form->prop( 'additional_settings' ), 'cf7-newsletter' );
 
@@ -115,7 +150,7 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 					'//input[@type="submit"]' => 'bg-secondary text-background py-3 px-6 text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity cursor-pointer',
 				);
 
-				// Supprimer le spinner CF7 et la classe has-spinner du submit
+				// Supprimer le spinner CF7 et la classe has-spinner du submit.
 				foreach ( iterator_to_array( $xpath->query( '//span[contains(@class, "wpcf7-spinner")]' ) ) as $el ) {
 					if ( $el instanceof DOMElement ) {
 						$el->parentNode->removeChild( $el );
@@ -127,14 +162,14 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 					}
 				}
 
-				// Supprimer l'attribut size qui force une largeur fixe
+				// Supprimer l'attribut size qui force une largeur fixe.
 				foreach ( iterator_to_array( $xpath->query( '//input[@type="email"]' ) ) as $el ) {
 					if ( $el instanceof DOMElement ) {
 						$el->removeAttribute( 'size' );
 					}
 				}
 
-				// Supprimer les <p> et <br> ajoutés par CF7
+				// Supprimer les <p> et <br> ajoutés par CF7.
 				foreach ( iterator_to_array( $xpath->query( '//br' ) ) as $br ) {
 					$br->parentNode->removeChild( $br );
 				}
@@ -164,18 +199,19 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 					if ( ! $element instanceof DOMElement ) {
 						continue;
 					}
-					$currentClass = $element->getAttribute( 'class' );
-					$element->setAttribute( 'class', trim( $currentClass . ' ' . $classes ) );
+					$current_class = $element->getAttribute( 'class' );
+					$element->setAttribute( 'class', trim( $current_class . ' ' . $classes ) );
 				}
 			}
 
-			// Remplace les <input type="submit"> par des <button> avec icône Lucide
+			// Remplace les <input type="submit"> par des <button> avec icône Lucide.
 			foreach ( iterator_to_array( $xpath->query( '//input[@type="submit"]' ) ) as $submit ) {
 				if ( ! $submit instanceof DOMElement ) {
 					continue;
 				}
 
-				$label = $submit->getAttribute( 'value' ) ?: __( 'Envoyer', 'ufo-boilerplate' );
+				$submit_value = $submit->getAttribute( 'value' );
+				$label        = '' !== $submit_value ? $submit_value : __( 'Envoyer', 'ufo-boilerplate' );
 
 				$button = $dom->createElement( 'button' );
 				$button->setAttribute( 'type', 'submit' );
@@ -215,37 +251,44 @@ if ( ! class_exists( 'UFO_Contact_Form7' ) ) :
 			return '<div class="bg-slate-200 rounded-xl py-2 px-6 mx-4">' . $output . '</div>';
 		}
 
+		/**
+		 * Invalidate the field when the honeypot input has been filled.
+		 *
+		 * @param WPCF7_Validation $result Validation result.
+		 * @param WPCF7_FormTag    $tag    The form tag being validated.
+		 * @return WPCF7_Validation
+		 */
 		public function validate_honeypot( $result, $tag ) {
-			$honeypot = isset( $_POST['honeypot'] ) ? sanitize_text_field( wp_unslash( $_POST['honeypot'] ) ) : '';
-			if ( 'honeypot' == $tag->name && ! empty( $honeypot ) ) {
+			// Contact Form 7 verifies its own nonce before this filter runs.
+			$honeypot = isset( $_POST['honeypot'] ) ? sanitize_text_field( wp_unslash( $_POST['honeypot'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( 'honeypot' === $tag->name && ! empty( $honeypot ) ) {
 				$result->invalidate( $tag, __( 'Spam détecté', 'ufo-boilerplate' ) );
 			}
 			return $result;
 		}
-	}
-endif;
 
-// Initialize
-add_action( 'init', array( UFO_Contact_Form7::get_instance(), 'init' ) );
+		/**
+		 * Reject textarea submissions containing an obvious spam keyword.
+		 *
+		 * @param WPCF7_Validation $result Validation result.
+		 * @param WPCF7_FormTag    $tag    The form tag being validated.
+		 * @return WPCF7_Validation
+		 */
+		public function validate_textarea_spam( $result, $tag ) {
+			// Contact Form 7 verifies its own nonce before this filter runs.
+			$form_input = isset( $_POST[ $tag->name ] ) ? sanitize_text_field( wp_unslash( $_POST[ $tag->name ] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
-add_action( 'wpcf7_validate_textarea', 'cwpai_custom_textarea_validation_filter', 10, 2 );
+			$spam_words = array( 'spam', 'sex', 'escort', 'viagra', 'cialis', 'xanax', 'loan', 'credit', 'claim', 'won', 'selected', 'congratulations', 'free', 'off', 'save', 'plans' );
 
-if ( ! function_exists( 'cwpai_custom_textarea_validation_filter' ) ) :
-	function cwpai_custom_textarea_validation_filter( $result, $tag ) {
-		// Get the form input
-		$form_input = isset( $_POST[ $tag->name ] ) ? sanitize_text_field( wp_unslash( $_POST[ $tag->name ] ) ) : '';
-
-		// Define spam words
-		$spam_words = array( 'spam', 'sex', 'escort', 'viagra', 'cialis', 'xanax', 'loan', 'credit', 'claim', 'won', 'selected', 'congratulations', 'free', 'off', 'save', 'plans', 'sex' );
-
-		// Check if any spam word exists in the input
-		foreach ( $spam_words as $spam_word ) {
-			if ( stripos( $form_input, $spam_word ) !== false ) {
-				// Add validation error
-				$result->invalidate( $tag, __( 'Please remove inappropriate words from your message.', 'ufo-boilerplate' ) );
-				break;
+			foreach ( $spam_words as $spam_word ) {
+				if ( false !== stripos( $form_input, $spam_word ) ) {
+					$result->invalidate( $tag, __( 'Please remove inappropriate words from your message.', 'ufo-boilerplate' ) );
+					break;
+				}
 			}
+			return $result;
 		}
-		return $result;
 	}
+
+	add_action( 'init', array( _Ufo_Contact_Form7::get_instance(), 'init' ) );
 endif;
