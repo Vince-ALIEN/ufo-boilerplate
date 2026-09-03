@@ -72,25 +72,33 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 		}
 
 		/**
-		 * Returns the footer logo markup, falling back to the site’s custom
-		 * logo, then to the site name as plain text.
+		 * Returns the footer logo image markup, falling back to the site’s
+		 * custom-logo image, then to the site name as plain text.
+		 *
+		 * The result is never itself a link — wrap it in an `<a>` (with an
+		 * accessible name) at the call site.
 		 *
 		 * @param string $classes Classes applied to the `<img>` or fallback `<span>`.
+		 * @param string $alt     Alternative text for the image (use '' when the
+		 *                         wrapping link already carries an accessible name).
 		 */
-		public static function footer_logo_html( $classes = 'h-9' ) {
+		public static function footer_logo_html( $classes = 'h-9', $alt = '' ) {
 			$attachment_id = get_theme_mod( self::FOOTER_LOGO_SETTING );
+
+			if ( ! $attachment_id && has_custom_logo() ) {
+				$attachment_id = get_theme_mod( 'custom_logo' );
+			}
 
 			if ( $attachment_id ) {
 				return wp_get_attachment_image(
 					$attachment_id,
 					'full',
 					false,
-					array( 'class' => esc_attr( $classes ) )
+					array(
+						'class' => esc_attr( $classes ),
+						'alt'   => $alt,
+					)
 				);
-			}
-
-			if ( has_custom_logo() ) {
-				return get_custom_logo();
 			}
 
 			return sprintf(

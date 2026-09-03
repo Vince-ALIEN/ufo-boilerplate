@@ -19,7 +19,12 @@ $_ufo_tagline = get_bloginfo( 'description', 'display' );
 		<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6">
 
 			<div class="lg:col-span-1">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mb-6 inline-block">
+				<a
+					href="<?php echo esc_url( home_url( '/' ) ); ?>"
+					class="mb-6 inline-block"
+					rel="home"
+					aria-label="<?php echo esc_attr( sprintf( /* translators: %s: site name. */ __( '%s – home', 'ufo-boilerplate' ), get_bloginfo( 'name' ) ) ); ?>"
+				>
 					<?php echo _Ufo_Options::footer_logo_html( 'h-auto max-w-[170px]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Markup built and escaped inside _Ufo_Options. ?>
 				</a>
 				<?php if ( $_ufo_tagline ) : ?>
