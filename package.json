@@ -26,6 +26,7 @@
 		"production": "run-p \"production:**\"",
 		"prod": "npm run production",
 		"zip": "node node_scripts/zip.js ufo-boilerplate",
+		"make-pot": "php node_scripts/make-pot.php",
 		"bundle": "run-s production zip"
 	},
 	"devDependencies": {
