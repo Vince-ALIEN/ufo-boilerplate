@@ -11,10 +11,16 @@
  */
 
 if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
+
+	/**
+	 * Header nav walker: top-level links/buttons plus mega-menu panels.
+	 */
 	class _Ufo_Header_Nav_Walker extends Walker_Nav_Menu {
 
 		/**
-		 * @var string Classes applied to each top-level (depth 0) link/button.
+		 * Classes applied to each top-level (depth 0) link/button.
+		 *
+		 * @var string
 		 */
 		protected $link_class;
 
@@ -31,6 +37,8 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 		protected $current_top_level_item = null;
 
 		/**
+		 * Store the top-level link class for later use in start_el().
+		 *
 		 * @param string $link_class Classes to apply to each top-level menu link/button.
 		 */
 		public function __construct( $link_class ) {
@@ -141,7 +149,13 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 		}
 
 		/**
+		 * Open the sub-menu wrapper (mega-menu panel at depth 0).
+		 *
 		 * @see Walker::start_lvl()
+		 *
+		 * @param string   $output Passed by reference. Used to append additional content.
+		 * @param int      $depth  Depth of menu item.
+		 * @param stdClass $args   wp_nav_menu() arguments.
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = null ) {
 			if ( 0 !== $depth ) {
@@ -179,7 +193,13 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 		}
 
 		/**
+		 * Close the sub-menu wrapper, appending featured posts for a mega menu.
+		 *
 		 * @see Walker::end_lvl()
+		 *
+		 * @param string   $output Passed by reference. Used to append additional content.
+		 * @param int      $depth  Depth of menu item.
+		 * @param stdClass $args   wp_nav_menu() arguments.
 		 */
 		public function end_lvl( &$output, $depth = 0, $args = null ) {
 			if ( 0 !== $depth ) {
@@ -203,7 +223,15 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 		}
 
 		/**
+		 * Render one menu item (top-level link/button or child link).
+		 *
 		 * @see Walker::start_el()
+		 *
+		 * @param string   $output Passed by reference. Used to append additional content.
+		 * @param WP_Post  $item   Menu item data object.
+		 * @param int      $depth  Depth of menu item.
+		 * @param stdClass $args   wp_nav_menu() arguments.
+		 * @param int      $id     Current item ID.
 		 */
 		public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
 			$classes      = empty( $item->classes ) ? array() : (array) $item->classes;
@@ -259,7 +287,14 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 		}
 
 		/**
+		 * Close one menu item.
+		 *
 		 * @see Walker::end_el()
+		 *
+		 * @param string   $output Passed by reference. Used to append additional content.
+		 * @param WP_Post  $item   Menu item data object.
+		 * @param int      $depth  Depth of menu item.
+		 * @param stdClass $args   wp_nav_menu() arguments.
 		 */
 		public function end_el( &$output, $item, $depth = 0, $args = null ) {
 			$output .= '</li>';
