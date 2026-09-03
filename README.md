@@ -25,23 +25,78 @@ Beyond the \_tw base, this theme adds (mostly under
 * **Custom logo** (`class-custom-logo.php`) — registers `custom-logo` theme
   support for the header.
 * **Breadcrumbs** (`class-breadcrumb.php`) — accessible, schema.org-annotated
-  breadcrumb trail with Category Base support.
+  breadcrumb trail with Category Base support. Call `_ufo_the_breadcrumb()`
+  to print it (run through `wp_kses()` with an allowlist that keeps the
+  microdata); `_ufo_get_breadcrumb()` returns the raw string.
 * **Footer navigation** (`class-footer-nav.php`) — applies Tailwind classes
   to the footer's `wp_nav_menu()` links.
-* **Contact Form 7 integration** (`class-contact-form-7.php`) — restyles CF7
-  markup with Tailwind (including a distinct newsletter-form variant),
-  replaces the submit `<input>` with a `<button>` + Lucide icon, wraps the
-  form in a `bg-slate-200 rounded-xl px-4` container, adds honeypot/timing
-  spam protection, and only enqueues CF7's assets on pages that actually use
-  it.
+* **Contact Form 7 integration** (`class-contact-form-7.php`,
+  `_Ufo_Contact_Form7`) — restyles CF7 markup with Tailwind (including a
+  distinct newsletter-form variant), replaces the submit `<input>` with a
+  `<button>` + Lucide icon, wraps the form in a `bg-slate-200 rounded-xl
+  px-4` container, adds honeypot / timing / keyword spam protection, and only
+  enqueues CF7's assets on pages that actually use it.
+* **Speculative loading** (`inc/class-speculative.php`) — tunes WordPress
+  6.8+ Speculation Rules: keeps the safe `prefetch` mode but raises eagerness
+  to `moderate`, and excludes cart / checkout / account paths. No-op on
+  WordPress < 6.8. Overridable via the `_UFO_SPECULATION_MODE` /
+  `_UFO_SPECULATION_EAGERNESS` constants or the `_ufo_speculation_mode`,
+  `_ufo_speculation_eagerness` and `_ufo_speculation_exclude_paths` filters.
 * **Per-page CTA buttons** (`inc/cta-buttons.php`) — post meta for two
   call-to-action buttons in the page header, editable from the block
   editor's Document sidebar.
 * **Ajax filter** (`inc/ajax-filter/`) — client-side filtering for archive
-  listings.
+  listings. Extension points: the `_ufo_ajax_filter_allowed_templates`,
+  `_ufo_ajax_filter_is_post_type_viewable`,
+  `_ufo_ajax_filter_is_post_status_viewable` and
+  `_ufo_ajax_filter_query_args` filters.
 * **Image block** (`class-image-block.php`) — excludes `core/image` from
   Tailwind Typography's `.prose` styles.
 * **Truncate helper** (`inc/truncate/`) — character-based text truncation.
+
+### Performance
+
+* Front-end scripts (`script.min.js`, `headroom.min.js`, `ajax-filter.min.js`)
+  are enqueued with `{ strategy: 'defer', in_footer: true }`.
+* Templates render post images through `the_post_thumbnail()` /
+  `wp_get_attachment_image()`, so they carry `width` / `height` / `srcset` /
+  `sizes` (no layout shift). The blog-index and front-page hero images are
+  `loading="eager"` with `fetchpriority="high"` (LCP candidates); cards and
+  mega-menu thumbnails stay lazy.
+* Speculative loading (see above) for near-instant internal navigation.
+
+### Internationalization
+
+* Theme strings use the `ufo-boilerplate` text domain.
+* `composer make-pot` regenerates `theme/languages/ufo-boilerplate.pot` with
+  wp-cli. `npm run make-pot` does the same without wp-cli via
+  `node_scripts/make-pot.php`, which scans `theme/` with the PHP tokenizer.
+
+### Security
+
+* Custom nav-menu fields verify `edit_theme_options` and the
+  `update-nav_menu` nonce before saving.
+* The ajax filter deep-sanitizes the posted `params` array; Contact Form 7
+  spam checks sanitize their `$_SERVER` / `$_POST` reads.
+* `content-single.php` injects the table-of-contents `id` anchors with
+  `WP_HTML_Tag_Processor` (not a regex) and strips stray inline `on*`
+  handlers from headings.
+
+### Coding standards
+
+* Run `composer install`, then `composer php:lint` (or `npm run lint:php`);
+  `composer php:lint:autofix` runs phpcbf. The theme is clean against
+  `WordPress-Extra` + `WordPress-Docs` — see `phpcs.xml.dist`.
+* The theme follows the `_s` / `_tw` leading-underscore prefix convention
+  (`_ufo_*` functions, `_Ufo_*` classes); `phpcs.xml.dist` is configured to
+  accept it, and `.git-blame-ignore-revs` hides the one-off phpcbf reformat
+  commit from `git blame`.
+
+### Build notes
+
+* The WordPress `style.css` header is injected by `postcss-header`
+  (`postcss.config.js`) so it stays the first comment in the compiled file,
+  rather than being pulled in from a CSS partial.
 
 ## Quickstart
 
