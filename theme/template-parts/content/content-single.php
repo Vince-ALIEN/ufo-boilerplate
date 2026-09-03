@@ -6,6 +6,7 @@
  *
  * @package Ufo_Boilerplate
  */
+
 ?>
 
 <article class="px-4 mt-32" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -44,7 +45,7 @@
 					<?php endif; ?>
 					<?php the_title( '<h1 class="entry-title text-background my-0" itemprop="name" data-anime-heading>', '</h1>' ); ?>
 					<div class="flex flex-wrap items-center gap-x-1 text-sm text-slate-300">
-						<?php echo get_avatar( get_the_author_meta( 'email' ), 50, '', '', $args = array( 'class' => 'w-9 h-9 rounded-full mr-2' ) ); ?>
+						<?php echo get_avatar( get_the_author_meta( 'email' ), 50, '', '', array( 'class' => 'w-9 h-9 rounded-full mr-2' ) ); ?>
 						<?php _ufo_entry_footer(); ?>
 					</div>
 				</div>
@@ -63,19 +64,19 @@
 						<p class="not-prose font-chillax font-semibold text-primary text-lg mb-4">Table des matières</p>
 						<div class="table-of-contents">
 							<?php
-							// Fonction pour extraire les titres h2 du contenu
-							$content = get_the_content();
-							preg_match_all( '/<h2.*?>(.*?)<\/h2>/i', $content, $matches );
+							// Extraire les titres h2 du contenu pour la table des matières.
+							$_ufo_toc_content = get_the_content();
+							preg_match_all( '/<h2.*?>(.*?)<\/h2>/i', $_ufo_toc_content, $_ufo_toc_matches );
 
-							if ( ! empty( $matches[0] ) ) {
+							if ( ! empty( $_ufo_toc_matches[0] ) ) {
 								echo '<ul class="space-y-2">';
-								foreach ( $matches[1] as $index => $title ) {
-									// Générer un ID basé sur le titre
-									$id = sanitize_title( $title );
+								foreach ( $_ufo_toc_matches[1] as $_ufo_toc_title ) {
+									// Générer un ID basé sur le titre (même logique que l'injection plus bas).
+									$_ufo_toc_id = sanitize_title( $_ufo_toc_title );
 									echo '<li class="not-prose transition-colors">';
-									echo '<a href="#' . esc_attr( $id ) . '" class="text-sm text-slate-600 flex items-center gap-2">';
+									echo '<a href="#' . esc_attr( $_ufo_toc_id ) . '" class="text-sm text-slate-600 flex items-center gap-2">';
 									echo '<i data-lucide="chevron-right" class="size-5 text-primary"></i>';
-									echo esc_html( strip_tags( $title ) );
+									echo esc_html( wp_strip_all_tags( $_ufo_toc_title ) );
 									echo '</a></li>';
 								}
 								echo '</ul>';
@@ -117,27 +118,28 @@
 				// ci-dessus) puis injecté via WP_HTML_Tag_Processor : aucun
 				// fragment du contenu de l'article n'est réémis sans échappement
 				// (protection XSS). the_content n'est appliqué qu'une seule fois
-				// en aval — pas de double filtrage.
-				$content = get_the_content();
+				// en aval : pas de double filtrage.
+				$_ufo_content = get_the_content();
 
 				if ( class_exists( 'WP_HTML_Tag_Processor' ) ) {
-					preg_match_all( '/<h2.*?>(.*?)<\/h2>/i', $content, $h2_matches );
-					$processor = new WP_HTML_Tag_Processor( $content );
-					$h2_index  = 0;
-					while ( $processor->next_tag( 'h2' ) ) {
-						// Strip any inline event handler that slipped into the heading markup.
-						foreach ( (array) $processor->get_attribute_names_with_prefix( 'on' ) as $handler ) {
-							$processor->remove_attribute( $handler );
+					preg_match_all( '/<h2.*?>(.*?)<\/h2>/i', $_ufo_content, $_ufo_h2_matches );
+					$_ufo_processor = new WP_HTML_Tag_Processor( $_ufo_content );
+					$_ufo_h2_index  = 0;
+					while ( $_ufo_processor->next_tag( 'h2' ) ) {
+						// Retirer tout gestionnaire d'événement inline glissé dans le titre.
+						foreach ( (array) $_ufo_processor->get_attribute_names_with_prefix( 'on' ) as $_ufo_handler ) {
+							$_ufo_processor->remove_attribute( $_ufo_handler );
 						}
-						if ( isset( $h2_matches[1][ $h2_index ] ) && null === $processor->get_attribute( 'id' ) ) {
-							$processor->set_attribute( 'id', sanitize_title( $h2_matches[1][ $h2_index ] ) );
+						if ( isset( $_ufo_h2_matches[1][ $_ufo_h2_index ] ) && null === $_ufo_processor->get_attribute( 'id' ) ) {
+							$_ufo_processor->set_attribute( 'id', sanitize_title( $_ufo_h2_matches[1][ $_ufo_h2_index ] ) );
 						}
-						++$h2_index;
+						++$_ufo_h2_index;
 					}
-					$content = $processor->get_updated_html();
+					$_ufo_content = $_ufo_processor->get_updated_html();
 				}
 
-				echo apply_filters( 'the_content', $content );
+				// Core hook; content already escaped by the_content filters.
+				echo apply_filters( 'the_content', $_ufo_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
 				wp_link_pages(
 					array(
