@@ -76,7 +76,7 @@ $_ufo_tagline = get_bloginfo( 'description', 'display' );
 					</div>
 					<!-- End Social Brands -->
 
-					<div id="wcb" class="ufo-carbonbadge wcb-d p-4"></div>
+					<div id="wcb" class="carbonbadge wcb-d p-4"></div>
 				</div>
 			</div>
 			<!-- End Col -->

@@ -6,7 +6,7 @@
 		"development:tailwind:frontend": "npx postcss ./tailwind.css -o ./theme/style.css --verbose",
 		"development:tailwind:editor": "cross-env _TW_TARGET=editor npx postcss ./tailwind.css -o ./theme/style-editor.css",
 		"development:tailwind:intellisense": "cross-env _TW_TARGET=intellisense npx postcss ./tailwind.css -o ./tailwind-intellisense.css",
-		"development:esbuild": "npx esbuild ./javascript/script.js ./javascript/block-editor.js ./javascript/ajax-filter.js ./javascript/headroom.js --target=esnext --bundle --outdir=./theme/js --out-extension:.js=.min.js",
+		"development:esbuild": "npx esbuild ./javascript/script.js ./javascript/block-editor.js ./javascript/ajax-filter.js ./javascript/headroom.js ./javascript/website-carbon-badge.js --target=esnext --bundle --outdir=./theme/js --out-extension:.js=.min.js",
 		"development": "run-p \"development:**\"",
 		"dev": "npm run development",
 		"watch:tailwind:frontend": "npm run development:tailwind:frontend -- --watch",

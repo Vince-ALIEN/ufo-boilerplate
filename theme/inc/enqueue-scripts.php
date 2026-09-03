@@ -30,10 +30,11 @@ if ( ! function_exists( '_ufo_custom_scripts' ) ) :
 			)
 		);
 
-		// Website Carbon badge, rendered by the `#wcb` element in the footer.
+		// Website Carbon badge (self-hosted copy of website-carbon-badges@1.1.3),
+		// rendered by the `#wcb` element in the footer.
 		wp_enqueue_script(
 			'website-carbon-badge',
-			'https://unpkg.com/website-carbon-badges@1.1.3/b.min.js',
+			get_template_directory_uri() . '/js/website-carbon-badge.min.js',
 			array(),
 			'1.1.3',
 			array(
