@@ -19,8 +19,8 @@
 	<!-- Check PHP files only. JavaScript and CSS files are checked separately. -->
 	<arg name="extensions" value="php"/>
 
-	<!-- Check all files in this directory and the directories below it. -->
-	<file>.</file>
+	<!-- Check the theme code. All PHP lives under theme/. -->
+	<file>./theme</file>
 
 	<!-- Exclude patterns. -->
 	<exclude-pattern>/vendor/*</exclude-pattern>
@@ -45,6 +45,15 @@
 		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
 		<exclude name="WordPress.Security.EscapeOutput"/>
 		-->
+
+		<!--
+		This theme follows the _s / _tw starter-theme convention of prefixing
+		its own globals with a leading underscore: functions _ufo_*, classes
+		_Ufo_*, class files class-name.php. That prefix is the namespace, so the
+		sniff that demands a class name start with a capital letter does not
+		apply here.
+		-->
+		<exclude name="PEAR.NamingConventions.ValidClassName.StartWithCapital"/>
 	</rule>
 
 	<!-- Let's also check that everything is properly documented. -->
@@ -84,6 +93,13 @@
 		<properties>
 			<property name="is_theme" value="true"/>
 		</properties>
+		<!--
+		Class files are named class-name.php (e.g. class-speculative.php for
+		_Ufo_Speculative). The leading underscore in the class name is the theme
+		prefix, not part of the file-name slug, so the sniff that expects it in
+		the file name does not apply here.
+		-->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
 	</rule>
 
 </ruleset>

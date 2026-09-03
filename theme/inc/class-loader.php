@@ -6,7 +6,7 @@
  * Files dropped into `template-parts/custom/` (nav walkers, theme-support
  * registrations, etc.) are picked up automatically — no further wiring
  * needed. Anything that lives elsewhere in `inc/` must be added to
- * `$class_files` below.
+ * `$_ufo_class_files` below.
  *
  * @package Ufo_Boilerplate
  */
@@ -20,31 +20,32 @@ foreach ( glob( get_template_directory() . '/template-parts/custom/*.php' ) as $
 }
 unset( $_ufo_custom_file );
 
-$inc_dir = __DIR__;
+$_ufo_inc_dir = __DIR__;
 
-$class_files = array(
-	$inc_dir . '/navigation/class-navwalker.php',
-	$inc_dir . '/navigation/menu-custom-fields.php',
-	$inc_dir . '/navigation/walker-nav-menu-edit.php',
-	$inc_dir . '/ajax-filter/init.php',
-	$inc_dir . '/truncate/class-truncate.php',
+$_ufo_class_files = array(
+	$_ufo_inc_dir . '/class-speculative.php',
+	$_ufo_inc_dir . '/navigation/class-navwalker.php',
+	$_ufo_inc_dir . '/navigation/menu-custom-fields.php',
+	$_ufo_inc_dir . '/navigation/walker-nav-menu-edit.php',
+	$_ufo_inc_dir . '/ajax-filter/init.php',
+	$_ufo_inc_dir . '/truncate/class-truncate.php',
 );
 
-foreach ( $class_files as $file ) {
-	if ( file_exists( $file ) ) {
-		require_once $file;
+foreach ( $_ufo_class_files as $_ufo_file ) {
+	if ( file_exists( $_ufo_file ) ) {
+		require_once $_ufo_file;
 	} else {
 		add_action(
 			'admin_notices',
-			function () use ( $file ) {
+			function () use ( $_ufo_file ) {
 				printf(
 					'<div class="notice notice-error"><p>%s</p></div>',
 					esc_html(
 						sprintf(
 							/* translators: 1: file name, 2: directory path. */
 							__( 'Erreur : le fichier %1$s est manquant dans %2$s', 'ufo-boilerplate' ),
-							basename( $file ),
-							dirname( $file )
+							basename( $_ufo_file ),
+							dirname( $_ufo_file )
 						)
 					)
 				);
@@ -52,4 +53,4 @@ foreach ( $class_files as $file ) {
 		);
 	}
 }
-unset( $inc_dir, $class_files, $file );
+unset( $_ufo_inc_dir, $_ufo_class_files, $_ufo_file );
