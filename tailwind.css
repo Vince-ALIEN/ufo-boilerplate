@@ -12,8 +12,10 @@
 
 /**
  * Add the WordPress file header.
+ *
+ * The header is injected by `postcss-header` (see postcss.config.js) so it is
+ * the very first comment in the compiled `style.css`, as WordPress requires.
  */
-@import "./tailwind/custom/file-header.css";
 
 /**
  * Add Tailwind’s default theme and your custom theme.
