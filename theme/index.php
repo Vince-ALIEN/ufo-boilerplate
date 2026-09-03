@@ -37,7 +37,21 @@ get_header();
                 ?>
                 <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 px-8 pb-8 min-h-[600px] mb-8">
                     <?php if (has_post_thumbnail()) : ?>
-                        <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="not-prose absolute inset-0 -z-10 w-full h-full object-cover" loading="lazy" />
+                        <?php
+                        // Image LCP de la page blog : chargée en priorité (pas de
+                        // lazy-loading) et en taille adaptée. wp_get_attachment_image
+                        // ajoute width/height/srcset/sizes → pas de CLS.
+                        the_post_thumbnail(
+                            'large',
+                            array(
+                                'class'         => 'not-prose absolute inset-0 -z-10 w-full h-full object-cover',
+                                'alt'           => wp_strip_all_tags( get_the_title() ),
+                                'loading'       => 'eager',
+                                'fetchpriority' => 'high',
+                                'sizes'         => '(max-width: 768px) 100vw, 1152px',
+                            )
+                        );
+                        ?>
                     <?php endif; ?>
                     <div class="absolute inset-0 -z-10 bg-linear-to-t from-slate-900 via-slate-900/40"></div>
                     <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-slate-900/10"></div>

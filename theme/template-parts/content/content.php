@@ -13,7 +13,19 @@ $category_slug = $category ? $category->slug : '';
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 px-8 pb-8 min-h-[480px]'); ?>>
     <?php if (has_post_thumbnail()) : ?>
-        <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="not-prose absolute inset-0 -z-10 w-full h-full object-cover" loading="lazy" />
+        <?php
+        // wp_get_attachment_image ajoute width/height/srcset/sizes → pas de CLS.
+        // Cartes sous la ligne de flottaison : lazy-loading conservé.
+        the_post_thumbnail(
+            'medium_large',
+            array(
+                'class'   => 'not-prose absolute inset-0 -z-10 w-full h-full object-cover',
+                'alt'     => wp_strip_all_tags(get_the_title()),
+                'loading' => 'lazy',
+                'sizes'   => '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw',
+            )
+        );
+        ?>
     <?php endif; ?>
     <div class="absolute inset-0 -z-10 bg-linear-to-t from-slate-900 via-slate-900/50"></div>
     <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-slate-900/10"></div>
@@ -30,7 +42,7 @@ $category_slug = $category ? $category->slug : '';
         <?php endif; ?>
     </div>
 
-    <h2 class="not-prose mt-3 h-12 line-clamp-2 text-base/6 font-chillax font-semibold text-white">
+    <h2 class="not-prose mt-3 h-12 line-clamp-2 text-lg/6 font-chillax font-semibold text-slate-100">
         <?php the_title(); ?>
     </h2>
     <p class="not-prose mt-2 line-clamp-2 text-sm/6 text-slate-100">

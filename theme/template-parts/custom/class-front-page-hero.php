@@ -168,13 +168,18 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 				return '';
 			}
 
+			// Full-bleed background covering the viewport: strong LCP candidate on
+			// the front page, so it is loaded eagerly with a high fetch priority.
 			return wp_get_attachment_image(
 				$attachment_id,
-				'full',
+				'1536x1536',
 				false,
 				array(
-					'class' => esc_attr( $class ),
-					'alt'   => '',
+					'class'         => esc_attr( $class ),
+					'alt'           => '',
+					'loading'       => 'eager',
+					'fetchpriority' => 'high',
+					'sizes'         => '100vw',
 				)
 			);
 		}

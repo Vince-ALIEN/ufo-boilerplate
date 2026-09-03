@@ -107,7 +107,16 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 
 				if ( has_post_thumbnail() ) {
 					$output .= '<div class="flex-none overflow-hidden rounded-lg bg-primary/5">';
-					$output .= '<img src="' . esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) . '" alt="" class="w-full h-full object-cover" loading="lazy" />';
+					// get_the_post_thumbnail ajoute width/height/srcset → pas de CLS.
+					$output .= get_the_post_thumbnail(
+						get_the_ID(),
+						'medium',
+						array(
+							'alt'     => '',
+							'class'   => 'w-full h-full object-cover',
+							'loading' => 'lazy',
+						)
+					);
 					$output .= '</div>';
 				}
 
