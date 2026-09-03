@@ -77,14 +77,12 @@ if ( ! function_exists( '_ufo_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
-		// This theme uses wp_nav_menu() in five locations.
+		// Primary navigation plus the two footer menus (Services / Legal).
 		register_nav_menus(
 			array(
-				'menu-1'         => __( 'Primary', 'ufo-boilerplate' ),
-				'menu-2'         => __( 'Footer Menu (Company)', 'ufo-boilerplate' ),
-				'menu-3'         => __( 'Footer Menu 2 (Legal)', 'ufo-boilerplate' ),
-				'menu-solutions' => __( 'Footer Solutions', 'ufo-boilerplate' ),
-				'menu-support'   => __( 'Footer Support', 'ufo-boilerplate' ),
+				'menu-1' => __( 'Primary', 'ufo-boilerplate' ),
+				'menu-2' => __( 'Footer Menu (Services)', 'ufo-boilerplate' ),
+				'menu-3' => __( 'Footer Menu 2 (Legal)', 'ufo-boilerplate' ),
 			)
 		);
 

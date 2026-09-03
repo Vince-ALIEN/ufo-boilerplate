@@ -28,8 +28,11 @@ Beyond the \_tw base, this theme adds (mostly under
   breadcrumb trail with Category Base support. Call `_ufo_the_breadcrumb()`
   to print it (run through `wp_kses()` with an allowlist that keeps the
   microdata); `_ufo_get_breadcrumb()` returns the raw string.
-* **Footer navigation** (`class-footer-nav.php`) — applies Tailwind classes
-  to the footer's `wp_nav_menu()` links.
+* **Footer** (`template-parts/layout/footer-content.php`) — a `bg-barossa-950`
+  body with a logo / Contact / Services / "Me suivre" grid and a copyright +
+  legal-menu bar. Fed by the `menu-2` / `menu-3` nav menus, the `sidebar-2`
+  (Footer Contact) / `sidebar-3` (Footer Newsletter) widget areas,
+  `_Ufo_Social_Media` and a self-hosted Website Carbon badge (`#wcb`).
 * **Contact Form 7 integration** (`class-contact-form-7.php`,
   `_Ufo_Contact_Form7`) — restyles CF7 markup with Tailwind (including a
   distinct newsletter-form variant), replaces the submit `<input>` with a
