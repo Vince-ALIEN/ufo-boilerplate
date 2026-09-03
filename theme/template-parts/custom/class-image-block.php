@@ -6,6 +6,10 @@
  */
 
 if ( ! class_exists( '_Ufo_Image_Block' ) ) {
+
+	/**
+	 * Adds `not-prose` to the core image block output.
+	 */
 	class _Ufo_Image_Block {
 
 		/**

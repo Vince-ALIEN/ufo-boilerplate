@@ -9,6 +9,10 @@
  */
 
 if ( ! class_exists( '_Ufo_Header_Cta' ) ) {
+
+	/**
+	 * Registers the "Header CTA" Customizer section.
+	 */
 	class _Ufo_Header_Cta {
 
 		const SECTION_ID   = 'ufo_header_cta';
@@ -23,6 +27,8 @@ if ( ! class_exists( '_Ufo_Header_Cta' ) ) {
 		}
 
 		/**
+		 * Registers the section, settings and controls for the header CTA.
+		 *
 		 * @param WP_Customize_Manager $wp_customize Customizer instance.
 		 */
 		public static function register( $wp_customize ) {

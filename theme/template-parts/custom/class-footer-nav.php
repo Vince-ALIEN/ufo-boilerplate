@@ -10,6 +10,10 @@
  */
 
 if ( ! class_exists( '_Ufo_Footer_Nav' ) ) {
+
+	/**
+	 * Merges a Tailwind link class onto the footer nav menus.
+	 */
 	class _Ufo_Footer_Nav {
 
 		/**
@@ -34,6 +38,8 @@ if ( ! class_exists( '_Ufo_Footer_Nav' ) ) {
 		}
 
 		/**
+		 * Append the footer link class for the footer theme locations.
+		 *
 		 * @param array    $atts Link attributes.
 		 * @param WP_Post  $item Menu item.
 		 * @param stdClass $args wp_nav_menu() args, including `theme_location`.

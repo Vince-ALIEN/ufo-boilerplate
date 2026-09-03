@@ -10,6 +10,10 @@
  */
 
 if ( ! class_exists( '_Ufo_Options' ) ) {
+
+	/**
+	 * Registers the "Ufo options" Customizer panel and footer logo setting.
+	 */
 	class _Ufo_Options {
 
 		const PANEL_ID            = 'ufo_options';
@@ -71,9 +75,9 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 		 * Returns the footer logo markup, falling back to the site’s custom
 		 * logo, then to the site name as plain text.
 		 *
-		 * @param string $class Classes applied to the `<img>` or fallback `<span>`.
+		 * @param string $classes Classes applied to the `<img>` or fallback `<span>`.
 		 */
-		public static function footer_logo_html( $class = 'h-9' ) {
+		public static function footer_logo_html( $classes = 'h-9' ) {
 			$attachment_id = get_theme_mod( self::FOOTER_LOGO_SETTING );
 
 			if ( $attachment_id ) {
@@ -81,7 +85,7 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 					$attachment_id,
 					'full',
 					false,
-					array( 'class' => esc_attr( $class ) )
+					array( 'class' => esc_attr( $classes ) )
 				);
 			}
 

@@ -9,6 +9,10 @@
  */
 
 if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
+
+	/**
+	 * Registers the "Front Page Hero" Customizer section.
+	 */
 	class _Ufo_Front_Page_Hero {
 
 		const SECTION_ID         = 'ufo_front_page_hero';
@@ -75,6 +79,8 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 		}
 
 		/**
+		 * Registers the section, settings and controls for the hero.
+		 *
 		 * @param WP_Customize_Manager $wp_customize Customizer instance.
 		 */
 		public static function register( $wp_customize ) {
@@ -130,6 +136,8 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 		}
 
 		/**
+		 * Maps a control type to its sanitize callback.
+		 *
 		 * @param string $type Control type, e.g. `text`, `url`, `textarea`.
 		 */
 		protected static function sanitize_callback( $type ) {
@@ -159,9 +167,9 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 		 * Returns the hero background `<img>` markup, or an empty string if
 		 * no image has been set.
 		 *
-		 * @param string $class Classes applied to the `<img>`.
+		 * @param string $classes Classes applied to the `<img>`.
 		 */
-		public static function background_image_html( $class = '' ) {
+		public static function background_image_html( $classes = '' ) {
 			$attachment_id = get_theme_mod( self::BACKGROUND_SETTING );
 
 			if ( ! $attachment_id ) {
@@ -175,7 +183,7 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 				'1536x1536',
 				false,
 				array(
-					'class'         => esc_attr( $class ),
+					'class'         => esc_attr( $classes ),
 					'alt'           => '',
 					'loading'       => 'eager',
 					'fetchpriority' => 'high',

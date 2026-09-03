@@ -6,6 +6,10 @@
  */
 
 if ( ! class_exists( '_Ufo_Social_Media' ) ) {
+
+	/**
+	 * Registers the "Social Media" Customizer section and renders the links.
+	 */
 	class _Ufo_Social_Media {
 
 		const SECTION_ID = 'ufo_social_media';

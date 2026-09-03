@@ -6,6 +6,10 @@
  */
 
 if ( ! class_exists( '_Ufo_Custom_Logo' ) ) {
+
+	/**
+	 * Registers `custom-logo` theme support.
+	 */
 	class _Ufo_Custom_Logo {
 
 		/**
