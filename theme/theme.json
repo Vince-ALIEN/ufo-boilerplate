@@ -186,23 +186,6 @@
 					]
 				},
 				{
-					"fontFamily": "\"Instrument Serif\", serif",
-					"name": "Instrument Serif",
-					"slug": "instrument-serif",
-					"fontFace": [
-						{
-							"fontDisplay": "optional",
-							"fontFamily": "Instrument Serif",
-							"fontStretch": "normal",
-							"fontStyle": "italic",
-							"fontWeight": "400",
-							"src": [
-								"file:./src/fonts/InstrumentSerif-Italic.woff2"
-							]
-						}
-					]
-				},
-				{
 					"fontFamily": "system-ui, ui-sans-serif, sans-serif",
 					"name": "System UI",
 					"slug": "system"
