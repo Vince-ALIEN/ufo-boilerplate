@@ -5,9 +5,12 @@
  * Since WordPress 6.8 the Speculation Rules API is wired into core and
  * enabled by default in its most conservative form (`prefetch` /
  * `conservative`). This class only tweaks that default — it does not add a
- * second implementation — bumping the eagerness so internal navigation feels
- * instant, while keeping the safer `prefetch` mode (no target-page JS runs
- * ahead of the click, unlike `prerender`).
+ * second implementation — bumping the mode to `prerender` and the eagerness
+ * to `moderate` so internal navigation feels instant. `prerender` runs the
+ * target page (including its JS) ahead of the click, so the path exclusions
+ * below and core's own guards (query strings, `nofollow`, logged-in routes,
+ * WooCommerce cart/checkout…) matter more in this mode. Drop back to
+ * `prefetch` via `_UFO_SPECULATION_MODE` if that is a concern.
  *
  * On WordPress < 6.8 the filters below simply never fire, so this file is a
  * no-op there.
@@ -113,7 +116,7 @@ if ( ! class_exists( '_Ufo_Speculative' ) ) {
 				return $config;
 			}
 
-			$mode = defined( '_UFO_SPECULATION_MODE' ) ? _UFO_SPECULATION_MODE : 'prefetch';
+			$mode = defined( '_UFO_SPECULATION_MODE' ) ? _UFO_SPECULATION_MODE : 'prerender';
 			/**
 			 * Filters the speculative loading mode.
 			 *
