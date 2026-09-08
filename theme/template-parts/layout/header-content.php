@@ -19,7 +19,7 @@
 			background (applied to `nav`, see utilities.css) narrower than the
 			full-width `#masthead`, with transparent gaps on both sides.
 		-->
-		<div class="mx-auto flex max-w-content items-center justify-between gap-x-6 p-2 lg:relative">
+		<div class="mx-auto flex max-w-content items-center justify-between gap-x-6 p-2.5 lg:relative">
 			<div class="flex lg:flex-1">
 				<?php if ( has_custom_logo() ) : ?>
 					<div class="-m-1.5 p-1.5">
@@ -33,14 +33,14 @@
 			</div>
 
 			<?php if ( has_nav_menu( 'menu-1' ) ) : ?>
-				<div class="hidden lg:flex lg:gap-x-12">
+				<div class="hidden lg:block">
 					<?php
 					wp_nav_menu(
 						array(
 							'theme_location' => 'menu-1',
 							'container'      => false,
-							'items_wrap'     => '%3$s',
-							'walker'         => new _Ufo_Header_Nav_Walker( 'text-sm/6 font-semibold text-foreground' ),
+							'items_wrap'     => '<ul class="flex gap-x-12">%3$s</ul>',
+							'walker'         => new _Ufo_Header_Nav_Walker( 'text-sm/6 font-semibold text-foreground', 'primary' ),
 						)
 					);
 					?>
@@ -87,18 +87,18 @@
 
 	<?php if ( has_nav_menu( 'menu-1' ) ) : ?>
 		<div id="mobile-menu" data-mobile-menu class="absolute inset-x-0 z-50 hidden max-h-[calc(100dvh-100%)] overflow-y-auto bg-background p-6 shadow-lg ring-1 ring-foreground/10 lg:hidden">
-			<div class="space-y-2">
+			<nav aria-label="<?php esc_attr_e( 'Mobile', 'ufo-boilerplate' ); ?>">
 				<?php
 				wp_nav_menu(
 					array(
 						'theme_location' => 'menu-1',
 						'container'      => false,
-						'items_wrap'     => '%3$s',
-						'walker'         => new _Ufo_Header_Nav_Walker( '-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-foreground hover:bg-foreground/5' ),
+						'items_wrap'     => '<ul class="space-y-2">%3$s</ul>',
+						'walker'         => new _Ufo_Header_Nav_Walker( '-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-foreground hover:bg-foreground/5', 'mobile' ),
 					)
 				);
 				?>
-			</div>
+			</nav>
 		</div>
 	<?php endif; ?>
 </header><!-- #masthead -->

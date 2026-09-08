@@ -24,7 +24,7 @@
 <?php wp_body_open(); ?>
 
 <div id="page">
-	<a href="#content" class="sr-only"><?php esc_html_e( 'Skip to content', 'ufo-boilerplate' ); ?></a>
+	<a href="#content" class="skip-link sr-only"><?php esc_html_e( 'Skip to content', 'ufo-boilerplate' ); ?></a>
 
 	<?php get_template_part( 'template-parts/layout/header', 'content' ); ?>
 
