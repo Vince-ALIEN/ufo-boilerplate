@@ -14,7 +14,12 @@ const tailwindRules = tailwindRulesConfig?.rules || {};
 
 export default [
 	{
-		ignores: ['**/*.min.js', '**/vendor/'],
+		ignores: [
+			'**/*.min.js',
+			'**/vendor/',
+			// Vendored upstream, kept byte-for-byte verbatim.
+			'javascript/website-carbon-badge.js',
+		],
 	},
 	{
 		files: ['**/*.js'],

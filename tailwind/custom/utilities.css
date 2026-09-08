@@ -12,6 +12,18 @@
 	will-change: transform;
  }
 
+/*
+ * Reserve the Website Carbon badge's rendered height before its markup is
+ * injected (see `javascript/website-carbon-badge.js`, which renders it on
+ * scroll). Without this the two-line badge appearing in the footer is a
+ * layout shift counting against CLS whenever the footer is in view. Height
+ * only — the element's `p-4` padding sits on top. Tune if the "Cleaner
+ * than …" line wraps at your footer column width.
+ */
+ #wcb {
+	min-height: 60px;
+ }
+
  #masthead.slideup {
 	/*
 	 * A fixed length instead of a percentage: percentages in `translateY`

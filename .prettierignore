@@ -9,3 +9,6 @@
 
 # Ignore minified JavaScript:
 *.min.js
+
+# Vendored upstream, kept byte-for-byte verbatim:
+javascript/website-carbon-badge.js
