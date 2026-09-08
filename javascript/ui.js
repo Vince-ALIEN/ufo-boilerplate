@@ -8,6 +8,41 @@ import van from 'vanjs-core';
 // ── Helpers ────────────────────────────────────────────────────────────────
 
 /**
+ * Whether the user asked the OS to reduce motion. Read at call time so it
+ * tracks the setting if it changes during the session.
+ *
+ * @return {boolean}
+ */
+function prefersReducedMotion() {
+	return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Move keyboard focus to an element that isn't normally focusable (a landmark,
+ * a section wrapper…), adding a temporary `tabindex="-1"` if needed, so
+ * screen-reader and keyboard users land there — not just the scroll position.
+ *
+ * @param {HTMLElement} target
+ */
+function moveFocusTo(target) {
+	if (!target.hasAttribute('tabindex')) {
+		target.setAttribute('tabindex', '-1');
+	}
+	target.focus({ preventScroll: true });
+}
+
+/**
+ * Visible, focusable descendants of a container, in DOM order.
+ *
+ * @param {HTMLElement} container
+ * @return {HTMLElement[]}
+ */
+function getFocusable(container) {
+	const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+	return [...container.querySelectorAll(selector)].filter(el => el.offsetParent !== null);
+}
+
+/**
  * Show an element with a CSS-transition-based enter animation.
  * The element must have `hidden` class to start hidden.
  * Transition classes are driven by data-enter-from / data-enter-to attributes
@@ -102,6 +137,9 @@ function initBurgerMenu() {
 				'opacity-0 -translate-y-2',
 				'opacity-100 translate-y-0'
 			);
+			// The panel visually overlays the page, so send focus into it.
+			const first = getFocusable(menu)[0];
+			if (first) first.focus();
 		} else {
 			if (!menu.classList.contains('hidden')) {
 				hideEl(menu,
@@ -109,6 +147,8 @@ function initBurgerMenu() {
 					'opacity-100 translate-y-0',
 					150
 				);
+				// Return focus to the toggle if it was left inside the panel.
+				if (menu.contains(document.activeElement)) btn.focus();
 			}
 		}
 	});
@@ -124,6 +164,29 @@ function initBurgerMenu() {
 	// Close on outside click
 	document.addEventListener('click', e => {
 		if (open.val && !header.contains(e.target)) open.val = false;
+	});
+
+	// While the panel is open it covers the page, so keep Tab focus cycling
+	// between the toggle (still visible as an "X") and the panel's items.
+	// Escape and the toggle still close it — this is not a WCAG 2.1.2 trap.
+	header.addEventListener('keydown', e => {
+		if (e.key !== 'Tab' || !open.val) return;
+
+		const items = getFocusable(menu);
+		if (!items.length) return;
+
+		const cycle  = [btn, ...items];
+		const first  = cycle[0];
+		const last   = cycle[cycle.length - 1];
+		const active = document.activeElement;
+
+		if (e.shiftKey && active === first) {
+			e.preventDefault();
+			last.focus();
+		} else if (!e.shiftKey && active === last) {
+			e.preventDefault();
+			first.focus();
+		}
 	});
 }
 
@@ -176,9 +239,13 @@ function initMegaMenus() {
 
 		btn.addEventListener('click', () => { open.val = !open.val; });
 
-		// Close on Escape
-		btn.addEventListener('keydown', e => {
-			if (e.key === 'Escape') open.val = false;
+		// Close on Escape from anywhere within the item (button or panel) and
+		// send focus back to the trigger.
+		li.addEventListener('keydown', e => {
+			if (e.key === 'Escape' && open.val) {
+				open.val = false;
+				btn.focus();
+			}
 		});
 
 		// Close when clicking outside this item
@@ -342,11 +409,18 @@ function initSmoothAnchors() {
 
 			e.preventDefault();
 
-			if (window.lenis) {
+			const reduce = prefersReducedMotion();
+
+			if (window.lenis && !reduce) {
 				window.lenis.scrollTo(target, { duration: 2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
 			} else {
-				target.scrollIntoView({ behavior: 'smooth' });
+				target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
 			}
+
+			// preventDefault() cancels the browser's native "focus the fragment
+			// target" step, so do it ourselves — this is what makes the skip
+			// link actually work for keyboard / screen-reader users.
+			moveFocusTo(target);
 		});
 	});
 }

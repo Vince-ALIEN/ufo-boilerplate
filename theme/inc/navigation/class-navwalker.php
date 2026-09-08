@@ -25,6 +25,17 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 		protected $link_class;
 
 		/**
+		 * Prefix for the generated dropdown-panel `id` attributes.
+		 *
+		 * The header renders this menu twice (desktop bar + mobile panel), so
+		 * each instance needs its own prefix to keep panel `id`s — and the
+		 * `aria-controls` values that point at them — unique in the document.
+		 *
+		 * @var string
+		 */
+		protected $panel_id_prefix;
+
+		/**
 		 * The depth-0 menu item currently being processed.
 		 *
 		 * `start_lvl()`/`end_lvl()` only receive `$depth`, not the item itself,
@@ -39,10 +50,23 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 		/**
 		 * Store the top-level link class for later use in start_el().
 		 *
-		 * @param string $link_class Classes to apply to each top-level menu link/button.
+		 * @param string $link_class      Classes to apply to each top-level menu link/button.
+		 * @param string $panel_id_prefix Prefix for generated dropdown-panel `id`s (must be
+		 *                                unique per menu instance on the page).
 		 */
-		public function __construct( $link_class ) {
-			$this->link_class = $link_class;
+		public function __construct( $link_class, $panel_id_prefix = 'menu' ) {
+			$this->link_class      = $link_class;
+			$this->panel_id_prefix = sanitize_html_class( $panel_id_prefix );
+		}
+
+		/**
+		 * The dropdown-panel `id` for a given top-level menu item.
+		 *
+		 * @param WP_Post $item Menu item object (depth 0).
+		 * @return string
+		 */
+		protected function panel_id( $item ) {
+			return $this->panel_id_prefix . '-submenu-' . $item->ID;
 		}
 
 		/**
@@ -175,7 +199,8 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 			$panel_position_classes = $is_mega_menu
 				? 'lg:inset-x-0'
 				: 'lg:left-1/2 lg:-translate-x-1/2';
-			$output                .= '<div data-dropdown-panel class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible mt-4 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-1">';
+			$panel_id               = $this->panel_id( $this->current_top_level_item );
+			$output                .= '<div data-dropdown-panel id="' . esc_attr( $panel_id ) . '" class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible mt-4 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-1">';
 
 			// Inner card wrapper: mega menus cap at the same `max-w-content` used
 			// for the rest of the site so the card matches the page's content
@@ -251,7 +276,7 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 					 */
 					$li_class = $this->is_mega_menu( $item ) ? 'list-none' : 'relative list-none';
 					$output  .= '<li class="' . esc_attr( $li_class ) . '" data-dropdown-item>';
-					$output  .= '<button type="button" data-dropdown-btn aria-expanded="false" aria-haspopup="true" class="inline-flex items-center gap-x-1 cursor-pointer ' . esc_attr( $this->link_class ) . '">';
+					$output  .= '<button type="button" data-dropdown-btn aria-expanded="false" aria-controls="' . esc_attr( $this->panel_id( $item ) ) . '" class="inline-flex items-center gap-x-1 cursor-pointer ' . esc_attr( $this->link_class ) . '">';
 					$output  .= esc_html( $item->title );
 					$output  .= '<i data-lucide="chevron-down" data-chevron class="size-4 transition-transform duration-200" aria-hidden="true"></i>';
 					$output  .= '</button>';

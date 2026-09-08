@@ -433,14 +433,6 @@
 			}
 		},
 		"elements": {
-			"heading": {
-				"spacing": {
-					"padding": {
-						"left": "var(--wp--preset--spacing--4)",
-						"right": "var(--wp--preset--spacing--4)"
-					}
-				}
-			},
 			"h1": {
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--chillax)",
@@ -525,6 +517,14 @@
 			}
 		},
 		"blocks": {
+			"core/heading": {
+				"spacing": {
+					"padding": {
+						"left": "var(--wp--preset--spacing--4)",
+						"right": "var(--wp--preset--spacing--4)"
+					}
+				}
+			},
 			"core/paragraph": {
 				"typography": {
 					"lineHeight": "1.75"
