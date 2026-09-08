@@ -11,9 +11,9 @@ $_ufo_tagline = get_bloginfo( 'description', 'display' );
 
 ?>
 <!-- ========== FOOTER ========== -->
-<footer id="colophon" class="mt-auto text-background!">
-
-	<div class="entry-content bg-barossa-950 p-6 sm:p-8 lg:p-12 text-background!">
+<footer id="colophon" class="mt-auto bg-barossa-950 text-background!">
+<div class="h-10 bg-background rounded-b-4xl"></div>
+	<div class="entry-content  p-6 sm:p-8 lg:p-12 text-background!">
 
 		<!-- Grid -->
 		<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6">
