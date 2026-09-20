@@ -137,8 +137,8 @@ for how services are wired up and autoloaded via Composer's classmap):
 ### Internationalization
 
 * Theme strings use the `ufo-boilerplate` text domain.
-* `composer make-pot` regenerates `theme/languages/ufo-boilerplate.pot` with
-  wp-cli. `npm run make-pot` does the same without wp-cli via
+* `composer -d theme make-pot` regenerates `theme/languages/ufo-boilerplate.pot`
+  with wp-cli. `npm run make-pot` does the same without wp-cli via
   `node_scripts/make-pot.php`, which scans `theme/` with the PHP tokenizer.
 
 ### Security
@@ -153,9 +153,10 @@ for how services are wired up and autoloaded via Composer's classmap):
 
 ### Coding standards
 
-* Run `composer install`, then `composer php:lint` (or `npm run lint:php`);
-  `composer php:lint:autofix` runs phpcbf. The theme is clean against
-  `WordPress-Extra` + `WordPress-Docs` — see `phpcs.xml.dist`.
+* Run `composer install -d theme` (see Quickstart), then `composer -d theme
+  php:lint` (or `npm run lint:php`, runnable from this folder without `-d`);
+  `composer -d theme php:lint:autofix` runs phpcbf. The theme is clean
+  against `WordPress-Extra` + `WordPress-Docs` — see `phpcs.xml.dist`.
 * The theme follows the `_s` / `_tw` leading-underscore prefix convention
   (`_ufo_*` functions, `_Ufo_*` classes); `phpcs.xml.dist` is configured to
   accept it, and `.git-blame-ignore-revs` hides the one-off phpcbf reformat
@@ -173,11 +174,18 @@ for how services are wired up and autoloaded via Composer's classmap):
 
 1. Move this folder to `wp-content/themes` in your local development environment
 2. Run `npm install && npm run dev` in this folder
-3. Run `composer install` in this folder — required at runtime (not just for
-   linting): it generates the classmap autoloader that `inc/class-loader.php`
-   uses to load the theme's services. Without it, an admin notice appears and
-   those services (breadcrumbs, header CTA, ajax filter, speculative
-   loading…) stay inactive.
+3. Run `composer install` **inside `theme/`** (`composer install -d theme`
+   from this folder, or `cd theme && composer install`) — required at
+   runtime (not just for linting): it generates the classmap autoloader
+   that `inc/class-loader.php` uses to load the theme's services. Without
+   it, an admin notice appears and those services (breadcrumbs, header CTA,
+   ajax filter, speculative loading…) stay inactive.
+   `composer.json` lives inside `theme/`, not at the root of this
+   repository — it has to, so that Composer computes its autoloader's
+   paths relative to `theme/` itself. `theme/` is what a deployed zip (see
+   Deployment below) turns into the theme's actual root directory once
+   uploaded, so this is the one location that gives the same relative
+   paths in both this local dev layout and a deployed site.
 4. Activate this theme in your local WordPress installation
 
 Using WordPress Multisite? Don’t forget that your theme must first be enabled via the Network Admin in order to be available for activation on a network site.

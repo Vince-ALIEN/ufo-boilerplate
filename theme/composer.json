@@ -1,7 +1,7 @@
 {
 	"autoload": {
 		"classmap": [
-			"theme/inc/"
+			"inc/"
 		]
 	},
 	"require-dev": {
@@ -13,14 +13,13 @@
 		"wp-coding-standards/wpcs": "^3.2"
 	},
 	"scripts": {
-		"php:lint": "theme/vendor/bin/phpcs -p -s",
-		"php:lint:errors": "theme/vendor/bin/phpcs -p -s --runtime-set ignore_warnings_on_exit 1",
-		"php:lint:autofix": "theme/vendor/bin/phpcbf",
-		"php:lint:changed": "theme/vendor/bin/phpcs-changed --git --git-unstaged",
-		"make-pot": "wp i18n make-pot . theme/languages/ufo-boilerplate.pot"
+		"php:lint": "vendor/bin/phpcs -p -s --standard=../phpcs.xml.dist",
+		"php:lint:errors": "vendor/bin/phpcs -p -s --standard=../phpcs.xml.dist --runtime-set ignore_warnings_on_exit 1",
+		"php:lint:autofix": "vendor/bin/phpcbf --standard=../phpcs.xml.dist",
+		"php:lint:changed": "vendor/bin/phpcs-changed --standard=../phpcs.xml.dist --git --git-unstaged",
+		"make-pot": "wp i18n make-pot . languages/ufo-boilerplate.pot"
 	},
 	"config": {
-		"vendor-dir": "theme/vendor",
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
