@@ -73,7 +73,7 @@ $_ufo_attributes['multiselect'] = 'false';
 					<svg xmlns="https://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" role="presentation">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 					</svg>
-					<h4 class="mt-4 text-lg font-chillax font-semibold text-slate-900">
+					<h4 class="mt-4 text-lg font-primary font-semibold text-slate-900">
 						<?php
 						/* translators: %s: nom pluriel du type de contenu (ex. articles). */
 						printf( esc_html__( 'Aucun %s trouvé', 'ufo-boilerplate' ), esc_html( $_ufo_plural_post_name ) );
@@ -82,7 +82,7 @@ $_ufo_attributes['multiselect'] = 'false';
 					<p class="mt-2 text-sm text-slate-600">
 						<?php esc_html_e( 'Essayez d\'autres filtres ou', 'ufo-boilerplate' ); ?>
 						<button type="button"
-								class="js-reset-filters text-primary hover:text-barossa-800 transition-colors duration-300 underline bg-transparent border-0 cursor-pointer"
+								class="js-reset-filters text-primary hover:text-primary-800 transition-colors duration-300 underline bg-transparent border-0 cursor-pointer"
 								aria-label="<?php esc_html_e( 'Réinitialiser tous les filtres', 'ufo-boilerplate' ); ?>">
 							<?php esc_html_e( 'réinitialisez-les tous', 'ufo-boilerplate' ); ?>
 						</button>.

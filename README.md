@@ -5,6 +5,29 @@ A custom WordPress theme based on [\_tw](https://underscoretw.com/), extended
 with a set of theme-specific customizations (see below) on top of the
 standard \_tw quickstart/build workflow.
 
+## Theme status
+
+This is **Ufo Agency's client-project starter**, not a neutral/generic
+boilerplate. Every new project is expected to start from it and customize it —
+it is not meant to be used as-is.
+
+Concretely, this means:
+
+* `theme/index.php`, `theme/template-parts/content/content-single.php`,
+  `theme/template-parts/content/content-page.php` and
+  `theme/template-parts/content/content-frontpage.php` contain Ufo Agency's
+  default blog/page layout (sticky hero, table-of-contents sidebar, social
+  share buttons, `/contact/` CTA, front-page hero). This is **intentional
+  starting content**, not leftover production debris — replace the copy,
+  images and links per project, but the layout itself is the agency's
+  standard starting point and doesn't need to be stripped out.
+* Rebranding a project means changing `theme/theme.json`'s `primary` /
+  `secondary` / `tertiary` color values and the `primary` / `secondary` font
+  families — the rest of the theme (Tailwind classes, `theme.json` element
+  styles) references those semantic slugs rather than hardcoded palette
+  names, so a new brand only requires editing `theme.json` and
+  `tailwind/tailwind-theme.css`, not searching the codebase for a color name.
+
 ## Project-specific customizations
 
 Beyond the \_tw base, this theme adds (mostly under
@@ -28,7 +51,7 @@ Beyond the \_tw base, this theme adds (mostly under
   breadcrumb trail with Category Base support. Call `_ufo_the_breadcrumb()`
   to print it (run through `wp_kses()` with an allowlist that keeps the
   microdata); `_ufo_get_breadcrumb()` returns the raw string.
-* **Footer** (`template-parts/layout/footer-content.php`) — a `bg-barossa-950`
+* **Footer** (`template-parts/layout/footer-content.php`) — a `bg-primary-950`
   body with a logo / Contact / Services / "Me suivre" grid and a copyright +
   legal-menu bar. Fed by the `menu-2` / `menu-3` nav menus, the `sidebar-2`
   (Footer Contact) / `sidebar-3` (Footer Newsletter) widget areas,

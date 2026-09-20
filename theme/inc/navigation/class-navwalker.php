@@ -295,7 +295,7 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 
 			if ( $icon_name ) {
 				$output .= '<div class="flex flex-none items-center justify-center rounded-lg bg-primary/5 group-hover:bg-primary/10">';
-				$output .= '<i data-lucide="' . esc_attr( $icon_name ) . '" class="size-6 text-barossa-600 group-hover:text-primary"></i>';
+				$output .= '<i data-lucide="' . esc_attr( $icon_name ) . '" class="size-6 text-primary-600 group-hover:text-primary"></i>';
 				$output .= '</div>';
 			}
 

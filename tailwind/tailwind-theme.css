@@ -10,13 +10,15 @@
 @source "../../../plugins/ufo-blocks/src/**/*.js";
 @source "../../../plugins/ufo-blocks/src/**/*.php";
 
-@source "../../../plugins/ufo-highlight/src/**/*.js";
+/* Plugins Ufo optionnels — décommenter les lignes correspondantes une fois
+   le plugin installé sur le projet, sinon Tailwind les ignore silencieusement. */
+/* @source "../../../plugins/ufo-highlight/src/**/*.js"; */
 
-@source "../../../plugins/ufo-splide-blocks/src/**/*.js";
-@source "../../../plugins/ufo-splide-blocks/src/**/*.php";
+/* @source "../../../plugins/ufo-splide-blocks/src/**/*.js"; */
+/* @source "../../../plugins/ufo-splide-blocks/src/**/*.php"; */
 
-@source "../../../plugins/ufo-horizontal-scroll-section/src/**/*.js";
-@source "../../../plugins/ufo-post-carousel/src/**/*.php";
+/* @source "../../../plugins/ufo-horizontal-scroll-section/src/**/*.js"; */
+/* @source "../../../plugins/ufo-post-carousel/src/**/*.php"; */
 
 @source not "../../DOCUMENTATION.md";
 
@@ -71,19 +73,19 @@
 	   Use `w-full h-full` instead. */
 	--size-full: initial;
 
-	/* ── Barossa ──────────────────────────────────────────────
+	/* ── Primary (nuancier) ───────────────────────────────────
 	   Violet profond · Usage : logo, backgrounds corporate,
 	   boutons secondaires, badges.
 	   ───────────────────────────────────────────────────────── */
-	--color-barossa-200: var(--wp--preset--color--barossa-200);
-	--color-barossa-300: var(--wp--preset--color--barossa-300);
-	--color-barossa-400: var(--wp--preset--color--barossa-400);
-	--color-barossa-500: var(--wp--preset--color--barossa-500);
-	--color-barossa-600: var(--wp--preset--color--barossa-600);
-	--color-barossa-700: var(--wp--preset--color--barossa-700);
-	--color-barossa-800: var(--wp--preset--color--barossa-800);
-	--color-barossa-900: var(--wp--preset--color--barossa-900);
-	--color-barossa-950: var(--wp--preset--color--barossa-950);
+	--color-primary-200: var(--wp--preset--color--primary-200);
+	--color-primary-300: var(--wp--preset--color--primary-300);
+	--color-primary-400: var(--wp--preset--color--primary-400);
+	--color-primary-500: var(--wp--preset--color--primary-500);
+	--color-primary-600: var(--wp--preset--color--primary-600);
+	--color-primary-700: var(--wp--preset--color--primary-700);
+	--color-primary-800: var(--wp--preset--color--primary-800);
+	--color-primary-900: var(--wp--preset--color--primary-900);
+	--color-primary-950: var(--wp--preset--color--primary-950);
 
  --color-slate-50: oklch(98.4% 0.003 247.858);
   --color-slate-100: oklch(96.8% 0.007 247.896);
@@ -115,6 +117,10 @@
 	--font-mono:
 		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
+
+	/* ── Fonts bridgées depuis theme.json ────────────────────── */
+	--font-primary: var(--wp--preset--font-family--primary);
+	--font-secondary: var(--wp--preset--font-family--secondary);
 
 		/* ── Spacing bridgé depuis theme.json ────────────────── */
 		--spacing-1:  var(--wp--preset--spacing--1);

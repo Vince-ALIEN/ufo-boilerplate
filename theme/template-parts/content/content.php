@@ -41,7 +41,7 @@ $_ufo_category   = ! empty( $_ufo_categories ) ? $_ufo_categories[0] : null;
 		<?php endif; ?>
 	</div>
 
-	<h2 class="not-prose mt-3 h-12 line-clamp-2 text-lg/6 font-chillax font-semibold text-slate-100">
+	<h2 class="not-prose mt-3 h-12 line-clamp-2 text-lg/6 font-primary font-semibold text-slate-100">
 		<?php the_title(); ?>
 	</h2>
 	<p class="not-prose mt-2 line-clamp-2 text-sm/6 text-slate-100">

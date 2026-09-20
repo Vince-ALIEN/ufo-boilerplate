@@ -31,49 +31,49 @@
 					"name": "Tertiary"
 				},
 				{
-					"slug": "barossa-200",
+					"slug": "primary-200",
 					"color": "#f3d4e9",
-					"name": "Barossa 200"
+					"name": "Primary 200"
 				},
 				{
-					"slug": "barossa-300",
+					"slug": "primary-300",
 					"color": "#e9afd5",
-					"name": "Barossa 300"
+					"name": "Primary 300"
 				},
 				{
-					"slug": "barossa-400",
+					"slug": "primary-400",
 					"color": "#d97db9",
-					"name": "Barossa 400"
+					"name": "Primary 400"
 				},
 				{
-					"slug": "barossa-500",
+					"slug": "primary-500",
 					"color": "#c7569d",
-					"name": "Barossa 500"
+					"name": "Primary 500"
 				},
 				{
-					"slug": "barossa-600",
+					"slug": "primary-600",
 					"color": "#b34f94",
-					"name": "Barossa 600"
+					"name": "Primary 600"
 				},
 				{
-					"slug": "barossa-700",
+					"slug": "primary-700",
 					"color": "oklch(0.38 0.13 328)",
-					"name": "Barossa 700"
+					"name": "Primary 700"
 				},
 				{
-					"slug": "barossa-800",
+					"slug": "primary-800",
 					"color": "#7f3565",
-					"name": "Barossa 800"
+					"name": "Primary 800"
 				},
 				{
-					"slug": "barossa-900",
+					"slug": "primary-900",
 					"color": "oklch(0.22 0.09 326)",
-					"name": "Barossa 900"
+					"name": "Primary 900"
 				},
 				{
-					"slug": "barossa-950",
+					"slug": "primary-950",
 					"color": "oklch(0.15 0.06 325)",
-					"name": "Barossa 950"
+					"name": "Primary 950"
 				},
 				{
 					"slug": "slate-50",
@@ -148,19 +148,9 @@
 			],
 			"gradients": [
 				{
-					"slug": "brand-accent",
-					"name": "Brand Barossa → Cinnabar",
-					"gradient": "linear-gradient(90deg, #7f3565 0%, #f7573c 100%)"
-				},
-				{
-					"slug": "barossa-dark",
-					"name": "Barossa sombre",
+					"slug": "primary-dark",
+					"name": "Primaire sombre",
 					"gradient": "linear-gradient(135deg, #471a37 0%, #27272f 100%)"
-				},
-				{
-					"slug": "cinnabar-warm",
-					"name": "Cinnabar chaud",
-					"gradient": "linear-gradient(135deg, #ff7f6a 0%, #e03a1f 100%)"
 				}
 			]
 		},
@@ -171,8 +161,8 @@
 			"fontFamilies": [
 				{
 					"fontFamily": "\"Chillax\", sans-serif",
-					"name": "Chillax",
-					"slug": "chillax",
+					"name": "Primary",
+					"slug": "primary",
 					"fontFace": [
 						{
 							"fontDisplay": "swap",
@@ -188,8 +178,8 @@
 				},
 				{
 					"fontFamily": "system-ui, ui-sans-serif, sans-serif",
-					"name": "System UI",
-					"slug": "system"
+					"name": "Secondary",
+					"slug": "secondary"
 				}
 			],
 			"fontSizes": [
@@ -418,7 +408,7 @@
 			"text": "var(--wp--preset--color--foreground)"
 		},
 		"typography": {
-			"fontFamily": "var(--wp--preset--font-family--system)",
+			"fontFamily": "var(--wp--preset--font-family--secondary)",
 			"fontSize": "var(--wp--preset--font-size--text-base)",
 			"fontWeight": "400",
 			"lineHeight": "1.7"
@@ -435,7 +425,7 @@
 		"elements": {
 			"h1": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--chillax)",
+					"fontFamily": "var(--wp--preset--font-family--primary)",
 					"fontWeight": "600",
 					"lineHeight": "1.1",
 					"letterSpacing": "-0.03em"
@@ -449,7 +439,7 @@
 			},
 			"h2": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--chillax)",
+					"fontFamily": "var(--wp--preset--font-family--primary)",
 					"fontWeight": "500",
 					"lineHeight": "1.15",
 					"letterSpacing": "-0.025em"
@@ -463,7 +453,7 @@
 			},
 			"h3": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--chillax)",
+					"fontFamily": "var(--wp--preset--font-family--primary)",
 					"fontWeight": "700",
 					"lineHeight": "1.2",
 					"letterSpacing": "-0.02em"
@@ -480,7 +470,7 @@
 			},
 			"h4": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--instrument-serif)",
+					"fontFamily": "var(--wp--preset--font-family--primary)",
 					"fontWeight": "400",
 					"lineHeight": "1.3"
 				},
@@ -503,7 +493,7 @@
 				},
 				":hover": {
 					"color": {
-						"text": "var(--wp--preset--color--cinnabar-600)"
+						"text": "var(--wp--preset--color--primary-700)"
 					},
 					"typography": {
 						"textDecoration": "underline"
@@ -511,7 +501,7 @@
 				},
 				":focus": {
 					"color": {
-						"text": "var(--wp--preset--color--cinnabar-600)"
+						"text": "var(--wp--preset--color--primary-700)"
 					}
 				}
 			}

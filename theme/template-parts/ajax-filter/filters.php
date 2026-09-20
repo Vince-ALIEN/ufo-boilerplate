@@ -21,7 +21,7 @@ if ( ! empty( $_ufo_filterlists ) ) :
 			<!-- Bouton "Toutes les catégories" -->
 			<li>
 				<button type="button"
-						class="ajax-posts__filter inline-block text-sm font-semibold bg-cinnabar-200 hover:bg-primary hover:text-slate-100 transition-colors duration-300 px-3 py-1 rounded-full js-show-all-filters border-0 cursor-pointer"
+						class="ajax-posts__filter inline-block text-sm font-semibold bg-primary-200 hover:bg-primary hover:text-slate-100 transition-colors duration-300 px-3 py-1 rounded-full js-show-all-filters border-0 cursor-pointer"
 						aria-pressed="true"
 						data-filter="<?php echo esc_attr( $_ufo_filterlist['taxonomy'] ); ?>"
 						data-term="all">
@@ -32,7 +32,7 @@ if ( ! empty( $_ufo_filterlists ) ) :
 			<?php foreach ( $_ufo_filterlist['filters'] as $_ufo_filter ) : ?>
 				<li>
 					<button type="button"
-							class="ajax-posts__filter inline-block text-sm bg-cinnabar-200 hover:bg-primary hover:text-slate-100 transition-colors duration-300 px-3 py-1 rounded-full border-0 cursor-pointer"
+							class="ajax-posts__filter inline-block text-sm bg-primary-200 hover:bg-primary hover:text-slate-100 transition-colors duration-300 px-3 py-1 rounded-full border-0 cursor-pointer"
 							aria-pressed="false"
 							aria-label="<?php /* translators: 1: nom de la liste de filtres, 2: nom du terme. */ echo esc_attr( sprintf( __( 'Filtrer par %1$s : %2$s', 'ufo-boilerplate' ), $_ufo_filterlist['name'], $_ufo_filter->name ) ); ?>"
 							data-filter="<?php echo esc_attr( $_ufo_filter->taxonomy ); ?>"
@@ -54,7 +54,7 @@ if ( ! empty( $_ufo_filterlists ) ) :
 				aria-expanded="false"
 				aria-controls="mobile-filters-<?php echo esc_attr( $_ufo_filterlist['id'] ); ?>"
 				aria-label="<?php /* translators: %s: nom de la liste de filtres. */ echo esc_attr( sprintf( __( 'Afficher/Masquer les filtres %s', 'ufo-boilerplate' ), $_ufo_filterlist['name'] ) ); ?>">
-			<span class="font-chillax text-lg font-semibold">
+			<span class="font-primary text-lg font-semibold">
 				<?php echo esc_html( $_ufo_filterlist['name'] ); ?>
 			</span>
 			<svg xmlns="https://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

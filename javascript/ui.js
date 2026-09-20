@@ -255,153 +255,18 @@ function initMegaMenus() {
 	});
 }
 
-// ── Page loader ────────────────────────────────────────────────────────────
-
-/**
- * Drives the preloader progress bar and hides it when the page is ready.
- *
- * HTML hooks:
- *   div#preloader       — overlay (hidden by removing it from DOM / display)
- *   div#progress-bar    — the fill bar (width animated via JS)
- */
-function initLoader() {
-	const preloader   = document.getElementById('preloader');
-	const progressBar = document.getElementById('progress-bar');
-
-	if (!preloader) return;
-
-	const loading  = van.state(true);
-	const progress = van.state(0);
-
-	// Animate progress bar width
-	van.derive(() => {
-		if (progressBar) progressBar.style.width = progress.val + '%';
-	});
-
-	// Hide preloader when loading becomes false
-	van.derive(() => {
-		if (!loading.val) {
-			preloader.style.transition = 'opacity 0.3s ease';
-			preloader.style.opacity    = '0';
-			setTimeout(() => { preloader.style.display = 'none'; }, 300);
-		}
-	});
-
-	// Increment progress counter (20 ms steps → ~2 s to reach 100)
-	function incrementProgress() {
-		if (progress.val < 100) {
-			progress.val += 1;
-			setTimeout(incrementProgress, 20);
-		}
-	}
-	incrementProgress();
-
-	// Determine when to hide
-	const startTime   = Date.now();
-	const minLoadTime = 1000; // 1 s minimum display
-	const maxLoadTime = 3000; // 3 s hard limit
-
-	function hideLoader() {
-		const elapsed       = Date.now() - startTime;
-		const remainingTime = Math.max(0, minLoadTime - elapsed);
-		setTimeout(() => { loading.val = false; }, remainingTime);
-	}
-
-	document.addEventListener('DOMContentLoaded', hideLoader);
-	window.addEventListener('load', hideLoader);
-	setTimeout(() => { loading.val = false; }, maxLoadTime);
-}
-
-// ── Promo popup ────────────────────────────────────────────────────────────
-
-/**
- * Drives the promo popup overlay (optional, only rendered when theme mod 'autorise' is on).
- *
- * HTML hooks:
- *   div#promo-overlay   data-cookie-name, data-delay, data-cookie-duration
- *   div#promo-modal
- *   button#promo-close-btn
- *   a#promo-cta-link    (optional)
- */
-function initPromoPopup() {
-	const overlay = document.getElementById('promo-overlay');
-	const modal   = document.getElementById('promo-modal');
-
-	if (!overlay || !modal) return;
-
-	const cookieName     = overlay.dataset.cookieName     || 'promo_popup_cookie';
-	const delay          = parseInt(overlay.dataset.delay          || '2000', 10);
-	const cookieDuration = parseInt(overlay.dataset.cookieDuration || '30',   10);
-
-	const showPopup = van.state(false);
-
-	// Sync DOM to state
-	van.derive(() => {
-		const isVisible = showPopup.val;
-
-		if (isVisible) {
-			overlay.classList.remove('hidden');
-			void overlay.offsetHeight; // force reflow
-			overlay.classList.remove('opacity-0');
-			overlay.classList.add('opacity-100');
-			modal.classList.remove('opacity-0', 'scale-95');
-			modal.classList.add('opacity-100', 'scale-100');
-		} else {
-			overlay.classList.remove('opacity-100');
-			overlay.classList.add('opacity-0');
-			modal.classList.remove('opacity-100', 'scale-100');
-			modal.classList.add('opacity-0', 'scale-95');
-			setTimeout(() => overlay.classList.add('hidden'), 300);
-		}
-	});
-
-	// Initialize: check cookie
-	const cookieManager = window.SecureCookieManager ? new window.SecureCookieManager() : null;
-	const cookieExists  = cookieManager && cookieManager.getCookie(cookieName) === 'true';
-
-	if (!cookieExists) {
-		setTimeout(() => { showPopup.val = true; }, delay);
-	}
-
-	// Close helper
-	function closePopup() {
-		showPopup.val = false;
-		if (cookieManager) {
-			cookieManager.setCookie(cookieName, 'true', cookieDuration, {
-				secure:   window.location.protocol === 'https:',
-				sameSite: window.location.protocol === 'https:' ? 'Strict' : 'Lax',
-			});
-		}
-	}
-
-	// Close button
-	const closeBtn = document.getElementById('promo-close-btn');
-	if (closeBtn) closeBtn.addEventListener('click', closePopup);
-
-	// Optional CTA link
-	const ctaLink = document.getElementById('promo-cta-link');
-	if (ctaLink) ctaLink.addEventListener('click', closePopup);
-
-	// Click outside modal closes popup
-	overlay.addEventListener('click', e => {
-		if (!modal.contains(e.target)) closePopup();
-	});
-}
-
 // ── Smooth anchors ─────────────────────────────────────────────────────────
 
 /**
  * Smooth-scrolls to a target element on click.
- * Uses Lenis (window.lenis) if available, otherwise native scrollIntoView.
  *
  * HTML hooks:
- *   [data-scroll-to="#id"]   — any clickable element
- *   a[href^="#"]             — standard anchor links
+ *   a[href^="#"]             — standard anchor links (e.g. the skip link)
  */
 function initSmoothAnchors() {
-	document.querySelectorAll('[data-scroll-to], a[href^="#"]').forEach(el => {
+	document.querySelectorAll('a[href^="#"]').forEach(el => {
 		el.addEventListener('click', e => {
-			const selector = el.dataset.scrollTo || el.getAttribute('href');
+			const selector = el.getAttribute('href');
 			if (!selector || selector === '#') return;
 
 			const target = document.querySelector(selector);
@@ -410,12 +275,7 @@ function initSmoothAnchors() {
 			e.preventDefault();
 
 			const reduce = prefersReducedMotion();
-
-			if (window.lenis && !reduce) {
-				window.lenis.scrollTo(target, { duration: 2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-			} else {
-				target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
-			}
+			target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
 
 			// preventDefault() cancels the browser's native "focus the fragment
 			// target" step, so do it ourselves — this is what makes the skip
@@ -430,7 +290,5 @@ function initSmoothAnchors() {
 document.addEventListener('DOMContentLoaded', () => {
 	initBurgerMenu();
 	initMegaMenus();
-	initLoader();
-	initPromoPopup();
 	initSmoothAnchors();
 });

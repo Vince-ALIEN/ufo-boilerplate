@@ -54,7 +54,7 @@
 			-->
 			<div class="flex flex-1 items-center justify-end gap-x-6 lg:min-w-40">
 				<?php if ( _Ufo_Header_Cta::url() ) : ?>
-					<a href="<?php echo esc_url( _Ufo_Header_Cta::url() ); ?>" class="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-background shadow-xs hover:bg-barossa-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><?php echo esc_html( _Ufo_Header_Cta::text() ); ?></a>
+					<a href="<?php echo esc_url( _Ufo_Header_Cta::url() ); ?>" class="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-background shadow-xs hover:bg-primary-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><?php echo esc_html( _Ufo_Header_Cta::text() ); ?></a>
 				<?php endif; ?>
 
 				<?php if ( is_active_sidebar( 'menu_widget_area' ) ) : ?>

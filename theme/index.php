@@ -74,7 +74,7 @@ get_header();
 						<?php endif; ?>
 					</div>
 
-					<h2 class="not-prose mt-3 text-2xl font-chillax font-semibold text-background line-clamp-2">
+					<h2 class="not-prose mt-3 text-2xl font-primary font-semibold text-background line-clamp-2">
 						<?php the_title(); ?>
 					</h2>
 					<p class="not-prose mt-2 line-clamp-3 text-sm/6 text-slate-300 max-w-2xl">

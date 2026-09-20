@@ -43,7 +43,7 @@ $_ufo_badge_link_url = _Ufo_Front_Page_Hero::get( 'ufo_hero_badge_link_url' );
 				<h1 class="text-5xl font-semibold tracking-tight text-balance text-foreground sm:text-7xl"><?php echo esc_html( _Ufo_Front_Page_Hero::get( 'ufo_hero_heading' ) ); ?></h1>
 				<p class="mt-8 text-lg font-medium text-pretty text-foreground/70 sm:text-xl/8"><?php echo esc_html( _Ufo_Front_Page_Hero::get( 'ufo_hero_description' ) ); ?></p>
 				<div class="mt-10 flex items-center justify-center gap-x-6">
-					<a href="<?php echo esc_url( _Ufo_Front_Page_Hero::get( 'ufo_hero_cta_primary_url' ) ); ?>" class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-background shadow-xs hover:bg-barossa-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><?php echo esc_html( _Ufo_Front_Page_Hero::get( 'ufo_hero_cta_primary_text' ) ); ?></a>
+					<a href="<?php echo esc_url( _Ufo_Front_Page_Hero::get( 'ufo_hero_cta_primary_url' ) ); ?>" class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-background shadow-xs hover:bg-primary-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><?php echo esc_html( _Ufo_Front_Page_Hero::get( 'ufo_hero_cta_primary_text' ) ); ?></a>
 					<a href="<?php echo esc_url( _Ufo_Front_Page_Hero::get( 'ufo_hero_cta_secondary_url' ) ); ?>" class="text-sm/6 font-semibold text-foreground"><?php echo esc_html( _Ufo_Front_Page_Hero::get( 'ufo_hero_cta_secondary_text' ) ); ?> <span aria-hidden="true">→</span></a>
 				</div>
 			</div>

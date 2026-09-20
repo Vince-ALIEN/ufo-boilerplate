@@ -10,23 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Configuration du filtre
- */
-add_filter(
-	'ajax_filter_config',
-	function ( $config ) {
-		return array_merge(
-			$config,
-			array(
-				'templates_path' => 'template-parts/ajax-filter',
-				'assets_path'    => '/inc/ajax-filter/assets',
-				'text_domain'    => 'ufo-boilerplate',
-			)
-		);
-	}
-);
-
-/**
  * Point d'accroche pour modifier les arguments WP_Query du filtre.
  *
  * Enregistré sans effet par défaut ; à surcharger dans un thème enfant.

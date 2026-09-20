@@ -61,7 +61,7 @@
 			<div class="lg:col-span-1 md:h-fit md:sticky md:top-22 md:overflow-y-auto">
 				<div class="p-6 grid gap-y-6 mt-6">
 					<div class="mb-4">
-						<p class="not-prose font-chillax font-semibold text-primary text-lg mb-4">Table des matières</p>
+						<p class="not-prose font-primary font-semibold text-primary text-lg mb-4">Table des matières</p>
 						<div class="table-of-contents">
 							<?php
 							// Extraire les titres h2 du contenu pour la table des matières.
@@ -89,7 +89,7 @@
 
 					<!-- Call to Action -->
 					<div class="mt-6 bg-primary p-6 rounded-lg">
-						<h3 class="font-chillax font-semibold text-lg text-background mb-2"><?php esc_html_e( 'Des questions ?', 'ufo-boilerplate' ); ?></h3>
+						<h3 class="font-primary font-semibold text-lg text-background mb-2"><?php esc_html_e( 'Des questions ?', 'ufo-boilerplate' ); ?></h3>
 						<p class="mb-4 text-sm text-background"><?php esc_html_e( 'Nous sommes là pour vous accompagner dans vos projets.', 'ufo-boilerplate' ); ?></p>
 						<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center justify-center gap-2 bg-background hover:bg-slate-200 text-primary btn rounded-md">
 							<i data-lucide="message-circle" class="size-4"></i>
@@ -99,10 +99,10 @@
 					<div class="w-full my-1 grid grid-cols-2 gap-2 items-center justify-start">
 						<div class="h-8 col-span-1 items-center"><span class="text-base font-semibold uppercase"><?php esc_html_e( 'Partager', 'ufo-boilerplate' ); ?></span></div>
 						<div class="col-span-1 flex justify-start gap-1">
-							<a target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Partager sur LinkedIn', 'ufo-boilerplate' ); ?>" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-barossa-800" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo rawurlencode( get_permalink() ); ?>">
+							<a target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Partager sur LinkedIn', 'ufo-boilerplate' ); ?>" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-primary-800" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo rawurlencode( get_permalink() ); ?>">
 								<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-background" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.605 0 4.276 2.372 4.276 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
 							</a>
-							<a target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Partager sur Facebook', 'ufo-boilerplate' ); ?>" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-barossa-800" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>">
+							<a target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Partager sur Facebook', 'ufo-boilerplate' ); ?>" class="w-8 h-8 inline-flex items-center justify-center rounded-full mr-2 mt-1 bg-primary hover:bg-primary-800" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>">
 								<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-background" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>
 							</a>
 						</div>
