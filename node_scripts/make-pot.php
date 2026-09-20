@@ -140,7 +140,7 @@ foreach ( $dir as $file ) {
 				'references'   => array(),
 			);
 		}
-		$entries[ $key ]['references'][] = str_replace( '/home/vincent-lasserre/DDev/wordpress/wp-content/themes/ufo-boilerplate/', '', $path );
+		$entries[ $key ]['references'][] = str_replace( dirname( $theme_dir ) . '/', '', $path );
 		unset( $context, $msgid_plural );
 	}
 }
