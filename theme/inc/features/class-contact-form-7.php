@@ -14,7 +14,7 @@ if ( ! class_exists( '_Ufo_Contact_Form7' ) ) :
 	/**
 	 * Restyles Contact Form 7 output and adds lightweight spam protection.
 	 */
-	class _Ufo_Contact_Form7 {
+	class _Ufo_Contact_Form7 implements _Ufo_Service {
 
 		/**
 		 * Singleton instance.
@@ -36,9 +36,16 @@ if ( ! class_exists( '_Ufo_Contact_Form7' ) ) :
 		}
 
 		/**
+		 * Defers hook registration to `init`, once CF7 has had a chance to load.
+		 */
+		public static function register() {
+			add_action( 'init', array( self::get_instance(), 'init_hooks' ) );
+		}
+
+		/**
 		 * Register hooks.
 		 */
-		public function init() {
+		public function init_hooks() {
 			add_filter( 'wpcf7_form_elements', array( $this, 'customize_cf7_elements' ) );
 			add_filter( 'wpcf7_validate_text', array( $this, 'validate_honeypot' ), 20, 2 );
 			add_filter( 'wpcf7_validate_text*', array( $this, 'validate_honeypot' ), 20, 2 );
@@ -289,6 +296,4 @@ if ( ! class_exists( '_Ufo_Contact_Form7' ) ) :
 			return $result;
 		}
 	}
-
-	add_action( 'init', array( _Ufo_Contact_Form7::get_instance(), 'init' ) );
 endif;

@@ -2,6 +2,20 @@
 /**
  * Template part for displaying ajax filter filters
  *
+ * @param array $args {
+ *     Args passed via `get_template_part( 'template-parts/ajax-filter/filters', null, $args )`.
+ *
+ *     @type array $filterlists {
+ *         One entry per taxonomy filter group, keyed numerically.
+ *
+ *         @type string   $id        HTML id/class for the filter list, e.g. `filter-category`.
+ *         @type string   $name      Group label, e.g. `Category`.
+ *         @type string   $taxonomy  Taxonomy slug the terms below belong to.
+ *         @type string   $all_items Label for the "show all" button.
+ *         @type WP_Term[] $filters  Terms to render as individual filter buttons.
+ *     }
+ * }
+ *
  * @package Ufo_Boilerplate
  */
 

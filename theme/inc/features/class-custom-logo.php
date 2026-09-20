@@ -10,13 +10,13 @@ if ( ! class_exists( '_Ufo_Custom_Logo' ) ) {
 	/**
 	 * Registers `custom-logo` theme support.
 	 */
-	class _Ufo_Custom_Logo {
+	class _Ufo_Custom_Logo implements _Ufo_Service {
 
 		/**
 		 * Hooks the theme support registration into `after_setup_theme`, so
 		 * it runs on every request, including in the Customizer.
 		 */
-		public static function init() {
+		public static function register() {
 			add_action( 'after_setup_theme', array( __CLASS__, 'add_support' ) );
 		}
 
@@ -33,6 +33,4 @@ if ( ! class_exists( '_Ufo_Custom_Logo' ) ) {
 			);
 		}
 	}
-
-	_Ufo_Custom_Logo::init();
 }

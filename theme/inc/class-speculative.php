@@ -32,7 +32,7 @@ if ( ! class_exists( '_Ufo_Speculative' ) ) {
 	/**
 	 * Adjusts core's Speculation Rules configuration for this theme.
 	 */
-	class _Ufo_Speculative {
+	class _Ufo_Speculative implements _Ufo_Service {
 
 		/**
 		 * Singleton instance.
@@ -84,6 +84,13 @@ if ( ! class_exists( '_Ufo_Speculative' ) ) {
 				self::$instance = new self();
 			}
 			return self::$instance;
+		}
+
+		/**
+		 * Instantiates the singleton, which hooks into core from its constructor.
+		 */
+		public static function register() {
+			self::get_instance();
 		}
 
 		/**
@@ -152,6 +159,4 @@ if ( ! class_exists( '_Ufo_Speculative' ) ) {
 			return array_values( array_unique( array_merge( (array) $paths, (array) $exclude ) ) );
 		}
 	}
-
-	_Ufo_Speculative::get_instance();
 }

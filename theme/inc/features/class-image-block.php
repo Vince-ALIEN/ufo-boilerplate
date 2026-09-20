@@ -10,12 +10,12 @@ if ( ! class_exists( '_Ufo_Image_Block' ) ) {
 	/**
 	 * Adds `not-prose` to the core image block output.
 	 */
-	class _Ufo_Image_Block {
+	class _Ufo_Image_Block implements _Ufo_Service {
 
 		/**
 		 * Hooks the render filter.
 		 */
-		public static function init() {
+		public static function register() {
 			add_filter( 'render_block_core/image', array( __CLASS__, 'add_not_prose_class' ) );
 		}
 
@@ -30,6 +30,4 @@ if ( ! class_exists( '_Ufo_Image_Block' ) ) {
 			return preg_replace( '/\bclass="wp-block-image/', 'class="not-prose wp-block-image', $block_content, 1 );
 		}
 	}
-
-	_Ufo_Image_Block::init();
 }

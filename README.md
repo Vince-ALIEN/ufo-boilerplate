@@ -30,9 +30,9 @@ Concretely, this means:
 
 ## Project-specific customizations
 
-Beyond the \_tw base, this theme adds (mostly under
-`theme/template-parts/custom/` and `theme/inc/`, auto-loaded by
-`theme/inc/class-loader.php`):
+Beyond the \_tw base, this theme adds (mostly under `theme/inc/features/`
+and `theme/inc/`, booted by `theme/inc/class-loader.php` — see that file
+for how services are wired up and autoloaded via Composer's classmap):
 
 * **Header CTA** (`class-header-cta.php`) — Customizer section ("Ufo
   options" → "Header CTA") to edit the header's button text/URL; the button
@@ -130,19 +130,24 @@ Beyond the \_tw base, this theme adds (mostly under
 
 1. Move this folder to `wp-content/themes` in your local development environment
 2. Run `npm install && npm run dev` in this folder
-3. Activate this theme in your local WordPress installation
+3. Run `composer install` in this folder — required at runtime (not just for
+   linting): it generates the classmap autoloader that `inc/class-loader.php`
+   uses to load the theme's services. Without it, an admin notice appears and
+   those services (breadcrumbs, header CTA, ajax filter, speculative
+   loading…) stay inactive.
+4. Activate this theme in your local WordPress installation
 
 Using WordPress Multisite? Don’t forget that your theme must first be enabled via the Network Admin in order to be available for activation on a network site.
 
 ### Development
 
-4. Run `npm run watch`
-5. Add [Tailwind utility classes](https://tailwindcss.com/docs/utility-first) with abandon
+5. Run `npm run watch`
+6. Add [Tailwind utility classes](https://tailwindcss.com/docs/utility-first) with abandon
 
 ### Deployment
 
-6. Run `npm run bundle`
-7. Upload the resulting zip file to your site using the “Upload Theme” button on the “Add Themes” administration page
+7. Run `npm run bundle`
+8. Upload the resulting zip file to your site using the “Upload Theme” button on the “Add Themes” administration page
 
 Or [deploy with the tool of your choice](https://underscoretw.com/docs/deployment/#h-other-deployment-options)!
 

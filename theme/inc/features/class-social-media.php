@@ -10,15 +10,15 @@ if ( ! class_exists( '_Ufo_Social_Media' ) ) {
 	/**
 	 * Registers the "Social Media" Customizer section and renders the links.
 	 */
-	class _Ufo_Social_Media {
+	class _Ufo_Social_Media implements _Ufo_Service {
 
 		const SECTION_ID = 'ufo_social_media';
 
 		/**
 		 * Hooks the Customizer registration into `customize_register`.
 		 */
-		public static function init() {
-			add_action( 'customize_register', array( __CLASS__, 'register' ) );
+		public static function register() {
+			add_action( 'customize_register', array( __CLASS__, 'register_customizer' ) );
 		}
 
 		/**
@@ -63,7 +63,7 @@ if ( ! class_exists( '_Ufo_Social_Media' ) ) {
 		 *
 		 * @param WP_Customize_Manager $wp_customize Customizer instance.
 		 */
-		public static function register( $wp_customize ) {
+		public static function register_customizer( $wp_customize ) {
 			$wp_customize->add_section(
 				self::SECTION_ID,
 				array(
@@ -121,6 +121,4 @@ if ( ! class_exists( '_Ufo_Social_Media' ) ) {
 			}
 		}
 	}
-
-	_Ufo_Social_Media::init();
 }

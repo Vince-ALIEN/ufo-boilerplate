@@ -289,7 +289,7 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
- * Loads custom classes from `template-parts/custom/`.
+ * Boots the theme's custom services and features (see `inc/class-loader.php`).
  */
 require get_template_directory() . '/inc/class-loader.php';
 

@@ -13,7 +13,7 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 	/**
 	 * Registers the "Front Page Hero" Customizer section.
 	 */
-	class _Ufo_Front_Page_Hero {
+	class _Ufo_Front_Page_Hero implements _Ufo_Service {
 
 		const SECTION_ID         = 'ufo_front_page_hero';
 		const BACKGROUND_SETTING = 'ufo_hero_background';
@@ -74,8 +74,8 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 		/**
 		 * Hooks the Customizer registration into `customize_register`.
 		 */
-		public static function init() {
-			add_action( 'customize_register', array( __CLASS__, 'register' ) );
+		public static function register() {
+			add_action( 'customize_register', array( __CLASS__, 'register_customizer' ) );
 		}
 
 		/**
@@ -83,7 +83,7 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 		 *
 		 * @param WP_Customize_Manager $wp_customize Customizer instance.
 		 */
-		public static function register( $wp_customize ) {
+		public static function register_customizer( $wp_customize ) {
 			$wp_customize->add_section(
 				self::SECTION_ID,
 				array(
@@ -192,6 +192,4 @@ if ( ! class_exists( '_Ufo_Front_Page_Hero' ) ) {
 			);
 		}
 	}
-
-	_Ufo_Front_Page_Hero::init();
 }

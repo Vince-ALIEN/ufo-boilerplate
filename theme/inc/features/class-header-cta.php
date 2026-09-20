@@ -13,7 +13,7 @@ if ( ! class_exists( '_Ufo_Header_Cta' ) ) {
 	/**
 	 * Registers the "Header CTA" Customizer section.
 	 */
-	class _Ufo_Header_Cta {
+	class _Ufo_Header_Cta implements _Ufo_Service {
 
 		const SECTION_ID   = 'ufo_header_cta';
 		const TEXT_SETTING = 'ufo_header_cta_text';
@@ -22,8 +22,8 @@ if ( ! class_exists( '_Ufo_Header_Cta' ) ) {
 		/**
 		 * Hooks the Customizer registration into `customize_register`.
 		 */
-		public static function init() {
-			add_action( 'customize_register', array( __CLASS__, 'register' ) );
+		public static function register() {
+			add_action( 'customize_register', array( __CLASS__, 'register_customizer' ) );
 		}
 
 		/**
@@ -31,7 +31,7 @@ if ( ! class_exists( '_Ufo_Header_Cta' ) ) {
 		 *
 		 * @param WP_Customize_Manager $wp_customize Customizer instance.
 		 */
-		public static function register( $wp_customize ) {
+		public static function register_customizer( $wp_customize ) {
 			$wp_customize->add_section(
 				self::SECTION_ID,
 				array(
@@ -93,6 +93,4 @@ if ( ! class_exists( '_Ufo_Header_Cta' ) ) {
 			return get_theme_mod( self::URL_SETTING, '' );
 		}
 	}
-
-	_Ufo_Header_Cta::init();
 }

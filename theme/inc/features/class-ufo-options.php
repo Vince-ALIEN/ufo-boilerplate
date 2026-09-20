@@ -14,7 +14,7 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 	/**
 	 * Registers the "Ufo options" Customizer panel and footer logo setting.
 	 */
-	class _Ufo_Options {
+	class _Ufo_Options implements _Ufo_Service {
 
 		const PANEL_ID            = 'ufo_options';
 		const FOOTER_LOGO_SETTING = 'ufo_footer_logo';
@@ -22,8 +22,8 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 		/**
 		 * Hooks the Customizer registration into `customize_register`.
 		 */
-		public static function init() {
-			add_action( 'customize_register', array( __CLASS__, 'register' ) );
+		public static function register() {
+			add_action( 'customize_register', array( __CLASS__, 'register_customizer' ) );
 		}
 
 		/**
@@ -31,7 +31,7 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 		 *
 		 * @param WP_Customize_Manager $wp_customize Customizer instance.
 		 */
-		public static function register( $wp_customize ) {
+		public static function register_customizer( $wp_customize ) {
 			$wp_customize->add_panel(
 				self::PANEL_ID,
 				array(
@@ -107,6 +107,4 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 			);
 		}
 	}
-
-	_Ufo_Options::init();
 }
