@@ -10,15 +10,12 @@
 @source "../../../plugins/ufo-blocks/src/**/*.js";
 @source "../../../plugins/ufo-blocks/src/**/*.php";
 
-/* Plugins Ufo optionnels — décommenter les lignes correspondantes une fois
-   le plugin installé sur le projet, sinon Tailwind les ignore silencieusement. */
-/* @source "../../../plugins/ufo-highlight/src/**/*.js"; */
-
-/* @source "../../../plugins/ufo-splide-blocks/src/**/*.js"; */
-/* @source "../../../plugins/ufo-splide-blocks/src/**/*.php"; */
-
-/* @source "../../../plugins/ufo-horizontal-scroll-section/src/**/*.js"; */
-/* @source "../../../plugins/ufo-post-carousel/src/**/*.php"; */
+/* Plugins Ufo optionnels (ufo-highlight, ufo-splide-blocks,
+   ufo-horizontal-scroll-section, ufo-post-carousel) : ces plugins ne sont pas
+   installés dans cet environnement. Une fois un projet doté de l'un d'eux,
+   ajoutez une ligne @source pointant vers son dossier src/, sur le modèle des
+   deux lignes ufo-blocks ci-dessus — ne pas mettre un glob contenant "**"
+   suivi de "/" dans un commentaire CSS, cela le termine prématurément. */
 
 @source not "../../DOCUMENTATION.md";
 

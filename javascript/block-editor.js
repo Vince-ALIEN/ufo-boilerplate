@@ -28,6 +28,16 @@ wp.domReady(() => {
 		label: 'Lead',
 	});
 
+	/**
+	 * Replace the bullet with a check icon — see the `.is-style-checklist`
+	 * rule in `tailwind/custom/components/components.css`. Only takes effect
+	 * on an unordered list (the CSS selector is scoped to `ul`).
+	 */
+	wp.blocks.registerBlockStyle('core/list', {
+		name: 'checklist',
+		label: 'Coche',
+	});
+
 	// Add additional block editor modifications here. For example, you could
 	// register another block style:
 	//

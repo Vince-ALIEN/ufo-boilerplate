@@ -134,6 +134,17 @@ function _ufo_add_page_excerpt_support() {
 add_action( 'init', '_ufo_add_page_excerpt_support' );
 
 /**
+ * Register the pattern category used by patterns under `theme/patterns/`.
+ */
+function _ufo_register_pattern_categories() {
+	register_block_pattern_category(
+		'ufo-boilerplate',
+		array( 'label' => __( 'Ufo Boilerplate', 'ufo-boilerplate' ) )
+	);
+}
+add_action( 'init', '_ufo_register_pattern_categories' );
+
+/**
  * Register widget areas.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar

@@ -113,3 +113,36 @@
 p.wp-block-paragraph {
 	padding: var(--wp--preset--spacing--4);
 }
+
+/* ── Checklist (core/list style variation) ───────────────────────────────────
+   Replaces the bullet with the Lucide "check" icon (path lifted from
+   lucide's `check.mjs`, kept in sync manually — this theme has no build step
+   that generates CSS icons from the npm package). Colored via `background-
+   color` + `mask-image` so it follows `--color-primary` like everything else,
+   rather than baking a fixed color into the SVG itself. Scoped to `ul` only:
+   applying this style to an ordered list is a no-op, not a broken list. */
+ul.wp-block-list.is-style-checklist {
+	list-style: none;
+	padding-left: 0;
+}
+
+ul.wp-block-list.is-style-checklist > li {
+	position: relative;
+	padding-left: 1.75rem;
+}
+
+ul.wp-block-list.is-style-checklist > li::before {
+	content: "";
+	position: absolute;
+	top: 0.25em;
+	left: 0;
+	width: 1.25rem;
+	height: 1.25rem;
+	background-color: var(--color-primary);
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+	mask-repeat: no-repeat;
+	mask-size: contain;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+}
