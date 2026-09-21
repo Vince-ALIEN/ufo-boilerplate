@@ -25,7 +25,7 @@ $_ufo_tagline = get_bloginfo( 'description', 'display' );
 					rel="home"
 					aria-label="<?php echo esc_attr( sprintf( /* translators: %s: site name. */ __( '%s – home', 'ufo-boilerplate' ), get_bloginfo( 'name' ) ) ); ?>"
 				>
-					<?php echo _Ufo_Options::footer_logo_html( 'h-auto max-w-[170px]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Markup built and escaped inside _Ufo_Options. ?>
+					<?php echo _Ufo_Options::footer_logo_html( 'size-[50px] object-contain' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Markup built and escaped inside _Ufo_Options. ?>
 				</a>
 				<?php if ( $_ufo_tagline ) : ?>
 					<p class="not-prose text-background text-sm"><?php echo esc_html( $_ufo_tagline ); ?></p>

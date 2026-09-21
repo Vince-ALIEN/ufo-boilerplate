@@ -23,7 +23,7 @@
 	<file>./theme</file>
 
 	<!-- Exclude patterns. -->
-	<exclude-pattern>/theme/vendor/*</exclude-pattern>
+	<exclude-pattern>/vendor/*</exclude-pattern>
 	<exclude-pattern>/node_modules/*</exclude-pattern>
 
 	<!-- Include the WordPress-Extra standard. -->

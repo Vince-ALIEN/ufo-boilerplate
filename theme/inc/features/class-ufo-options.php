@@ -58,14 +58,24 @@ if ( ! class_exists( '_Ufo_Options' ) ) {
 				)
 			);
 
+			/*
+			 * `WP_Customize_Cropped_Image_Control` (the same control class
+			 * WordPress core uses for the site logo, see `get_custom_logo()`
+			 * and `_Ufo_Custom_Logo`) forces the same 50×50 crop step here,
+			 * so the footer logo is guaranteed to be cropped like the header
+			 * one rather than relying on whatever size was uploaded.
+			 */
 			$wp_customize->add_control(
-				new WP_Customize_Media_Control(
+				new WP_Customize_Cropped_Image_Control(
 					$wp_customize,
 					self::FOOTER_LOGO_SETTING,
 					array(
-						'label'     => __( 'Footer logo', 'ufo-boilerplate' ),
-						'section'   => 'ufo_footer_logo',
-						'mime_type' => 'image',
+						'label'       => __( 'Footer logo', 'ufo-boilerplate' ),
+						'section'     => 'ufo_footer_logo',
+						'width'       => 50,
+						'height'      => 50,
+						'flex_width'  => false,
+						'flex_height' => false,
 					)
 				)
 			);

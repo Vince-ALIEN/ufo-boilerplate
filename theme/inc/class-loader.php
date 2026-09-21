@@ -2,19 +2,22 @@
 /**
  * Boots the theme's custom features.
  *
- * Composer's classmap autoloader (declared in `composer.json`, covering all
- * of `inc/`, including `inc/features/`) resolves any class referenced below
- * to its file — dropping a new passive class there needs no wiring here.
+ * No autoloader: every file below is `require`d directly. Files dropped
+ * into `inc/features/`, `inc/navigation/`, `inc/ajax-filter/` or
+ * `inc/truncate/` are picked up automatically by the glob loop below,
+ * whether they declare a class or are plain functions/hook registrations
+ * — no wiring needed either way. Anything living elsewhere in `inc/`
+ * (currently just `class-speculative.php`) needs a line of its own in
+ * `$_ufo_top_level_files`.
  *
- * Two categories of file still need an explicit line in this file, because
- * nothing in the theme ever *references* them by class/function name, so
- * autoloading alone would never trigger them to load:
+ * `interface-service.php` loads first, on its own: PHP resolves a class's
+ * `implements` clause when that class is declared, so `_Ufo_Service` has
+ * to exist before any file declaring a class that implements it runs.
  *
- *   - Services: implement `_Ufo_Service` and are booted via `register()`
- *     in the loop below. Add a new one to `$_ufo_services` and it's active
- *     — no further wiring needed as long as its file lives under `inc/`.
- *   - Procedural files: plain hook registrations or helper functions with
- *     no class behind them at all, so Composer's classmap can't index them.
+ * Loading a file only wires up whatever it does unconditionally (hooks,
+ * function definitions). A class that implements `_Ufo_Service` still
+ * needs to be added to `$_ufo_services` below to actually boot — that's
+ * the one piece of wiring a new feature can't avoid.
  *
  * @package Ufo_Boilerplate
  */
@@ -23,22 +26,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$_ufo_autoloader = dirname( __DIR__ ) . '/vendor/autoload.php';
+$_ufo_inc_dir = __DIR__;
 
-if ( file_exists( $_ufo_autoloader ) ) {
-	require_once $_ufo_autoloader;
-} else {
-	add_action(
-		'admin_notices',
-		function () {
-			printf(
-				'<div class="notice notice-error"><p>%s</p></div>',
-				esc_html__( 'Ufo Boilerplate: run `composer install` in the theme directory to enable its custom services (breadcrumbs, header CTA, ajax filter, speculative loading…).', 'ufo-boilerplate' )
-			);
-		}
-	);
+require_once $_ufo_inc_dir . '/interface-service.php';
+
+$_ufo_top_level_files = array(
+	$_ufo_inc_dir . '/class-speculative.php',
+);
+
+foreach ( $_ufo_top_level_files as $_ufo_file ) {
+	require_once $_ufo_file;
 }
-unset( $_ufo_autoloader );
+unset( $_ufo_top_level_files, $_ufo_file );
+
+$_ufo_auto_loaded_files = array_merge(
+	glob( $_ufo_inc_dir . '/features/*.php' ),
+	glob( $_ufo_inc_dir . '/navigation/*.php' ),
+	glob( $_ufo_inc_dir . '/ajax-filter/*.php' ),
+	glob( $_ufo_inc_dir . '/truncate/*.php' )
+);
+
+foreach ( $_ufo_auto_loaded_files as $_ufo_file ) {
+	require_once $_ufo_file;
+}
+unset( $_ufo_inc_dir, $_ufo_auto_loaded_files, $_ufo_file );
 
 /**
  * Services implementing `_Ufo_Service::register()`.
@@ -60,39 +71,3 @@ foreach ( $_ufo_services as $_ufo_service ) {
 	}
 }
 unset( $_ufo_services, $_ufo_service );
-
-/**
- * Procedural files: no class to autoload against, so require directly.
- */
-$_ufo_inc_dir = __DIR__;
-
-$_ufo_procedural_files = array(
-	$_ufo_inc_dir . '/features/class-breadcrumb.php', // Plain functions, not a class, despite the file name.
-	$_ufo_inc_dir . '/navigation/menu-custom-fields.php',
-	$_ufo_inc_dir . '/ajax-filter/init.php',
-	$_ufo_inc_dir . '/truncate/class-truncate.php', // Plain function, not a class, despite the file name.
-);
-
-foreach ( $_ufo_procedural_files as $_ufo_file ) {
-	if ( file_exists( $_ufo_file ) ) {
-		require_once $_ufo_file;
-	} else {
-		add_action(
-			'admin_notices',
-			function () use ( $_ufo_file ) {
-				printf(
-					'<div class="notice notice-error"><p>%s</p></div>',
-					esc_html(
-						sprintf(
-							/* translators: 1: file name, 2: directory path. */
-							__( 'Erreur : le fichier %1$s est manquant dans %2$s', 'ufo-boilerplate' ),
-							basename( $_ufo_file ),
-							dirname( $_ufo_file )
-						)
-					)
-				);
-			}
-		);
-	}
-}
-unset( $_ufo_inc_dir, $_ufo_procedural_files, $_ufo_file );
