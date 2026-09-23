@@ -14,8 +14,9 @@ tailwind-intellisense.css
 # Ignore the generated zip file:
 ufo-boilerplate.zip
 
-# Ignore .DS_Store files from macOS:
+# Ignore .DS_Store files and AppleDouble (._*) resource forks from macOS:
 .DS_Store
+._*
 
 /Cacptures/
 /audit/

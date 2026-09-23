@@ -111,8 +111,8 @@ $_ufo_tagline = get_bloginfo( 'description', 'display' );
 							'items_wrap'     => '<ul class="flex flex-wrap gap-x-4 gap-y-1">%3$s</ul>',
 							'depth'          => 1,
 							'fallback_cb'    => false,
-							'link_before'    => '<p class="text-sm text-slate-100 hover:text-white transition-colors">',
-							'link_after'     => '</p>',
+							'link_before'    => '<span class="text-sm text-slate-100 hover:text-white transition-colors">',
+							'link_after'     => '</span>',
 						)
 					);
 					?>
