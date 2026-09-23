@@ -59,7 +59,8 @@ if ( ! function_exists( '_ufo_setup' ) ) :
 		 */
 		load_theme_textdomain( 'ufo-boilerplate', get_template_directory() . '/languages' );
 
-		// Add default posts and comments RSS feed links to head.
+		// Add default posts RSS feed links to head (the comments feed is
+		// removed by _Ufo_Disable_Comments).
 		add_theme_support( 'automatic-feed-links' );
 
 		/*
@@ -87,15 +88,13 @@ if ( ! function_exists( '_ufo_setup' ) ) :
 		);
 
 		/*
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
+		 * Switch default core markup for search form, galleries, captions,
+		 * styles and scripts to output valid HTML5.
 		 */
 		add_theme_support(
 			'html5',
 			array(
 				'search-form',
-				'comment-form',
-				'comment-list',
 				'gallery',
 				'caption',
 				'style',
@@ -246,10 +245,6 @@ function _ufo_scripts() {
 			'in_footer' => true,
 		)
 	);
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
 }
 add_action( 'wp_enqueue_scripts', '_ufo_scripts' );
 

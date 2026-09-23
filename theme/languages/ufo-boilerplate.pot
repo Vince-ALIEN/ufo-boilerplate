@@ -18,16 +18,8 @@ msgstr ""
 msgid "\"Me suivre\" column of the footer (newsletter form, etc.)."
 msgstr ""
 
-#: theme/inc/template-functions.php
-msgid "%1$s at %2$s"
-msgstr ""
-
 #: theme/template-parts/layout/footer-content.php
 msgid "%1$s. %2$s © %3$s"
-msgstr ""
-
-#: theme/inc/template-functions.php
-msgid "%s <span class=\"says\">says:</span>"
 msgstr ""
 
 #: theme/inc/template-functions.php
@@ -252,10 +244,6 @@ msgstr ""
 msgid "Command"
 msgstr ""
 
-#: theme/comments.php
-msgid "Comments are closed."
-msgstr ""
-
 #: theme/template-parts/layout/footer-content.php
 msgid "Contact"
 msgstr ""
@@ -291,10 +279,6 @@ msgstr ""
 #: theme/inc/navigation/menu-custom-fields.php
 #: theme/inc/features/class-front-page-hero.php
 msgid "Description"
-msgstr ""
-
-#: theme/inc/template-functions.php
-msgid "Edit"
 msgstr ""
 
 #: theme/front-page.php
@@ -445,10 +429,6 @@ msgstr ""
 msgid "Learn more"
 msgstr ""
 
-#: theme/inc/template-tags.php
-msgid "Leave a comment<span class=\"sr-only\"> on %s</span>"
-msgstr ""
-
 #: theme/inc/features/class-header-cta.php
 msgid "Leave empty to hide the button."
 msgstr ""
@@ -502,24 +482,12 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: theme/single.php
-msgid "Next Post"
-msgstr ""
-
-#: theme/single.php
-msgid "Next post:"
-msgstr ""
-
 #: theme/template-parts/content/content-none.php
 msgid "No content matched your request."
 msgstr ""
 
 #: theme/template-parts/content/content-single.php
 msgid "Nous sommes là pour vous accompagner dans vos projets."
-msgstr ""
-
-#: theme/comments.php
-msgid "One comment on &ldquo;%1$s&rdquo;"
 msgstr ""
 
 #: theme/template-parts/layout/header-content.php
@@ -585,6 +553,10 @@ msgid "Please remove inappropriate words from your message."
 msgstr ""
 
 #: theme/inc/template-tags.php
+msgid "Post navigation"
+msgstr ""
+
+#: theme/inc/template-tags.php
 msgid "Posted by"
 msgstr ""
 
@@ -602,14 +574,6 @@ msgstr ""
 
 #: theme/inc/template-tags.php
 msgid "Previous"
-msgstr ""
-
-#: theme/single.php
-msgid "Previous Post"
-msgstr ""
-
-#: theme/single.php
-msgid "Previous post:"
 msgstr ""
 
 #: theme/functions.php
@@ -780,14 +744,6 @@ msgstr ""
 msgid "YouTube"
 msgstr ""
 
-#: theme/inc/template-functions.php
-msgid "Your comment is awaiting moderation."
-msgstr ""
-
-#: theme/inc/template-functions.php
-msgid "Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved."
-msgstr ""
-
 #: theme/template-parts/content/content-none.php
 msgid "Your search generated no results. Please try a different search."
 msgstr ""
@@ -812,13 +768,6 @@ msgstr ""
 #: theme/template-parts/ajax-filter/base.php
 msgid "réinitialisez-les tous"
 msgstr ""
-
-#: theme/comments.php
-msgctxt "ufo-boilerplate"
-msgid "%1$s comment on &ldquo;%2$s&rdquo;"
-msgid_plural "%1$s comments on &ldquo;%2$s&rdquo;"
-msgstr[0] ""
-msgstr[1] ""
 
 #: theme/inc/template-functions.php
 msgctxt "yearly archives date format"

@@ -21,22 +21,7 @@ get_header();
 
 				if ( is_singular( 'post' ) ) {
 					// Previous/next post navigation.
-					the_post_navigation(
-						array(
-							'next_text' => '<span aria-hidden="true">' . __( 'Next Post', 'ufo-boilerplate' ) . '</span> ' .
-								'<span class="sr-only">' . __( 'Next post:', 'ufo-boilerplate' ) . '</span> <br/>' .
-								'<span>%title</span>',
-							'prev_text' => '<span aria-hidden="true">' . __( 'Previous Post', 'ufo-boilerplate' ) . '</span> ' .
-								'<span class="sr-only">' . __( 'Previous post:', 'ufo-boilerplate' ) . '</span> <br/>' .
-								'<span>%title</span>',
-						)
-					);
-				}
-
-				// If comments are open, or we have at least one comment, load
-				// the comment template.
-				if ( comments_open() || get_comments_number() ) {
-					comments_template();
+					_ufo_the_post_navigation();
 				}
 
 				// End the loop.

@@ -48,21 +48,9 @@ if ( ! function_exists( '_ufo_posted_by' ) ) :
 	}
 endif;
 
-if ( ! function_exists( '_ufo_comment_count' ) ) :
-	/**
-	 * Prints HTML with the comment count for the current post.
-	 */
-	function _ufo_comment_count() {
-		if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-			/* translators: %s: Name of current post. Only visible to screen readers. */
-			comments_popup_link( sprintf( __( 'Leave a comment<span class="sr-only"> on %s</span>', 'ufo-boilerplate' ), get_the_title() ) );
-		}
-	}
-endif;
-
 if ( ! function_exists( '_ufo_entry_meta' ) ) :
 	/**
-	 * Prints HTML with meta information for the categories, tags and comments.
+	 * Prints HTML with meta information for the categories and tags.
 	 * This template tag is used in the entry header.
 	 */
 	function _ufo_entry_meta() {
@@ -99,11 +87,6 @@ if ( ! function_exists( '_ufo_entry_meta' ) ) :
 			}
 		}
 
-		// Comment count.
-		if ( ! is_singular() ) {
-			_ufo_comment_count();
-		}
-
 		// Edit post link.
 		edit_post_link(
 			sprintf(
@@ -124,7 +107,7 @@ endif;
 
 if ( ! function_exists( '_ufo_entry_footer' ) ) :
 	/**
-	 * Prints HTML with meta information for the categories, tags and comments.
+	 * Prints HTML with meta information for the categories and tags.
 	 */
 	function _ufo_entry_footer() {
 
@@ -158,11 +141,6 @@ if ( ! function_exists( '_ufo_entry_footer' ) ) :
 					$tags_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
-		}
-
-		// Comment count.
-		if ( ! is_singular() ) {
-			_ufo_comment_count();
 		}
 
 		// Edit post link.
@@ -215,44 +193,6 @@ if ( ! function_exists( '_ufo_post_thumbnail' ) ) :
 	}
 endif;
 
-if ( ! function_exists( '_ufo_comment_avatar' ) ) :
-	/**
-	 * Returns the HTML markup to generate a user avatar.
-	 *
-	 * @param mixed $id_or_email The Gravatar to retrieve. Accepts a user_id, gravatar md5 hash,
-	 *                           user email, WP_User object, WP_Post object, or WP_Comment object.
-	 */
-	function _ufo_get_user_avatar_markup( $id_or_email = null ) {
-
-		if ( ! isset( $id_or_email ) ) {
-			$id_or_email = get_current_user_id();
-		}
-
-		return sprintf( '<div class="vcard">%s</div>', get_avatar( $id_or_email, _ufo_get_avatar_size() ) );
-	}
-endif;
-
-if ( ! function_exists( '_ufo_discussion_avatars_list' ) ) :
-	/**
-	 * Displays a list of avatars involved in a discussion for a given post.
-	 *
-	 * @param array $comment_authors Comment authors to list as avatars.
-	 */
-	function _ufo_discussion_avatars_list( $comment_authors ) {
-		if ( empty( $comment_authors ) ) {
-			return;
-		}
-		echo '<ol>', "\n";
-		foreach ( $comment_authors as $id_or_email ) {
-			printf(
-				"<li>%s</li>\n",
-				_ufo_get_user_avatar_markup( $id_or_email ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			);
-		}
-		echo '</ol>', "\n";
-	}
-endif;
-
 if ( ! function_exists( '_ufo_the_posts_navigation' ) ) :
 	/**
 	 * Wraps `the_posts_pagination` for use throughout the theme.
@@ -271,6 +211,65 @@ if ( ! function_exists( '_ufo_the_posts_navigation' ) ) :
 				'before_page_number' => '<span class="sr-only">' . esc_html__( 'Page', 'ufo-boilerplate' ) . ' </span>',
 			)
 		);
+	}
+endif;
+
+if ( ! function_exists( '_ufo_the_post_navigation' ) ) :
+	/**
+	 * Displays links to the previous and next posts on a single post.
+	 *
+	 * Custom markup rather than `the_post_navigation()`, whose fixed
+	 * `.nav-links` wrapper can't carry the content-width layout. The post
+	 * title is visible from `md` up; below that it stays in the link as
+	 * `sr-only` text, so the accessible name is always "Previous <title>"
+	 * and still starts with the visible label.
+	 */
+	function _ufo_the_post_navigation() {
+		$links = array(
+			'previous' => get_previous_post(),
+			'next'     => get_next_post(),
+		);
+
+		if ( ! $links['previous'] && ! $links['next'] ) {
+			return;
+		}
+		?>
+		<nav class="post-navigation entry-content" aria-label="<?php esc_attr_e( 'Post navigation', 'ufo-boilerplate' ); ?>">
+			<div class="max-w-content mx-auto flex justify-between gap-x-2 items-center px-4 pb-4">
+				<?php
+				foreach ( $links as $direction => $adjacent_post ) :
+					if ( ! $adjacent_post ) {
+						continue;
+					}
+
+					$is_next = 'next' === $direction;
+					$label   = $is_next ? __( 'Next', 'ufo-boilerplate' ) : __( 'Previous', 'ufo-boilerplate' );
+					$icon    = sprintf(
+						'<i data-lucide="%1$s" class="size-5 p-1 %2$s bg-primary rounded-full text-background %3$s transition duration-200 ease-in-out" aria-hidden="true"></i>',
+						$is_next ? 'arrow-right' : 'arrow-left',
+						$is_next ? 'ml-1' : 'mr-1',
+						$is_next ? 'group-hover:translate-x-2' : 'group-hover:-translate-x-2'
+					);
+					?>
+					<div class="nav-<?php echo esc_attr( $direction ); ?><?php echo $is_next ? ' ml-auto' : ''; ?>">
+						<a href="<?php echo esc_url( get_permalink( $adjacent_post ) ); ?>" rel="<?php echo $is_next ? 'next' : 'prev'; ?>" class="group flex flex-col <?php echo $is_next ? 'items-end text-right' : 'items-start'; ?>">
+							<span class="text-sm mb-1 flex items-center">
+								<?php
+								// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- static icon markup built above.
+								echo $is_next ? '' : $icon;
+								echo esc_html( $label );
+								echo $is_next ? $icon : '';
+								// phpcs:enable
+								?>
+							</span>
+							<?php // The space keeps the label and title apart in the link's accessible name. ?>
+							&#32;<span class="sr-only md:not-sr-only md:block text-base group-hover:text-primary transition-colors duration-200"><?php echo esc_html( get_the_title( $adjacent_post ) ); ?></span>
+						</a>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</nav>
+		<?php
 	}
 endif;
 

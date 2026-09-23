@@ -21,17 +21,9 @@ msgid "\"Me suivre\" column of the footer (newsletter form, etc.)."
 msgstr ""
 "Colonne « Me suivre » du pied de page (formulaire de newsletter, etc.)."
 
-#: theme/inc/template-functions.php
-msgid "%1$s at %2$s"
-msgstr "%1$s à %2$s"
-
 #: theme/template-parts/layout/footer-content.php
 msgid "%1$s. %2$s © %3$s"
 msgstr ""
-
-#: theme/inc/template-functions.php
-msgid "%s <span class=\"says\">says:</span>"
-msgstr "%s <span class=\"says\">a écrit :</span>"
 
 #: theme/inc/template-functions.php
 msgid "%s Archives"
@@ -261,10 +253,6 @@ msgstr ""
 msgid "Command"
 msgstr "Commande"
 
-#: theme/comments.php
-msgid "Comments are closed."
-msgstr "Les commentaires sont fermés."
-
 #: theme/template-parts/layout/footer-content.php
 msgid "Contact"
 msgstr ""
@@ -301,10 +289,6 @@ msgstr ""
 #: theme/inc/features/class-front-page-hero.php
 msgid "Description"
 msgstr ""
-
-#: theme/inc/template-functions.php
-msgid "Edit"
-msgstr "Modifier"
 
 #: theme/front-page.php theme/inc/template-tags.php
 #: theme/template-parts/content/content-page.php
@@ -451,10 +435,6 @@ msgstr "Langues"
 msgid "Learn more"
 msgstr "En savoir plus"
 
-#: theme/inc/template-tags.php
-msgid "Leave a comment<span class=\"sr-only\"> on %s</span>"
-msgstr "Laisser un commentaire<span class=\"sr-only\"> sur %s</span>"
-
 #: theme/inc/features/class-header-cta.php
 msgid "Leave empty to hide the button."
 msgstr "Laisser vide pour masquer le bouton."
@@ -509,14 +489,6 @@ msgstr ""
 msgid "Next"
 msgstr "Suivant"
 
-#: theme/single.php
-msgid "Next Post"
-msgstr "Article suivant"
-
-#: theme/single.php
-msgid "Next post:"
-msgstr "Article suivant :"
-
 #: theme/template-parts/content/content-none.php
 msgid "No content matched your request."
 msgstr "Aucun contenu ne correspond à votre demande."
@@ -524,10 +496,6 @@ msgstr "Aucun contenu ne correspond à votre demande."
 #: theme/template-parts/content/content-single.php
 msgid "Nous sommes là pour vous accompagner dans vos projets."
 msgstr ""
-
-#: theme/comments.php
-msgid "One comment on &ldquo;%1$s&rdquo;"
-msgstr "Un commentaire sur « %1$s »"
 
 #: theme/template-parts/layout/header-content.php
 msgid "Open main menu"
@@ -591,6 +559,10 @@ msgid "Please remove inappropriate words from your message."
 msgstr "Merci de retirer les mots inappropriés de votre message."
 
 #: theme/inc/template-tags.php
+msgid "Post navigation"
+msgstr "Navigation de l’article"
+
+#: theme/inc/template-tags.php
 msgid "Posted by"
 msgstr "Publié par"
 
@@ -609,14 +581,6 @@ msgstr "Navigation des articles"
 #: theme/inc/template-tags.php
 msgid "Previous"
 msgstr "Précédent"
-
-#: theme/single.php
-msgid "Previous Post"
-msgstr "Article précédent"
-
-#: theme/single.php
-msgid "Previous post:"
-msgstr "Article précédent :"
 
 #: theme/functions.php
 msgid "Primary"
@@ -783,18 +747,6 @@ msgstr "Archives de l’année : "
 msgid "YouTube"
 msgstr ""
 
-#: theme/inc/template-functions.php
-msgid "Your comment is awaiting moderation."
-msgstr "Votre commentaire est en attente de modération."
-
-#: theme/inc/template-functions.php
-msgid ""
-"Your comment is awaiting moderation. This is a preview; your comment will be "
-"visible after it has been approved."
-msgstr ""
-"Votre commentaire est en attente de modération. Ceci est un aperçu ; il sera "
-"visible une fois approuvé."
-
 #: theme/template-parts/content/content-none.php
 msgid "Your search generated no results. Please try a different search."
 msgstr ""
@@ -824,13 +776,6 @@ msgstr "F Y"
 #: theme/template-parts/ajax-filter/base.php
 msgid "réinitialisez-les tous"
 msgstr ""
-
-#: theme/comments.php
-msgctxt "ufo-boilerplate"
-msgid "%1$s comment on &ldquo;%2$s&rdquo;"
-msgid_plural "%1$s comments on &ldquo;%2$s&rdquo;"
-msgstr[0] "%1$s commentaire sur « %2$s »"
-msgstr[1] "%1$s commentaires sur « %2$s »"
 
 #: theme/inc/template-functions.php
 msgctxt "yearly archives date format"
