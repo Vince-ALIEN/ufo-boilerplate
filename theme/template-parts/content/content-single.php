@@ -58,7 +58,7 @@
 	<div class="max-w-content mx-auto">
 		<div class="mb-16 grid gap-8 lg:grid-cols-3 min-h-screen">
 			<!-- Sidebar avec table des matières et CTA -->
-			<div class="lg:col-span-1 md:h-fit md:sticky md:top-22 md:overflow-y-auto">
+			<div class="toc-sidebar lg:col-span-1 md:h-fit md:sticky md:top-22 md:overflow-y-auto">
 				<div class="p-6 grid gap-y-6 mt-6">
 					<div class="mb-4">
 						<p class="not-prose font-primary font-semibold text-primary text-lg mb-4">Table des matières</p>

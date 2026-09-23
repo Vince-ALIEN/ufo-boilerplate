@@ -10,9 +10,9 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header px-2 mb-4">
+	<header class="entry-header px-2 my-4">
 		<div class="bg-background">
-			<div class="entry-content py-22 sm:px-6 sm:py-28 lg:px-8">
+			<div class="entry-content pb-22 sm:px-6 lg:px-8">
 			<div class="relative isolate overflow-hidden bg-slate-900 px-6 py-24 shadow-2xl rounded-2xl sm:px-16">
 				<?php if ( _ufo_can_show_post_thumbnail() ) : ?>
 				<div class="absolute inset-0 -z-10">

@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<section class="entry-content relative isolate mx-auto mt-32 px-4" id="primary">
+<section class="entry-content relative isolate mx-auto mt-12 px-4" id="primary">
 
 	<!-- En-tête de page reste inchangé -->
 	<div class="relative">

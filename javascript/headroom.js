@@ -3,13 +3,6 @@ import Headroom from 'headroom.js';
 // grab an element
 var element = document.querySelector('#masthead');
 
-// The pin/unpin background lives on the `nav`, not on `#masthead` itself:
-// on the home page `#masthead`'s own box height is `0` (see
-// `tailwind/custom/utilities.css`), and a `background-color` on a
-// zero-height box has no area to paint, so it stays invisible there no
-// matter the color/opacity used — the `nav` keeps its real height everywhere.
-var nav = element ? element.querySelector('header') : null;
-
 // options
 var options = {
 	// vertical offset in px before element is first unpinned

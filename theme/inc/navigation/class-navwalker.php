@@ -200,20 +200,21 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 				? 'lg:inset-x-0'
 				: 'lg:left-1/2 lg:-translate-x-1/2';
 			$panel_id               = $this->panel_id( $this->current_top_level_item );
-			$output                .= '<div data-dropdown-panel id="' . esc_attr( $panel_id ) . '" class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible mt-4 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-1">';
+			$output                .= '<div data-dropdown-panel id="' . esc_attr( $panel_id ) . '" class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible mt-4 lg:mt-0 transition-[opacity,translate] duration-200 ease-out opacity-0 translate-y-1">';
 
 			// Inner card wrapper: mega menus cap at the same `max-w-content` used
 			// for the rest of the site so the card matches the page's content
 			// column exactly (its `md:w-screen` base would otherwise stay full
-			// viewport width). Regular dropdowns keep their narrower cap.
-			$panel_max_width = $is_mega_menu ? 'lg:max-w-content' : 'lg:max-w-3xl';
+			// viewport width). Regular dropdowns (single column) get a fixed
+			// `w-96` instead, overriding `md:w-screen` (and the base `max-w-md`).
+			$panel_max_width = $is_mega_menu ? 'lg:max-w-content' : 'lg:w-96';
 			$output         .= '<div class="md:w-screen max-w-md mt-4 flex-auto overflow-hidden md:rounded-3xl bg-background text-sm/6 md:shadow-lg md:outline-1 outline-foreground/10 ' . $panel_max_width . '">';
 
 			if ( $is_mega_menu ) {
 				$output .= '<div class="grid grid-cols-1 gap-x-8 gap-y-6 p-4 lg:grid-cols-2 lg:p-6">';
 				$output .= '<ul class="submenu grid md:grid-cols-2 grid-cols-1 gap-x-6 gap-y-1">';
 			} else {
-				$output .= '<ul class="submenu grid grid-cols-1 gap-x-6 gap-y-1 p-4 lg:grid-cols-2">';
+				$output .= '<ul class="submenu grid grid-cols-1 gap-x-6 gap-y-1 p-4">';
 			}
 		}
 

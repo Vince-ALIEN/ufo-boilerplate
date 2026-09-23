@@ -27,29 +27,18 @@
  }
 
 /*
- * The pin/unpin background lives on the `nav`, not on `#masthead` itself:
- * on the front page `#masthead`'s own box height is `0` (see `.home
- * #masthead` below), and a `background-color` on a zero-height box has no
- * area to paint, so it would stay invisible there no matter the color/
- * opacity used — the `nav` keeps its real height on every page.
- *
- * `max-width`/`margin-inline` cancel the `.entry-content > *` component
- * rule (components.css): `nav` is a direct child of `header.entry-content`
- * and would otherwise inherit `max-w-content mx-auto`, shrinking to the
- * centered content column while `#masthead` stays full width — leaving
- * transparent gaps on both sides of the scroll background. The header's
- * actual content layout now lives on an inner wrapper div instead (see
- * header-content.php), unaffected by that rule since it isn't a direct
- * child of `.entry-content`.
+ * The pin/unpin background lives on `.masthead-bar`, not on `#masthead`
+ * itself: on the front page `#masthead`'s own box height is `0` (see
+ * `.home #masthead` below), and a `background-color` on a zero-height box
+ * has no area to paint, so it would stay invisible there no matter the
+ * color/opacity used — the bar keeps its real height on every page.
  */
- #masthead nav {
-	max-width: none;
-	margin-inline: 0;
+ .masthead-bar {
 	transition: background-color 200ms ease-in-out;
  }
 
- #masthead.slideup nav,
- #masthead.slideDown nav {
+ #masthead.slideup .masthead-bar,
+ #masthead.slideDown .masthead-bar {
 	@apply bg-background/80;
  }
 
@@ -67,3 +56,63 @@
 	height: 0;
 	overflow: visible;
  }
+
+/**
+ * Print styles (Opquast #190/#191: dedicated print styles, page content
+ * printable without navigation blocks).
+ *
+ * `!important` is needed throughout: without it, Tailwind utility classes
+ * like `sticky`, `fixed` or `hidden` (on the mobile menu, carousel controls…)
+ * — which all sit later in the stylesheet than this file — would still win
+ * over these plain-specificity print rules.
+ */
+@media print {
+	#masthead,
+	#colophon,
+	#mobile-menu,
+	.splide__arrows,
+	.splide__pagination,
+	.splide__toggle,
+	.ajax-posts__spinner {
+		display: none !important;
+	}
+
+	/* `#masthead` (header nav) and `.ufo-scroll-card` (the `ufo-scroll`
+	 * plugin's sticky stacking cards) both use `position: sticky`;
+	 * `content-single.php`'s table-of-contents sidebar uses
+	 * `md:sticky`. Sticky/fixed elements can repeat or overlap across
+	 * printed pages, so drop these specific ones back into normal flow
+	 * rather than resetting `position` on every element, which would
+	 * also break unrelated `absolute` layout (image covers, badge
+	 * overlays…) used throughout the theme and its blocks. */
+	#masthead,
+	.ufo-scroll-card,
+	.toc-sidebar {
+		position: static !important;
+	}
+
+	/* `.home #masthead` collapses to `height: 0` on the front page (see
+	 * above) so the transparent header floats over the hero on screen;
+	 * since the header itself is hidden for print anyway, undo that so
+	 * the hero's own height/spacing isn't thrown off. */
+	.home #masthead {
+		height: auto !important;
+	}
+
+	/* Expand any closed <details> accordion (e.g. the card-switcher
+	 * "Un Cloud…" cards) so its content prints instead of staying
+	 * collapsed. */
+	details:not([open]) > *:not(summary) {
+		display: block !important;
+	}
+
+	body {
+		background: #fff !important;
+		color: #000 !important;
+	}
+
+	a {
+		color: #000 !important;
+		text-decoration: underline !important;
+	}
+}

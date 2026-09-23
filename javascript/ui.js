@@ -4,6 +4,7 @@
  */
 
 import van from 'vanjs-core';
+import { refreshIcons } from './icons.js';
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -255,6 +256,114 @@ function initMegaMenus() {
 	});
 }
 
+// ── Header search toggle ───────────────────────────────────────────────────
+
+/**
+ * Focuses the search input when the header search dropdown opens.
+ *
+ * The toggle button and panel also carry the generic `data-dropdown-*`
+ * hooks, so `initMegaMenus()` already handles showing/hiding the panel,
+ * `aria-expanded`, closing on Escape/outside click, etc. — this only adds
+ * the input autofocus a search field needs but a nav flyout doesn't.
+ *
+ * A `MutationObserver` on `aria-expanded`, rather than reading it back
+ * from a second click listener, is what makes this safe to bolt on
+ * without depending on VanJS's `derive()` having already run by the time
+ * our own listener fires — `derive()` schedules its DOM updates as a
+ * microtask, so that order isn't guaranteed.
+ *
+ * HTML hooks (one set per `[data-dropdown-item]`):
+ *   button[data-search-btn]   — the toggle button (also data-dropdown-btn)
+ *   input[data-search-input]  — focused once the panel has opened
+ */
+function initHeaderSearch() {
+	// One instance per breakpoint (see header-search.php): pair each button
+	// with the input of its own dropdown item, not the first one in the page.
+	document.querySelectorAll('[data-search-btn]').forEach(btn => {
+		const input = btn.closest('[data-dropdown-item]')?.querySelector('[data-search-input]');
+
+		if (!input) return;
+
+		new MutationObserver(() => {
+			if (btn.getAttribute('aria-expanded') === 'true') {
+				input.focus();
+			}
+		}).observe(btn, { attributes: true, attributeFilter: ['aria-expanded'] });
+	});
+}
+
+// ── External link indicators ────────────────────────────────────────────────
+
+/**
+ * Marks links to a different hostname than the site's own, so they're
+ * distinguishable from internal ones (Opquast #137) and, when they open a
+ * new tab, warns about that too (Opquast #141) — both currently unmet by
+ * any single link on its own.
+ *
+ * Two different treatments, depending on what the link already carries:
+ *   - A link with its own visible text (body copy, the footer's "Website
+ *     Carbon" link…) gets a small `external-link` icon plus a `.sr-only`
+ *     span, since neither the text nor an icon alone reaches every user.
+ *   - An icon-only link (the footer's social icons: brand SVG + `.sr-only`
+ *     network name, see `_Ufo_Social_Media::the_links()`) is already
+ *     unambiguous for sighted users once you know the icon — a second
+ *     icon squeezed into an already-small button would just be visual
+ *     noise. Its existing `.sr-only` label is extended instead, so screen
+ *     reader users still learn the tab will open new.
+ *   - A link that already carries a manually-chosen `external-link` icon
+ *     (the nav menu editor's per-item icon picker, see
+ *     `menu-custom-fields.php` / `class-navwalker.php`) is left alone —
+ *     otherwise it would end up with two.
+ *
+ * Runs once on load: it decorates whatever the initial page render
+ * produced, not links inserted afterwards (e.g. by the ajax filter).
+ */
+function initExternalLinks() {
+	const homeHost = window.location.hostname;
+	let addedIcons = false;
+
+	document.querySelectorAll('a[href^="http"]').forEach(link => {
+		let url;
+		try {
+			url = new URL(link.href);
+		} catch {
+			return;
+		}
+		if (url.hostname === homeHost) return;
+
+		const opensNewTab = link.target === '_blank';
+		const existingSrOnly = link.querySelector('.sr-only');
+		const hasVisibleText = link.textContent.trim() !== (existingSrOnly ? existingSrOnly.textContent.trim() : '');
+
+		if (!hasVisibleText) {
+			// Icon-only link: extend its existing accessible name instead of
+			// adding a second visual icon.
+			if (opensNewTab && existingSrOnly) {
+				existingSrOnly.textContent += ' (nouvel onglet)';
+			}
+			return;
+		}
+
+		if (!link.querySelector('[data-lucide="external-link"]')) {
+			const icon = document.createElement('i');
+			icon.setAttribute('data-lucide', 'external-link');
+			icon.setAttribute('aria-hidden', 'true');
+			icon.className = 'inline-block size-4 ml-1 align-middle';
+			link.appendChild(icon);
+			addedIcons = true;
+		}
+
+		const label = document.createElement('span');
+		label.className = 'sr-only';
+		label.textContent = opensNewTab ? ' (site externe, nouvel onglet)' : ' (site externe)';
+		link.appendChild(label);
+	});
+
+	// The icons above are inserted as bare <i data-lucide> elements — turn
+	// them into the actual Lucide <svg>.
+	if (addedIcons) refreshIcons();
+}
+
 // ── Smooth anchors ─────────────────────────────────────────────────────────
 
 /**
@@ -290,5 +399,7 @@ function initSmoothAnchors() {
 document.addEventListener('DOMContentLoaded', () => {
 	initBurgerMenu();
 	initMegaMenus();
+	initHeaderSearch();
+	initExternalLinks();
 	initSmoothAnchors();
 });

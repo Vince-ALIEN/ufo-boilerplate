@@ -131,6 +131,20 @@ ul.wp-block-list.is-style-checklist > li {
 	padding-left: 1.75rem;
 }
 
+/* ── Splide pagination dots (ufo-splide-blocks) ──────────────────────────────
+   Splide's default `.splide__pagination__page` is an 8×8px dot — well under
+   the WCAG 2.2 (SC 2.5.8) 24×24px minimum tap target size. Padding enlarges
+   the actual clickable box to 24×24 while `background-clip: content-box`
+   keeps the painted dot itself at its original 8×8 visual size. */
+.splide__pagination__page {
+	box-sizing: content-box;
+	width: 8px;
+	height: 8px;
+	padding: 8px;
+	margin: 0;
+	background-clip: content-box;
+}
+
 ul.wp-block-list.is-style-checklist > li::before {
 	content: "";
 	position: absolute;
