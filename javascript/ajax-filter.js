@@ -465,6 +465,12 @@
 							} else {
 								postsContainer.replaceChildren(parseSafeHTML(response.data.content));
 							}
+
+							// Let ui.js decorate the new markup (external link
+							// markers…), see initExternalLinks().
+							document.dispatchEvent(
+								new CustomEvent('ufo:content-added', { detail: { root: postsContainer } })
+							);
 						}
 
 						loadMoreButtons.forEach(function (btn) {

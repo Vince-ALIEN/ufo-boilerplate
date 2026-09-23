@@ -6,7 +6,7 @@
  * Self-hosted rather than loaded from a CDN. Renders into the `#wcb` element
  * in the footer and calls https://api.websitecarbon.com at runtime.
  *
- * Two changes on top of the upstream file:
+ * Three changes on top of the upstream file:
  *   1. The upstream b.min.js body is wrapped in `wcbRender()` instead of
  *      running at parse time.
  *   2. A bootstrap runs it only once `#wcb` is about to scroll into view
@@ -16,6 +16,10 @@
  *      above-the-fold work and stops adding run-to-run noise to Lighthouse
  *      / PageSpeed scores. `#wcb` carries a reserved `min-height` in
  *      `tailwind/custom/utilities.css` so the injected markup causes no CLS.
+ *   3. Once rendered, it dispatches `ufo:content-added` so ui.js's
+ *      initExternalLinks() marks the badge's "Website Carbon" link as
+ *      external / opening a new tab — the badge is inserted after that
+ *      script's own pass on DOMContentLoaded, so it would miss it otherwise.
  *
  * This file is excluded from eslint/prettier (see `.prettierignore`,
  * `eslint.config.js`) so the upstream body stays byte-for-byte verbatim.
@@ -37,9 +41,14 @@ function wcbRender() {
 		return;
 	}
 
+	function render() {
+		wcbRender();
+		document.dispatchEvent(new CustomEvent("ufo:content-added", { detail: { root: el } }));
+	}
+
 	// No IntersectionObserver support: render immediately, as upstream does.
 	if (!("IntersectionObserver" in window)) {
-		wcbRender();
+		render();
 		return;
 	}
 
@@ -48,7 +57,7 @@ function wcbRender() {
 			for (var i = 0; i < entries.length; i++) {
 				if (entries[i].isIntersecting) {
 					observer.disconnect();
-					wcbRender();
+					render();
 					return;
 				}
 			}

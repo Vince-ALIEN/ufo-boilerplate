@@ -315,14 +315,30 @@ function initHeaderSearch() {
  *     `menu-custom-fields.php` / `class-navwalker.php`) is left alone —
  *     otherwise it would end up with two.
  *
- * Runs once on load: it decorates whatever the initial page render
- * produced, not links inserted afterwards (e.g. by the ajax filter).
+ * Runs on load, then again on any `ufo:content-added` event for markup
+ * inserted afterwards — dispatch it with the new subtree as `detail.root`
+ * (the Website Carbon badge and the ajax filter do, see
+ * website-carbon-badge.js / ajax-filter.js). Each link is marked `data-external-link` once
+ * decorated, so running twice over the same link is harmless.
  */
 function initExternalLinks() {
+	decorateExternalLinks(document);
+
+	document.addEventListener('ufo:content-added', e => {
+		decorateExternalLinks(e.detail?.root || document);
+	});
+}
+
+/**
+ * Decorates the external links inside `root` (see initExternalLinks()).
+ *
+ * @param {ParentNode} root
+ */
+function decorateExternalLinks(root) {
 	const homeHost = window.location.hostname;
 	let addedIcons = false;
 
-	document.querySelectorAll('a[href^="http"]').forEach(link => {
+	root.querySelectorAll('a[href^="http"]:not([data-external-link])').forEach(link => {
 		let url;
 		try {
 			url = new URL(link.href);
@@ -330,6 +346,8 @@ function initExternalLinks() {
 			return;
 		}
 		if (url.hostname === homeHost) return;
+
+		link.setAttribute('data-external-link', '');
 
 		const opensNewTab = link.target === '_blank';
 		const existingSrOnly = link.querySelector('.sr-only');
