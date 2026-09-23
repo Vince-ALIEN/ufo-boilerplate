@@ -140,13 +140,25 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 				if ( has_post_thumbnail() ) {
 					$output .= '<div class="flex-none overflow-hidden rounded-lg bg-primary/5">';
 					// get_the_post_thumbnail ajoute width/height/srcset → pas de CLS.
-					$output .= get_the_post_thumbnail(
-						get_the_ID(),
-						'medium',
-						array(
-							'alt'     => '',
-							'class'   => 'w-full h-full object-cover',
-							'loading' => 'lazy',
+					//
+					// `sizes` fixé à 300px : les cartes s'affichent en ~312px, et
+					// avec le `sizes="auto, …"` que WordPress ajoute aux images
+					// lazy, ces 12px de trop faisaient choisir au navigateur la
+					// version 600x400 (3 à 4 fois plus lourde) même sur un écran
+					// standard. En 300px, il prend la 300x200 en 1x et la 600x400
+					// seulement en 2x (retina).
+					$output .= str_replace(
+						'sizes="auto, ',
+						'sizes="',
+						get_the_post_thumbnail(
+							get_the_ID(),
+							'medium',
+							array(
+								'alt'     => '',
+								'class'   => 'w-full h-full object-cover',
+								'loading' => 'lazy',
+								'sizes'   => '300px',
+							)
 						)
 					);
 					$output .= '</div>';
