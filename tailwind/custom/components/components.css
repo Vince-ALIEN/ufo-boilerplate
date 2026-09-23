@@ -110,6 +110,40 @@
 	}
 }
 
+/* ── Posts pagination (`the_posts_pagination()`, see _ufo_the_posts_navigation) ─
+   WordPress's own markup (`nav.pagination > .nav-links > .page-numbers`),
+   styled to match `.btn`: same radius, primary color for the current page,
+   40px-high targets. `.screen-reader-text` is WordPress's class for the
+   hidden "Posts navigation" heading it prints above the links. */
+.screen-reader-text {
+	@apply sr-only;
+}
+
+.pagination {
+	@apply my-12;
+}
+
+.pagination .nav-links {
+	@apply flex flex-wrap items-center justify-center gap-2;
+}
+
+.pagination .page-numbers {
+	@apply inline-flex h-10 min-w-10 items-center justify-center gap-1 rounded-md px-3 text-sm font-semibold text-foreground ring-1 ring-foreground/10 ring-inset transition-colors;
+}
+
+.pagination a.page-numbers:hover {
+	@apply bg-primary/5 text-primary;
+}
+
+.pagination .page-numbers.current {
+	@apply bg-primary-700 ring-primary-700;
+	color: white;
+}
+
+.pagination .page-numbers.dots {
+	@apply ring-0;
+}
+
 p.wp-block-paragraph {
 	padding: var(--wp--preset--spacing--4);
 }

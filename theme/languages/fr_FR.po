@@ -1,0 +1,838 @@
+# Copyright (C) 2026 Ufo Agency
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ufo Boilerplate 0.1.0\n"
+"Report-Msgid-Bugs-To: https://www.ufo-agency.com\n"
+"POT-Creation-Date: 2026-09-02\n"
+"PO-Revision-Date: 2026-09-23\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: opencode manual extractor\n"
+"X-Domain: ufo-boilerplate\n"
+
+#: theme/functions.php
+msgid "\"Me suivre\" column of the footer (newsletter form, etc.)."
+msgstr ""
+"Colonne « Me suivre » du pied de page (formulaire de newsletter, etc.)."
+
+#: theme/inc/template-functions.php
+msgid "%1$s at %2$s"
+msgstr "%1$s à %2$s"
+
+#: theme/template-parts/layout/footer-content.php
+msgid "%1$s. %2$s © %3$s"
+msgstr ""
+
+#: theme/inc/template-functions.php
+msgid "%s <span class=\"says\">says:</span>"
+msgstr "%s <span class=\"says\">a écrit :</span>"
+
+#: theme/inc/template-functions.php
+msgid "%s Archives"
+msgstr "Archives %s"
+
+#: theme/inc/features/class-social-media.php
+msgid "%s URL"
+msgstr "URL %s"
+
+#: theme/search.php
+msgid "%s result found."
+msgid_plural "%s results found."
+msgstr[0] "%s résultat trouvé."
+msgstr[1] "%s résultats trouvés."
+
+#: theme/template-parts/layout/footer-content.php
+msgid "%s – home"
+msgstr "%s – accueil"
+
+#: theme/inc/template-tags.php
+msgid ", "
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "-- Aucun article --"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "-- No Icon --"
+msgstr "-- Aucune icône --"
+
+#: theme/inc/features/class-breadcrumb.php
+msgid "Accueil"
+msgstr ""
+
+#: theme/template-parts/content/content-none.php
+msgid "Add or publish posts"
+msgstr "Ajouter ou publier des articles"
+
+#: theme/functions.php
+msgid ""
+"Add widgets here to appear in the header, next to the CTA button (e.g. the "
+"WooCommerce Cart widget)."
+msgstr ""
+"Ajoutez ici des widgets à afficher dans l’en-tête, à côté du bouton d’appel "
+"à l’action (ex. le widget Panier de WooCommerce)."
+
+#: theme/functions.php
+msgid "Add widgets here to appear in your footer."
+msgstr "Ajoutez ici des widgets à afficher dans votre pied de page."
+
+#: theme/template-parts/ajax-filter/filters.php
+msgid "Afficher/Masquer les filtres %s"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Airplay"
+msgstr ""
+
+#: theme/inc/features/class-front-page-hero.php
+msgid ""
+"Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem "
+"cupidatat commodo. Elit sunt amet fugiat veniam occaecat."
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Archive"
+msgstr "Archive"
+
+#: theme/inc/template-functions.php
+msgid "Archives:"
+msgstr "Archives :"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Arrow Left"
+msgstr "Flèche gauche"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Arrow Right"
+msgstr "Flèche droite"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Article à la une 1 (méga menu)"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Article à la une 2 (méga menu)"
+msgstr ""
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Aucun %s trouvé"
+msgstr ""
+
+#: theme/inc/ajax-filter/functions.php
+msgid "Aucun résultat trouvé"
+msgstr ""
+
+#: theme/template-parts/content/content-single.php
+msgid "Aucun titre trouvé dans l'article"
+msgstr ""
+
+#: theme/inc/template-functions.php
+msgid "Author Archives: "
+msgstr "Articles de "
+
+#: theme/404.php
+msgid "Back to the homepage"
+msgstr "Retour à l’accueil"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Background image"
+msgstr "Image de fond"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Badge link URL"
+msgstr "URL du lien du badge"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Badge link text"
+msgstr "Texte du lien du badge"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Badge text"
+msgstr "Texte du badge"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Bar Chart"
+msgstr "Graphique en barres"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Bell"
+msgstr "Cloche"
+
+#: theme/inc/features/class-breadcrumb.php
+msgid "Blog"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Book Open"
+msgstr "Livre ouvert"
+
+#: theme/inc/cta-buttons.php
+msgid "Bouton principal — URL"
+msgstr ""
+
+#: theme/inc/cta-buttons.php
+msgid "Bouton principal — texte"
+msgstr ""
+
+#: theme/inc/cta-buttons.php
+msgid "Bouton secondaire — URL"
+msgstr ""
+
+#: theme/inc/cta-buttons.php
+msgid "Bouton secondaire — texte"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Briefcase"
+msgstr "Mallette"
+
+#: theme/inc/features/class-header-cta.php
+msgid "Button URL"
+msgstr "URL du bouton"
+
+#: theme/inc/features/class-header-cta.php
+msgid "Button text"
+msgstr "Texte du bouton"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Calendar"
+msgstr "Calendrier"
+
+#: theme/inc/template-functions.php
+msgid "Category Archives: "
+msgstr "Catégorie : "
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Chargement des résultats..."
+msgstr ""
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Chargement en cours..."
+msgstr ""
+
+#: theme/inc/ajax-filter/class-ajax-filter.php
+msgid "Chargement trop long. Veuillez rafraîchir la page."
+msgstr ""
+
+#: theme/inc/ajax-filter/functions.php
+msgid "Chargement..."
+msgstr ""
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Charger plus"
+msgstr ""
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Charger plus d'articles"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Check"
+msgstr "Coche"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Chess King"
+msgstr "Roi (échecs)"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Chevron Down"
+msgstr "Chevron bas"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Chevron Left"
+msgstr "Chevron gauche"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Chevron Right"
+msgstr "Chevron droit"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Code"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Command"
+msgstr "Commande"
+
+#: theme/comments.php
+msgid "Comments are closed."
+msgstr "Les commentaires sont fermés."
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Contact"
+msgstr ""
+
+#: theme/functions.php
+msgid "Contact column of the footer (address, phone, email…)."
+msgstr "Colonne Contact du pied de page (adresse, téléphone, e-mail…)."
+
+#: theme/template-parts/content/content-single.php
+msgid "Contactez nous !"
+msgstr ""
+
+#: theme/inc/template-functions.php
+msgid "Continue reading %s"
+msgstr "Lire la suite %s"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Crown"
+msgstr "Couronne"
+
+#: theme/inc/template-functions.php
+msgid "Daily Archives: "
+msgstr "Archives du jour : "
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Data to enrich your online business"
+msgstr "Des données pour enrichir votre activité en ligne"
+
+#: theme/template-parts/content/content-single.php
+msgid "Des questions ?"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+#: theme/inc/features/class-front-page-hero.php
+msgid "Description"
+msgstr ""
+
+#: theme/inc/template-functions.php
+msgid "Edit"
+msgstr "Modifier"
+
+#: theme/front-page.php theme/inc/template-tags.php
+#: theme/template-parts/content/content-page.php
+msgid "Edit <span class=\"sr-only\">%s</span>"
+msgstr "Modifier <span class=\"sr-only\">%s</span>"
+
+#: theme/inc/features/class-contact-form-7.php
+msgid "Envoyer"
+msgstr ""
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Essayez d'autres filtres ou"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "External Link"
+msgstr "Lien externe"
+
+#: theme/inc/features/class-social-media.php
+msgid "Facebook"
+msgstr ""
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Filtrage et affichage des articles"
+msgstr ""
+
+#: theme/template-parts/ajax-filter/filters.php
+msgid "Filtrer par %1$s : %2$s"
+msgstr ""
+
+#: theme/template-parts/ajax-filter/filters.php
+msgid "Filtrer par %s"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Folder"
+msgstr "Dossier"
+
+#: theme/functions.php
+msgid "Footer"
+msgstr "Pied de page"
+
+#: theme/functions.php
+msgid "Footer Contact"
+msgstr "Pied de page – Contact"
+
+#: theme/inc/features/class-ufo-options.php
+msgid "Footer Logo"
+msgstr "Logo du pied de page"
+
+#: theme/functions.php
+msgid "Footer Menu (Services)"
+msgstr "Menu du pied de page (Services)"
+
+#: theme/functions.php
+msgid "Footer Menu 2 (Legal)"
+msgstr "Menu du pied de page 2 (Mentions légales)"
+
+#: theme/functions.php
+msgid "Footer Newsletter"
+msgstr "Pied de page – Newsletter"
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Footer contact"
+msgstr "Contact du pied de page"
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Footer legal"
+msgstr "Mentions légales du pied de page"
+
+#: theme/inc/features/class-ufo-options.php
+msgid "Footer logo"
+msgstr "Logo du pied de page"
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Footer menu"
+msgstr "Menu du pied de page"
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Footer newsletter"
+msgstr "Newsletter du pied de page"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Front Page Hero"
+msgstr "Bannière de la page d’accueil"
+
+#: theme/inc/cta-buttons.php theme/inc/features/class-front-page-hero.php
+msgid "Get started"
+msgstr "Commencer"
+
+#: theme/inc/features/class-social-media.php
+msgid "GitHub"
+msgstr ""
+
+#: theme/template-parts/layout/header-content.php
+msgid "Global"
+msgstr "Principal"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Globe"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Grid"
+msgstr "Grille"
+
+#: theme/inc/features/class-header-cta.php
+msgid "Header CTA"
+msgstr "Bouton d’appel à l’action de l’en-tête"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Heading"
+msgstr "Titre"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Icon"
+msgstr "Icône"
+
+#: theme/inc/features/class-social-media.php
+msgid "Instagram"
+msgstr ""
+
+#: theme/404.php
+msgid "It might have been removed or renamed, or it may never have existed."
+msgstr "Elle a peut-être été supprimée ou renommée, ou n’a jamais existé."
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "JPG, PNG or WebP. Leave empty to hide it."
+msgstr "JPG, PNG ou WebP. Laisser vide pour la masquer."
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Key"
+msgstr "Clé"
+
+#: theme/inc/ajax-filter/class-ajax-filter.php
+msgid "La méthode de tri spécifiée n'est pas valide."
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Languages"
+msgstr "Langues"
+
+#: theme/inc/cta-buttons.php theme/inc/features/class-front-page-hero.php
+msgid "Learn more"
+msgstr "En savoir plus"
+
+#: theme/inc/template-tags.php
+msgid "Leave a comment<span class=\"sr-only\"> on %s</span>"
+msgstr "Laisser un commentaire<span class=\"sr-only\"> sur %s</span>"
+
+#: theme/inc/features/class-header-cta.php
+msgid "Leave empty to hide the button."
+msgstr "Laisser vide pour masquer le bouton."
+
+#: theme/inc/ajax-filter/class-ajax-filter.php
+msgid "Les articles demandés n'existent pas ou ne sont pas visibles."
+msgstr ""
+
+#: theme/index.php theme/template-parts/content/content.php
+msgid "Lire l'article"
+msgstr ""
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Me suivre"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Menu"
+msgstr ""
+
+#: theme/functions.php
+msgid "Menu Widget Area"
+msgstr "Zone de widgets du menu"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Message Circle"
+msgstr "Bulle de message"
+
+#: theme/template-parts/layout/header-content.php
+msgid "Mobile"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Monitor"
+msgstr "Écran"
+
+#: theme/inc/template-functions.php
+msgid "Monthly Archives: "
+msgstr "Archives du mois : "
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Moon"
+msgstr "Lune"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid ""
+"Méga menu (affiche les enfants de cet item en méga menu, avec articles à la "
+"une)"
+msgstr ""
+
+#: theme/inc/template-tags.php
+msgid "Next"
+msgstr "Suivant"
+
+#: theme/single.php
+msgid "Next Post"
+msgstr "Article suivant"
+
+#: theme/single.php
+msgid "Next post:"
+msgstr "Article suivant :"
+
+#: theme/template-parts/content/content-none.php
+msgid "No content matched your request."
+msgstr "Aucun contenu ne correspond à votre demande."
+
+#: theme/template-parts/content/content-single.php
+msgid "Nous sommes là pour vous accompagner dans vos projets."
+msgstr ""
+
+#: theme/comments.php
+msgid "One comment on &ldquo;%1$s&rdquo;"
+msgstr "Un commentaire sur « %1$s »"
+
+#: theme/template-parts/layout/header-content.php
+msgid "Open main menu"
+msgstr "Ouvrir le menu principal"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Package Open"
+msgstr "Colis ouvert"
+
+#: theme/inc/template-tags.php
+msgid "Page"
+msgstr ""
+
+#: theme/404.php
+msgid "Page Not Found"
+msgstr "Page introuvable"
+
+#: theme/inc/features/class-breadcrumb.php
+msgid "Page non trouvée"
+msgstr ""
+
+#: theme/template-parts/content/content-single.php
+msgid "Page précédente"
+msgstr ""
+
+#: theme/template-parts/content/content-single.php
+msgid "Page suivante"
+msgstr ""
+
+#: theme/template-parts/content/content-single.php
+msgid "Pages de l'article"
+msgstr ""
+
+#: theme/front-page.php theme/template-parts/content/content-page.php
+#: theme/template-parts/content/content-single.php
+msgid "Pages:"
+msgstr "Pages :"
+
+#: theme/template-parts/content/content-single.php
+msgid "Partager"
+msgstr ""
+
+#: theme/template-parts/content/content-single.php
+msgid "Partager sur Facebook"
+msgstr ""
+
+#: theme/template-parts/content/content-single.php
+msgid "Partager sur LinkedIn"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Phone"
+msgstr "Téléphone"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Play Circle"
+msgstr "Lecture"
+
+#: theme/inc/features/class-contact-form-7.php
+msgid "Please remove inappropriate words from your message."
+msgstr "Merci de retirer les mots inappropriés de votre message."
+
+#: theme/inc/template-tags.php
+msgid "Posted by"
+msgstr "Publié par"
+
+#: theme/inc/template-tags.php
+msgid "Posted in"
+msgstr "Publié dans"
+
+#: theme/inc/template-tags.php
+msgid "Posts"
+msgstr "Articles"
+
+#: theme/inc/template-tags.php
+msgid "Posts navigation"
+msgstr "Navigation des articles"
+
+#: theme/inc/template-tags.php
+msgid "Previous"
+msgstr "Précédent"
+
+#: theme/single.php
+msgid "Previous Post"
+msgstr "Article précédent"
+
+#: theme/single.php
+msgid "Previous post:"
+msgstr "Article précédent :"
+
+#: theme/functions.php
+msgid "Primary"
+msgstr "Principal"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Primary button URL"
+msgstr "URL du bouton principal"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Primary button text"
+msgstr "Texte du bouton principal"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Read more"
+msgstr "Lire la suite"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Refresh"
+msgstr "Actualiser"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Rocket"
+msgstr "Fusée"
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "Réinitialiser tous les filtres"
+msgstr ""
+
+#: theme/inc/features/class-breadcrumb.php
+msgid "Résultats pour : %s"
+msgstr ""
+
+#: theme/searchform.php theme/inc/navigation/menu-custom-fields.php
+#: theme/template-parts/layout/header-search.php
+msgid "Search"
+msgstr "Rechercher"
+
+#: theme/search.php
+msgid "Search results for “%s”"
+msgstr "Résultats de recherche pour « %s »"
+
+#: theme/searchform.php theme/template-parts/layout/header-search.php
+msgid "Search the site"
+msgstr "Rechercher sur le site"
+
+#: theme/searchform.php theme/template-parts/layout/header-search.php
+msgid "Search…"
+msgstr "Rechercher…"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Secondary link URL"
+msgstr "URL du lien secondaire"
+
+#: theme/inc/features/class-front-page-hero.php
+msgid "Secondary link text"
+msgstr "Texte du lien secondaire"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Send"
+msgstr "Envoyer"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Server"
+msgstr "Serveur"
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Services"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Shield"
+msgstr "Bouclier"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Shopping Cart"
+msgstr "Panier"
+
+#: theme/inc/features/class-header-cta.php
+msgid "Sign up"
+msgstr "S’inscrire"
+
+#: theme/header.php
+msgid "Skip to content"
+msgstr "Aller au contenu"
+
+#: theme/inc/features/class-social-media.php
+msgid "Social Media"
+msgstr "Réseaux sociaux"
+
+#: theme/inc/features/class-contact-form-7.php
+msgid "Spam détecté"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Sport Shoe"
+msgstr "Chaussure de sport"
+
+#: theme/template-parts/layout/header-search.php
+msgid "Submit search"
+msgstr "Lancer la recherche"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Sun"
+msgstr "Soleil"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Sun Moon"
+msgstr "Soleil et lune"
+
+#: theme/inc/template-functions.php
+msgid "Tag Archives: "
+msgstr "Étiquette : "
+
+#: theme/inc/template-tags.php
+msgid "Tags:"
+msgstr "Étiquettes :"
+
+#: theme/inc/features/class-ufo-options.php
+msgid "Theme-specific settings for Ufo Boilerplate."
+msgstr "Réglages propres au thème Ufo Boilerplate."
+
+#: theme/404.php
+msgid "This page could not be found."
+msgstr "Cette page est introuvable."
+
+#: theme/template-parts/layout/footer-content.php
+msgid "Tous droits réservés"
+msgstr ""
+
+#: theme/functions.php
+msgid "Ufo Boilerplate"
+msgstr ""
+
+#: theme/inc/features/class-ufo-options.php
+msgid "Ufo options"
+msgstr "Options Ufo"
+
+#: theme/inc/ajax-filter/class-ajax-filter.php
+msgid "Une erreur est survenue. Veuillez réessayer."
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "User"
+msgstr "Utilisateur"
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "User Round Plus"
+msgstr "Ajouter un utilisateur"
+
+#: theme/inc/features/class-social-media.php
+msgid "X"
+msgstr ""
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "X (Close)"
+msgstr "X (Fermer)"
+
+#: theme/inc/template-functions.php
+msgid "Yearly Archives: "
+msgstr "Archives de l’année : "
+
+#: theme/inc/features/class-social-media.php
+msgid "YouTube"
+msgstr ""
+
+#: theme/inc/template-functions.php
+msgid "Your comment is awaiting moderation."
+msgstr "Votre commentaire est en attente de modération."
+
+#: theme/inc/template-functions.php
+msgid ""
+"Your comment is awaiting moderation. This is a preview; your comment will be "
+"visible after it has been approved."
+msgstr ""
+"Votre commentaire est en attente de modération. Ceci est un aperçu ; il sera "
+"visible une fois approuvé."
+
+#: theme/template-parts/content/content-none.php
+msgid "Your search generated no results. Please try a different search."
+msgstr ""
+"Votre recherche n’a donné aucun résultat. Essayez avec d’autres mots-clés."
+
+#: theme/template-parts/content/content-none.php
+msgid ""
+"Your site is set to show the most recent posts on your homepage, but you "
+"haven&rsquo;t published any posts."
+msgstr ""
+"Votre site est réglé pour afficher les derniers articles sur la page "
+"d’accueil, mais vous n’avez encore publié aucun article."
+
+#: theme/inc/navigation/menu-custom-fields.php
+msgid "Zap"
+msgstr ""
+
+#: theme/inc/ajax-filter/class-ajax-filter.php
+msgid "articles"
+msgstr "articles"
+
+#: theme/inc/template-functions.php
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+#: theme/template-parts/ajax-filter/base.php
+msgid "réinitialisez-les tous"
+msgstr ""
+
+#: theme/comments.php
+msgctxt "ufo-boilerplate"
+msgid "%1$s comment on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s comments on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s commentaire sur « %2$s »"
+msgstr[1] "%1$s commentaires sur « %2$s »"
+
+#: theme/inc/template-functions.php
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"

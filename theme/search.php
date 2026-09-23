@@ -8,45 +8,64 @@
  */
 
 get_header();
+
+global $wp_query;
 ?>
 
-	<section id="primary">
-		<main id="main">
+<section class="entry-content relative isolate mx-auto mt-12 px-4" id="primary">
+
+	<?php
+	get_template_part(
+		'template-parts/layout/page-header',
+		null,
+		array(
+			'title'       => sprintf(
+				/* translators: %s: search term. */
+				esc_html__( 'Search results for “%s”', 'ufo-boilerplate' ),
+				esc_html( get_search_query() )
+			),
+			'description' => have_posts()
+				? esc_html(
+					sprintf(
+						/* translators: %s: number of search results. */
+						_n( '%s result found.', '%s results found.', (int) $wp_query->found_posts, 'ufo-boilerplate' ),
+						number_format_i18n( (int) $wp_query->found_posts )
+					)
+				)
+				: '',
+		)
+	);
+	?>
+
+	<main id="main">
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
+			<div class="mb-10">
+				<?php get_search_form(); ?>
+			</div>
+
+			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 				<?php
-				printf(
-					/* translators: 1: search result title. 2: search term. */
-					'<h1 class="page-title">%1$s <span>%2$s</span></h1>',
-					esc_html__( 'Search results for:', 'ufo-boilerplate' ),
-					get_search_query()
-				);
+				while ( have_posts() ) :
+					the_post();
+					get_template_part( 'template-parts/content/content' );
+				endwhile;
 				?>
-			</header><!-- .page-header -->
+			</div>
 
 			<?php
-			// Start the Loop.
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/content/content', 'excerpt' );
-
-				// End the loop.
-			endwhile;
-
-			// Previous/next page navigation.
 			_ufo_the_posts_navigation();
 
 		else :
 
-			// If no content is found, get the `content-none` template part.
 			get_template_part( 'template-parts/content/content', 'none' );
 
 		endif;
 		?>
-		</main><!-- #main -->
-	</section><!-- #primary -->
+
+	</main><!-- #main -->
+</section><!-- #primary -->
 
 <?php
 get_footer();

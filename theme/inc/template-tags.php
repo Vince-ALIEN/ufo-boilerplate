@@ -256,13 +256,19 @@ endif;
 if ( ! function_exists( '_ufo_the_posts_navigation' ) ) :
 	/**
 	 * Wraps `the_posts_pagination` for use throughout the theme.
+	 *
+	 * Styled in components.css (`.pagination`), the Lucide chevrons are
+	 * swapped for their SVG by `initIcons()` like everywhere else.
 	 */
 	function _ufo_the_posts_navigation() {
 		the_posts_pagination(
 			array(
-				'mid_size'  => 2,
-				'prev_text' => __( 'Newer posts', 'ufo-boilerplate' ),
-				'next_text' => __( 'Older posts', 'ufo-boilerplate' ),
+				'mid_size'           => 2,
+				'prev_text'          => '<i data-lucide="chevron-left" class="size-4" aria-hidden="true"></i>' . esc_html__( 'Previous', 'ufo-boilerplate' ),
+				'next_text'          => esc_html__( 'Next', 'ufo-boilerplate' ) . '<i data-lucide="chevron-right" class="size-4" aria-hidden="true"></i>',
+				'screen_reader_text' => __( 'Posts navigation', 'ufo-boilerplate' ),
+				'aria_label'         => __( 'Posts', 'ufo-boilerplate' ),
+				'before_page_number' => '<span class="sr-only">' . esc_html__( 'Page', 'ufo-boilerplate' ) . ' </span>',
 			)
 		);
 	}
