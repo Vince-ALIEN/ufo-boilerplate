@@ -17,11 +17,21 @@
  * injected (see `javascript/website-carbon-badge.js`, which renders it on
  * scroll). Without this the two-line badge appearing in the footer is a
  * layout shift counting against CLS whenever the footer is in view. Height
- * only — the element's `p-4` padding sits on top. Tune if the "Cleaner
+ * only — the element's `py-4` padding sits on top. Tune if the "Cleaner
  * than …" line wraps at your footer column width.
  */
  #wcb {
 	min-height: 60px;
+ }
+
+/*
+ * Left-align the badge in its footer column. The badge injects its own
+ * `<style>` with `#wcb.carbonbadge { text-align: center }`, placed after
+ * this stylesheet in the page, so the extra `#colophon` id is what lets
+ * this rule win.
+ */
+ #colophon #wcb.carbonbadge {
+	text-align: left;
  }
 
  #masthead.slideup {
