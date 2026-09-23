@@ -59,6 +59,7 @@ $_ufo_services = array(
 	'_Ufo_Contact_Form7',
 	'_Ufo_Custom_Logo',
 	'_Ufo_Disable_Comments',
+	'_Ufo_Font_Preload',
 	'_Ufo_Front_Page_Hero',
 	'_Ufo_Header_Cta',
 	'_Ufo_Image_Block',
