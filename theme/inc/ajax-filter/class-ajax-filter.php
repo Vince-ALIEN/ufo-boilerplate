@@ -206,7 +206,7 @@ class _Ufo_Ajax_Filter {
 			'page'        => isset( $params['page'] ) ? intval( $params['page'] ) : 1,
 			'orderby'     => isset( $params['orderby'] ) ? sanitize_text_field( $params['orderby'] ) : 'date',
 			'order'       => $order,
-			'quantity'    => isset( $params['quantity'] ) ? intval( $params['quantity'] ) : 9,
+			'quantity'    => $this->clamp_quantity( isset( $params['quantity'] ) ? intval( $params['quantity'] ) : 9 ),
 			'language'    => isset( $params['language'] ) ? sanitize_text_field( $params['language'] ) : '',
 			'template'    => $template,
 		);
@@ -283,6 +283,25 @@ class _Ufo_Ajax_Filter {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Clamp the client-supplied page size.
+	 *
+	 * The endpoint is public, so an unbounded value (or -1, "all posts")
+	 * would let any visitor load every post in a single request. The
+	 * ceiling never drops below the site's own "posts per page" setting.
+	 *
+	 * @param int $quantity Requested page size.
+	 * @return int
+	 */
+	protected function clamp_quantity( $quantity ) {
+		$max = (int) apply_filters(
+			'_ufo_ajax_filter_max_quantity',
+			max( 24, (int) get_option( 'posts_per_page' ) )
+		);
+
+		return min( max( 1, $quantity ), max( 1, $max ) );
 	}
 
 	/**
