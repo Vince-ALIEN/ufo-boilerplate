@@ -4,6 +4,7 @@
 	"settings": {
 		"useRootPaddingAwareAlignments": true,
 		"color": {
+			"defaultGradients": false,
 			"palette": [
 				{
 					"slug": "background",
@@ -155,6 +156,7 @@
 			]
 		},
 		"typography": {
+			"defaultFontSizes": false,
 			"fluid": true,
 			"lineHeight": true,
 			"customFontSize": true,
@@ -302,7 +304,11 @@
 				}
 			]
 		},
+		"shadow": {
+			"defaultPresets": false
+		},
 		"spacing": {
+			"defaultSpacingSizes": false,
 			"units": [
 				"px",
 				"rem",
