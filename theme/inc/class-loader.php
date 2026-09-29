@@ -63,6 +63,7 @@ $_ufo_services = array(
 	'_Ufo_Front_Page_Hero',
 	'_Ufo_Header_Cta',
 	'_Ufo_Image_Block',
+	'_Ufo_Paragraph_Block',
 	'_Ufo_Social_Media',
 	'_Ufo_Options',
 );

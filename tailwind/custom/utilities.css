@@ -138,3 +138,17 @@
 		text-decoration: underline !important;
 	}
 }
+
+/**
+ * Text label — is-text-label
+ *
+ * Overline avec trait fin avant le texte, en wheat-400, uppercase, Montserrat.
+ */
+.is-style-text-label {
+	@apply inline-flex items-center gap-3 uppercase text-primary text-base font-semibold font-primary tracking-widest my-0.5 px-2;
+}
+
+.is-style-text-label::before {
+	content: '';
+	@apply block w-8 h-px bg-primary shrink-0;
+}

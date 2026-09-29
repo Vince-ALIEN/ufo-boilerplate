@@ -29,6 +29,17 @@ wp.domReady(() => {
 	});
 
 	/**
+	 * Overline label placed above a heading — see the `.is-style-text-label`
+	 * rule in `tailwind/custom/utilities.css`. Keeping the label a paragraph
+	 * (rather than a heading) means the page's heading outline only lists
+	 * the real titles.
+	 */
+	wp.blocks.registerBlockStyle('core/paragraph', {
+		name: 'text-label',
+		label: 'Label',
+	});
+
+	/**
 	 * Replace the bullet with a check icon — see the `.is-style-checklist`
 	 * rule in `tailwind/custom/components/components.css`. Only takes effect
 	 * on an unordered list (the CSS selector is scoped to `ul`).
