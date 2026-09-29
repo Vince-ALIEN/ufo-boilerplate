@@ -446,6 +446,7 @@
 			"h2": {
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--primary)",
+					"fontSize": "var(--wp--preset--font-size--text-4-xl)",
 					"fontWeight": "500",
 					"lineHeight": "1.15",
 					"letterSpacing": "-0.025em"
