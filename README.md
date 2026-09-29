@@ -150,8 +150,10 @@ for how services are wired up and loaded):
   `update-nav_menu` nonce before saving.
 * The ajax filter deep-sanitizes the posted `params` array and clamps the
   requested page size to 1–24 (or the site's "posts per page" setting, if
-  higher; filterable via `_ufo_ajax_filter_max_quantity`); Contact Form 7
-  spam checks sanitize their `$_SERVER` / `$_POST` reads.
+  higher; filterable via `_ufo_ajax_filter_max_quantity`), caps the tax
+  filters to 5 taxonomies × 20 terms, rejects `orderby=rand` and no longer
+  echoes the query args back; Contact Form 7 spam checks sanitize their
+  `$_SERVER` / `$_POST` reads.
 * `content-single.php` injects the table-of-contents `id` anchors with
   `WP_HTML_Tag_Processor` (not a regex) and strips stray inline `on*`
   handlers from headings.

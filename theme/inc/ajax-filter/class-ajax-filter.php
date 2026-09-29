@@ -56,6 +56,9 @@ class _Ufo_Ajax_Filter {
 	/**
 	 * Allowed orderby values.
 	 *
+	 * 'rand' is deliberately left out: ORDER BY RAND() scans the whole
+	 * table and the endpoint is public.
+	 *
 	 * @var array
 	 */
 	protected $allowed_orderby_values = array(
@@ -67,11 +70,25 @@ class _Ufo_Ajax_Filter {
 		'date',
 		'modified',
 		'parent',
-		'rand',
 		'comment_count',
 		'relevance',
 		'menu_order',
 	);
+
+	/**
+	 * Maximum number of taxonomies accepted from the client.
+	 *
+	 * @var int
+	 */
+	protected $max_taxonomies = 5;
+
+	/**
+	 * Maximum number of terms accepted per taxonomy. Each term costs a
+	 * term_exists() query, so the posted list is capped before validation.
+	 *
+	 * @var int
+	 */
+	protected $max_terms_per_taxonomy = 20;
 
 	/**
 	 * Get instance of the class.
@@ -246,11 +263,10 @@ class _Ufo_Ajax_Filter {
 		wp_reset_postdata();
 
 		$response = array(
-			'content'    => $content,
-			'found'      => $query->found_posts,
-			'has_more'   => ! $this->is_last_page( $query ),
-			'next_page'  => $this->get_page_number( $query ) + 1,
-			'query_args' => $query_args,
+			'content'   => $content,
+			'found'     => $query->found_posts,
+			'has_more'  => ! $this->is_last_page( $query ),
+			'next_page' => $this->get_page_number( $query ) + 1,
 		);
 
 		wp_send_json_success( $response );
@@ -429,9 +445,13 @@ class _Ufo_Ajax_Filter {
 	protected function get_tax_query_vars( $taxonomies ) {
 		$tax_query = array();
 
+		// Each term costs a query: cap the posted lists before validating.
+		$taxonomies = array_slice( $taxonomies, 0, $this->max_taxonomies, true );
+
 		foreach ( $taxonomies as $taxonomy => $terms ) {
 			$taxonomy = sanitize_text_field( $taxonomy );
 			if ( taxonomy_exists( $taxonomy ) && is_array( $terms ) ) {
+				$terms       = array_slice( $terms, 0, $this->max_terms_per_taxonomy );
 				$valid_terms = $this->get_valid_terms( $terms, $taxonomy );
 				if ( $valid_terms ) {
 					$tax_query[] = array(
@@ -461,7 +481,9 @@ class _Ufo_Ajax_Filter {
 		$valid_terms = array();
 
 		foreach ( $terms as $term ) {
-			$term = sanitize_text_field( $term );
+			if ( ! is_string( $term ) || '' === $term ) {
+				continue;
+			}
 			if ( term_exists( $term, $tax ) ) {
 				$valid_terms[] = $term;
 			}
