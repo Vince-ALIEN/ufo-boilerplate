@@ -212,7 +212,7 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 				? 'lg:inset-x-0'
 				: 'lg:left-1/2 lg:-translate-x-1/2';
 			$panel_id               = $this->panel_id( $this->current_top_level_item );
-			$output                .= '<div data-dropdown-panel id="' . esc_attr( $panel_id ) . '" class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible mt-4 lg:mt-0 transition-[opacity,translate] duration-200 ease-out opacity-0 translate-y-1">';
+			$output                .= '<div data-dropdown-panel id="' . esc_attr( $panel_id ) . '" class="hidden lg:absolute lg:top-full ' . $panel_position_classes . ' lg:z-50 mx-auto overflow-visible md:mt-4 mt-0 transition-[opacity,translate] duration-200 ease-out opacity-0 translate-y-1">';
 
 			// Inner card wrapper: mega menus cap at the same `max-w-content` used
 			// for the rest of the site so the card matches the page's content
@@ -220,13 +220,13 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 			// viewport width). Regular dropdowns (single column) get a fixed
 			// `w-96` instead, overriding `md:w-screen` (and the base `max-w-md`).
 			$panel_max_width = $is_mega_menu ? 'lg:max-w-content' : 'lg:w-96';
-			$output         .= '<div class="md:w-screen max-w-md mt-4 flex-auto overflow-hidden md:rounded-3xl bg-background text-sm/6 md:shadow-lg md:outline-1 outline-foreground/10 ' . $panel_max_width . '">';
+			$output         .= '<div class="md:w-screen max-w-md md:mt-4 mt-0 flex-auto overflow-hidden md:rounded-3xl bg-background text-sm/6 md:shadow-lg md:outline-1 outline-foreground/10 ' . $panel_max_width . '">';
 
 			if ( $is_mega_menu ) {
 				$output .= '<div class="grid grid-cols-1 gap-x-8 gap-y-6 p-4 lg:grid-cols-2 lg:p-6">';
 				$output .= '<ul class="submenu grid md:grid-cols-2 grid-cols-1 gap-x-6 gap-y-1">';
 			} else {
-				$output .= '<ul class="submenu grid grid-cols-1 gap-x-6 gap-y-1 p-4">';
+				$output .= '<ul class="submenu grid grid-cols-1 gap-x-6 gap-y-1 md:mt-4 mt-0 p-4 lg:p-6">';
 			}
 		}
 
@@ -286,15 +286,20 @@ if ( ! class_exists( '_Ufo_Header_Nav_Walker' ) ) {
 					 * wrapper (see start_lvl()), so this `<li>` must stay
 					 * unpositioned and let the panel's `absolute` bubble up to
 					 * that ancestor.
+					 *
+					 * `lg:flex lg:items-center`: the `<li>` stretches to the header's
+					 * full height (see header-content.php) so its bottom edge — the
+					 * regular dropdown's `lg:top-full` reference — lines up with the
+					 * mega menu's.
 					 */
-					$li_class = $this->is_mega_menu( $item ) ? 'list-none' : 'relative list-none';
+					$li_class = $this->is_mega_menu( $item ) ? 'list-none lg:flex lg:items-center' : 'relative list-none lg:flex lg:items-center';
 					$output  .= '<li class="' . esc_attr( $li_class ) . '" data-dropdown-item>';
 					$output  .= '<button type="button" data-dropdown-btn aria-expanded="false" aria-controls="' . esc_attr( $this->panel_id( $item ) ) . '" class="inline-flex items-center gap-x-1 cursor-pointer ' . esc_attr( $this->link_class ) . '">';
 					$output  .= esc_html( $item->title );
 					$output  .= '<i data-lucide="chevron-down" data-chevron class="size-4 transition-transform duration-200" aria-hidden="true"></i>';
 					$output  .= '</button>';
 				} else {
-					$output .= '<li class="list-none">';
+					$output .= '<li class="list-none lg:flex lg:items-center">';
 					$output .= '<a href="' . esc_url( $item->url ) . '" class="' . esc_attr( $this->link_class ) . '">' . esc_html( $item->title ) . '</a>';
 				}
 				return;

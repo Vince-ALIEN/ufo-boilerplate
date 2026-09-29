@@ -31,13 +31,20 @@ $ufo_cta_url  = _Ufo_Header_Cta::url();
 			</div>
 
 			<?php if ( $ufo_has_menu ) : ?>
-				<nav aria-label="<?php esc_attr_e( 'Global', 'ufo-boilerplate' ); ?>" class="hidden lg:block">
+				<nav aria-label="<?php esc_attr_e( 'Global', 'ufo-boilerplate' ); ?>" class="hidden lg:block lg:-my-2.5 lg:self-stretch">
 					<?php
+					/*
+					 * The nav spans the bar's full height (padding included, like the
+					 * desktop search below), so each top-level `<li>`'s bottom edge
+					 * matches the header's: regular dropdowns (anchored to their `<li>`)
+					 * and mega menus (anchored to the wrapper above) then both open
+					 * from the same `lg:top-full` line. See class-navwalker.php.
+					 */
 					wp_nav_menu(
 						array(
 							'theme_location' => 'menu-1',
 							'container'      => false,
-							'items_wrap'     => '<ul class="flex gap-x-12">%3$s</ul>',
+							'items_wrap'     => '<ul class="flex h-full gap-x-12">%3$s</ul>',
 							'walker'         => new _Ufo_Header_Nav_Walker( 'text-sm/6 font-semibold text-foreground', 'primary' ),
 						)
 					);
