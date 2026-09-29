@@ -13,7 +13,7 @@
 	<header class="entry-header px-2 my-4">
 		<div class="bg-background">
 			<div class="entry-content pb-22 sm:px-6 lg:px-8">
-			<div class="relative isolate overflow-hidden bg-slate-900 px-6 py-24 shadow-2xl rounded-2xl sm:px-16">
+			<div class="relative isolate overflow-hidden bg-slate-900 px-6 py-24 shadow-2xl rounded-3xl sm:px-16">
 				<?php if ( _ufo_can_show_post_thumbnail() ) : ?>
 				<div class="absolute inset-0 -z-10">
 					<?php the_post_thumbnail( 'full', array( 'class' => 'w-full h-full object-cover' ) ); ?>
