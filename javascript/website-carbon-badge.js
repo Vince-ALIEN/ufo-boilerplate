@@ -16,10 +16,10 @@
  *      above-the-fold work and stops adding run-to-run noise to Lighthouse
  *      / PageSpeed scores. `#wcb` carries a reserved `min-height` in
  *      `tailwind/custom/utilities.css` so the injected markup causes no CLS.
- *   3. Once rendered, it dispatches `ufo:content-added` so ui.js's
- *      initExternalLinks() marks the badge's "Website Carbon" link as
- *      external / opening a new tab — the badge is inserted after that
- *      script's own pass on DOMContentLoaded, so it would miss it otherwise.
+ *   3. Once rendered, it dispatches `ufo:content-added` so the UFO External
+ *      Links plugin marks the badge's "Website Carbon" link as external /
+ *      opening a new tab — the badge is inserted after that plugin's own
+ *      pass on load, so it would miss it otherwise.
  *
  * This file is excluded from eslint/prettier (see `.prettierignore`,
  * `eslint.config.js`) so the upstream body stays byte-for-byte verbatim.

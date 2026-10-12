@@ -4,7 +4,6 @@
  */
 
 import van from 'vanjs-core';
-import { refreshIcons } from './icons.js';
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -292,96 +291,6 @@ function initHeaderSearch() {
 	});
 }
 
-// ── External link indicators ────────────────────────────────────────────────
-
-/**
- * Marks links to a different hostname than the site's own, so they're
- * distinguishable from internal ones (Opquast #137) and, when they open a
- * new tab, warns about that too (Opquast #141) — both currently unmet by
- * any single link on its own.
- *
- * Two different treatments, depending on what the link already carries:
- *   - A link with its own visible text (body copy, the footer's "Website
- *     Carbon" link…) gets a small `external-link` icon plus a `.sr-only`
- *     span, since neither the text nor an icon alone reaches every user.
- *   - An icon-only link (the footer's social icons: brand SVG + `.sr-only`
- *     network name, see `_Ufo_Social_Media::the_links()`) is already
- *     unambiguous for sighted users once you know the icon — a second
- *     icon squeezed into an already-small button would just be visual
- *     noise. Its existing `.sr-only` label is extended instead, so screen
- *     reader users still learn the tab will open new.
- *   - A link that already carries a manually-chosen `external-link` icon
- *     (the nav menu editor's per-item icon picker, see
- *     `menu-custom-fields.php` / `class-navwalker.php`) is left alone —
- *     otherwise it would end up with two.
- *
- * Runs on load, then again on any `ufo:content-added` event for markup
- * inserted afterwards — dispatch it with the new subtree as `detail.root`
- * (the Website Carbon badge and the ajax filter do, see
- * website-carbon-badge.js / ajax-filter.js). Each link is marked `data-external-link` once
- * decorated, so running twice over the same link is harmless.
- */
-function initExternalLinks() {
-	decorateExternalLinks(document);
-
-	document.addEventListener('ufo:content-added', e => {
-		decorateExternalLinks(e.detail?.root || document);
-	});
-}
-
-/**
- * Decorates the external links inside `root` (see initExternalLinks()).
- *
- * @param {ParentNode} root
- */
-function decorateExternalLinks(root) {
-	const homeHost = window.location.hostname;
-	let addedIcons = false;
-
-	root.querySelectorAll('a[href^="http"]:not([data-external-link])').forEach(link => {
-		let url;
-		try {
-			url = new URL(link.href);
-		} catch {
-			return;
-		}
-		if (url.hostname === homeHost) return;
-
-		link.setAttribute('data-external-link', '');
-
-		const opensNewTab = link.target === '_blank';
-		const existingSrOnly = link.querySelector('.sr-only');
-		const hasVisibleText = link.textContent.trim() !== (existingSrOnly ? existingSrOnly.textContent.trim() : '');
-
-		if (!hasVisibleText) {
-			// Icon-only link: extend its existing accessible name instead of
-			// adding a second visual icon.
-			if (opensNewTab && existingSrOnly) {
-				existingSrOnly.textContent += ' (nouvel onglet)';
-			}
-			return;
-		}
-
-		if (!link.querySelector('[data-lucide="external-link"]')) {
-			const icon = document.createElement('i');
-			icon.setAttribute('data-lucide', 'external-link');
-			icon.setAttribute('aria-hidden', 'true');
-			icon.className = 'inline-block size-4 ml-1 align-middle';
-			link.appendChild(icon);
-			addedIcons = true;
-		}
-
-		const label = document.createElement('span');
-		label.className = 'sr-only';
-		label.textContent = opensNewTab ? ' (site externe, nouvel onglet)' : ' (site externe)';
-		link.appendChild(label);
-	});
-
-	// The icons above are inserted as bare <i data-lucide> elements — turn
-	// them into the actual Lucide <svg>.
-	if (addedIcons) refreshIcons();
-}
-
 // ── Smooth anchors ─────────────────────────────────────────────────────────
 
 /**
@@ -418,6 +327,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	initBurgerMenu();
 	initMegaMenus();
 	initHeaderSearch();
-	initExternalLinks();
 	initSmoothAnchors();
 });

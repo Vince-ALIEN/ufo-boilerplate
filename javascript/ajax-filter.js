@@ -466,8 +466,8 @@
 								postsContainer.replaceChildren(parseSafeHTML(response.data.content));
 							}
 
-							// Let ui.js decorate the new markup (external link
-							// markers…), see initExternalLinks().
+							// Let plugins decorate the new markup (e.g. the
+							// external link markers of UFO External Links).
 							document.dispatchEvent(
 								new CustomEvent('ufo:content-added', { detail: { root: postsContainer } })
 							);
