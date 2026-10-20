@@ -38,7 +38,7 @@ if ( ! defined( '_UFO_TYPOGRAPHY_CLASSES' ) ) {
 	 */
 	define(
 		'_UFO_TYPOGRAPHY_CLASSES',
-		'prose prose-neutral max-w-none prose-a:text-primary prose-h2:mt-0 prose-h2:mb-4 prose-h2:text-(length:--wp--preset--font-size--text-4-xl) prose-h2:font-medium prose-h2:leading-heading'
+		'prose prose-ufo-boilerplate max-w-none prose-a:text-primary prose-h2:mt-0 prose-h2:mb-4 prose-h2:text-(length:--wp--preset--font-size--text-4-xl) prose-h2:font-medium prose-h2:leading-heading'
 	);
 }
 
