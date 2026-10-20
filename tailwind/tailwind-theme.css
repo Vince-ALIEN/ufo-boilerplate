@@ -105,6 +105,25 @@
   --color-slate-900: oklch(20.8% 0.042 265.755);
   --color-slate-950: oklch(12.9% 0.042 264.695);
 
+	/* ── Décor (dégradés du contenu de départ) ────────────────
+	   Hero de la page d'accueil (content-frontpage.php) et halo
+	   des en-têtes de page / d'article (content-page.php,
+	   content-single.php). À adapter au rebranding, comme
+	   primary / secondary.
+	   ───────────────────────────────────────────────────────── */
+	--color-hero-glow-start: #ff80b5;
+	--color-hero-glow-end: #9089fc;
+	--color-header-halo-start: #7775d6;
+	--color-header-halo-end: #e935c1;
+
+	/* ── Typographie hors échelle theme.json ───────────────── */
+	/* Chiffre géant de la page 404. */
+	--text-display: 7rem;
+	--text-display-lg: 12rem;
+	/* Interligne des titres : même valeur que
+	   styles.elements.h2.typography.lineHeight dans theme.json. */
+	--leading-heading: 1.15;
+
 	/**
 	 * These are the default `font-family` theme variables included with
      * Tailwind. You can update them below by adding custom fonts at the

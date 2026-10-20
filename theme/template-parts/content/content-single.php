@@ -13,7 +13,7 @@
 
 	<header class="entry-content relative mx-auto mb-6">
 
-	<div class="bg-slate-900 duration-700 relative mb-[50px] h-[500px] animate-fade overflow-hidden rounded-xl animate-once animate-ease-in-out md:h-[400px] lg:h-[500px]">
+	<div class="bg-slate-900 duration-700 relative mb-12.5 h-125 animate-fade overflow-hidden rounded-xl animate-once animate-ease-in-out md:h-100 lg:h-125">
 		<?php
 		if ( has_post_thumbnail() ) {
 			the_post_thumbnail(
@@ -30,8 +30,8 @@
 				<circle r="512" cx="512" cy="512" fill="url(#827591b1-ce8c-4110-b064-7cb85a0b1217-single)" fill-opacity="0.7" />
 				<defs>
 					<radialGradient id="827591b1-ce8c-4110-b064-7cb85a0b1217-single">
-					<stop stop-color="#7775D6" />
-					<stop offset="1" stop-color="#E935C1" />
+					<stop class="text-header-halo-start" stop-color="currentColor" />
+					<stop offset="1" class="text-header-halo-end" stop-color="currentColor" />
 					</radialGradient>
 				</defs>
 				</svg>

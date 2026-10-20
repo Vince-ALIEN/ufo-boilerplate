@@ -10,7 +10,7 @@ $_ufo_categories = get_the_category();
 $_ufo_category   = ! empty( $_ufo_categories ) ? $_ufo_categories[0] : null;
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 px-8 pb-8 min-h-[480px]' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 px-8 pb-8 min-h-120' ); ?>>
 	<?php if ( has_post_thumbnail() ) : ?>
 		<?php
 		// wp_get_attachment_image ajoute width/height/srcset/sizes → pas de CLS.

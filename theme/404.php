@@ -27,7 +27,7 @@ get_header();
 	?>
 
 	<main id="main" class="mb-16 text-center">
-		<p class="not-prose font-primary text-[7rem] leading-none font-semibold text-primary/15 select-none sm:text-[12rem]" aria-hidden="true">404</p>
+		<p class="not-prose font-primary text-display leading-none font-semibold text-primary/15 select-none sm:text-display-lg" aria-hidden="true">404</p>
 
 		<p class="not-prose mx-auto mt-6 max-w-2xl text-lg/8 text-pretty text-foreground/70">
 			<?php esc_html_e( 'This page could not be found.', 'ufo-boilerplate' ); ?><br>

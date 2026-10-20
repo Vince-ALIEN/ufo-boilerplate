@@ -188,7 +188,7 @@ if ( ! class_exists( '_Ufo_Contact_Form7' ) ) :
 					$parent->removeChild( $p );
 				}
 			} else {
-				$input_base = 'block w-full bg-slate-100 text-slate-900 border border-background/[.09] rounded-md font-secondary text-sm py-[0.65rem] px-[0.9rem] transition-all duration-200 focus:outline-none focus:border-primary-800 focus:ring-[3px] focus:ring-primary-800/18 placeholder:text-slate-300';
+				$input_base = 'block w-full bg-slate-100 text-slate-900 border border-background/9 rounded-md font-secondary text-sm py-2.5 px-3.5 transition-all duration-200 focus:outline-none focus:border-primary-800 focus:ring-3 focus:ring-primary-800/18 placeholder:text-slate-300';
 
 				$elements_config = array(
 					'//span[contains(@class, "wpcf7-form-control-wrap")]' => 'block w-full',

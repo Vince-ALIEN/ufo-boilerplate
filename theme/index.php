@@ -41,7 +41,7 @@ get_header();
 					$_ufo_feat_categories = get_the_category();
 					$_ufo_feat_category   = ! empty( $_ufo_feat_categories ) ? $_ufo_feat_categories[0] : null;
 					?>
-				<article class="relative isolate flex flex-col justify-end overflow-hidden rounded-3xl bg-slate-900 px-8 pb-8 min-h-[600px] mb-8">
+				<article class="relative isolate flex flex-col justify-end overflow-hidden rounded-3xl bg-slate-900 px-8 pb-8 min-h-150 mb-8">
 					<?php if ( has_post_thumbnail() ) : ?>
 						<?php
 						// Image LCP de la page blog : chargée en priorité (pas de
