@@ -106,6 +106,26 @@
   --color-slate-900: oklch(20.8% 0.042 265.755);
   --color-slate-950: oklch(12.9% 0.042 264.695);
 
+	/* ── Blanc, noir et gris pour ufo-blocks ─────────────────
+	   Les blocs du plugin (logo slider, bento, FAQ) utilisent
+	   white / black / gray-* de la palette Tailwind par défaut,
+	   remise à zéro plus haut. white / black viennent de
+	   theme.json ; gray-* est un alias de slate-*.
+	   ───────────────────────────────────────────────────────── */
+	--color-white: var(--wp--preset--color--white);
+	--color-black: var(--wp--preset--color--black);
+	--color-gray-50: var(--color-slate-50);
+	--color-gray-100: var(--color-slate-100);
+	--color-gray-200: var(--color-slate-200);
+	--color-gray-300: var(--color-slate-300);
+	--color-gray-400: var(--color-slate-400);
+	--color-gray-500: var(--color-slate-500);
+	--color-gray-600: var(--color-slate-600);
+	--color-gray-700: var(--color-slate-700);
+	--color-gray-800: var(--color-slate-800);
+	--color-gray-900: var(--color-slate-900);
+	--color-gray-950: var(--color-slate-950);
+
 	/* ── Décor (dégradés du contenu de départ) ────────────────
 	   Hero de la page d'accueil (content-frontpage.php) et halo
 	   des en-têtes de page / d'article (content-page.php,
