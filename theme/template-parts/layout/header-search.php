@@ -52,7 +52,7 @@ $_ufo_input_id = 'header-search-input-' . $_ufo_args['id'];
 		  button. That wrapper also stretches over the bar's full
 		  height (`self-stretch` + `-my-2.5` cancelling the bar's
 		  `p-2.5`), so `top-full` is the bar's bottom edge — the same
-		  reference the mega-menu panels use (see class-navwalker.php)
+		  reference the mega-menu panels use (see class-header-nav-walker.php)
 		  — and `lg:mt-4` matches their gap (the inner card's `mt-4`;
 		  the outer panel's own `mt-4` is reset with `lg:mt-0`), whatever
 		  the logo's height;

@@ -47,9 +47,9 @@ for how services are wired up and loaded):
   image.
 * **Custom logo** (`class-custom-logo.php`) — registers `custom-logo` theme
   support for the header, cropped to 50×50 pixels. The footer logo
-  (`class-ufo-options.php`'s `ufo_footer_logo` setting) goes through the
+  (`class-options.php`'s `ufo_footer_logo` setting) goes through the
   same `WP_Customize_Cropped_Image_Control` crop step, at the same size.
-* **Breadcrumbs** (`class-breadcrumb.php`) — accessible, schema.org-annotated
+* **Breadcrumbs** (`breadcrumb.php`) — accessible, schema.org-annotated
   breadcrumb trail with Category Base support. Call `_ufo_the_breadcrumb()`
   to print it (run through `wp_kses()` with an allowlist that keeps the
   microdata); `_ufo_get_breadcrumb()` returns the raw string.
@@ -58,7 +58,7 @@ for how services are wired up and loaded):
   legal-menu bar. Fed by the `menu-2` / `menu-3` nav menus, the `sidebar-2`
   (Footer Contact) / `sidebar-3` (Footer Newsletter) widget areas,
   `_Ufo_Social_Media` and a self-hosted Website Carbon badge (`#wcb`).
-* **Contact Form 7 integration** (`class-contact-form-7.php`,
+* **Contact Form 7 integration** (`class-contact-form7.php`,
   `_Ufo_Contact_Form7`) — restyles CF7 markup with Tailwind (including a
   distinct newsletter-form variant), replaces the submit `<input>` with a
   `<button>` + Lucide icon, wraps the form in a `bg-slate-200 rounded-xl
@@ -100,18 +100,24 @@ for how services are wired up and loaded):
   are `require`d directly from `functions.php`, alongside `class-loader.php`
   and `cta-buttons.php`.
 * **`theme/inc/class-loader.php`** is the boot file for everything else
-  (read its own docblock first when adding a feature). No autoloader: it
-  does two things:
-  - `require`s every file under `inc/features/`, `inc/navigation/`,
-    `inc/ajax-filter/` and `inc/truncate/` (a class or plain functions,
-    doesn't matter which) — drop a new file into one of those and it's
-    loaded, no wiring needed. Anything else in `inc/` (currently just
-    `class-speculative.php`) needs a line of its own in the file.
+  (read its own docblock first when adding a feature). It does three
+  things:
+  - Registers the autoloader (`inc/autoload.php`): a `_Ufo_*` class or
+    interface is loaded from its own file the first time it is used. The
+    file name follows the WordPress convention — `_Ufo_Header_Cta` →
+    `class-header-cta.php`, `_Ufo_Service` → `interface-service.php` — and
+    is looked up in `inc/`, `inc/features/`, `inc/navigation/` and
+    `inc/ajax-filter/`. A new class only needs a correctly named file.
+  - `require`s the files of plain functions and hook registrations listed
+    in `$_ufo_function_files` (breadcrumb, menu custom fields, ajax filter,
+    truncate), which cannot be autoloaded. A new one needs a line there;
+    only class files are named `class-*.php`.
   - Boots services: a class implementing the `_Ufo_Service` interface
     (`inc/interface-service.php` — one `register()` method that wires that
     feature's WordPress hooks) is activated by adding its name to the
     `$_ufo_services` array — the one bit of wiring a new feature can't
-    avoid, since loading the file only runs its top-level code.
+    avoid. A name that matches no file raises a `_doing_it_wrong()` notice
+    when `WP_DEBUG` is on.
 * **`inc/features/`** holds the Customizer-registered services listed above
   (header CTA, social media, front-page hero, custom logo, image block,
   breadcrumbs, Contact Form 7). Despite the folder's previous name
@@ -164,8 +170,8 @@ for how services are wired up and loaded):
   `composer php:lint:autofix` runs phpcbf. The theme is clean against
   `WordPress-Extra` + `WordPress-Docs` — see `phpcs.xml.dist`. Composer is
   dev tooling only (phpcs, wpcs, `wp i18n make-pot`) — it's never a runtime
-  dependency of the theme itself, which has no autoloader (see
-  `class-loader.php` above).
+  dependency of the theme itself, whose classes are loaded by its own
+  autoloader (see `class-loader.php` above).
 * The theme follows the `_s` / `_tw` leading-underscore prefix convention
   (`_ufo_*` functions, `_Ufo_*` classes); `phpcs.xml.dist` is configured to
   accept it, and `.git-blame-ignore-revs` hides the one-off phpcbf reformat

@@ -9,8 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Charger la classe principale.
-require_once get_template_directory() . '/inc/ajax-filter/class-ajax-filter.php';
+// La classe principale (_Ufo_Ajax_Filter) est chargée par inc/autoload.php.
 
 // Charger les fonctions additionnelles.
 require_once get_template_directory() . '/inc/ajax-filter/functions.php';

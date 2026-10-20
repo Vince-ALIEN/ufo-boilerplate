@@ -13,7 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Only load this class in admin context where Walker_Nav_Menu_Edit is available.
+// Autoloaded only when core asks for this walker (menu screens); load the
+// parent class first in case core has not loaded it yet.
 if ( ! class_exists( 'Walker_Nav_Menu_Edit' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/nav-menu.php';
 }

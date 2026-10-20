@@ -38,7 +38,7 @@ $ufo_cta_url  = _Ufo_Header_Cta::url();
 					 * desktop search below), so each top-level `<li>`'s bottom edge
 					 * matches the header's: regular dropdowns (anchored to their `<li>`)
 					 * and mega menus (anchored to the wrapper above) then both open
-					 * from the same `lg:top-full` line. See class-navwalker.php.
+					 * from the same `lg:top-full` line. See class-header-nav-walker.php.
 					 */
 					wp_nav_menu(
 						array(

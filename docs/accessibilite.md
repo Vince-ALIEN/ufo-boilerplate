@@ -28,7 +28,7 @@ d'écran, `prefers-reduced-motion`, audit **desktop**) a mis en évidence
   focus à l'ouverture/fermeture des panneaux.
 - Vérification du respect de `prefers-reduced-motion` (CSS + JS).
 - Revue de code : `theme/header.php`, `template-parts/layout/header-content.php`,
-  `inc/navigation/class-navwalker.php`, `javascript/ui.js`,
+  `inc/navigation/class-header-nav-walker.php`, `javascript/ui.js`,
   `tailwind/custom/*.css`.
 
 Hors périmètre (extensions distinctes, non livrées avec le thème) :
@@ -109,7 +109,7 @@ enveloppé dans `<nav aria-label="Mobile">` (libellé distinct de la navigation
 
 ### 3.5 — `aria-haspopup` mensonger sur les boutons de dropdown _(WCAG 4.1.2 — Corrigé)_
 
-**Constat.** `class-navwalker.php` posait `aria-haspopup="true"` (équivalent
+**Constat.** `class-header-nav-walker.php` posait `aria-haspopup="true"` (équivalent
 `menu`) sur chaque bouton, alors que le panneau n'expose pas de `role="menu"` et
 ne gère pas la navigation par flèches : les lecteurs d'écran annonçaient « menu »
 à tort. Par ailleurs Échap ne fermait le panneau que si le focus était **sur le
@@ -117,7 +117,7 @@ bouton**, pas à l'intérieur du panneau.
 
 **Correctif.**
 
-- `class-navwalker.php` : suppression de `aria-haspopup`. C'est un widget
+- `class-header-nav-walker.php` : suppression de `aria-haspopup`. C'est un widget
   _disclosure_ ; `aria-expanded` + `aria-controls` suffisent et sont désormais
   tous deux présents.
 - `aria-controls` ajouté, pointant vers l'`id` du panneau. Le menu étant rendu
@@ -181,7 +181,7 @@ Lighthouse desktop repasse à **100**.
 | `theme/header.php` | classe `skip-link` sur le lien d'évitement |
 | `tailwind/custom/base.css` | `@media (prefers-reduced-motion)` global + `.skip-link:focus` |
 | `javascript/ui.js` | helpers `prefersReducedMotion` / `moveFocusTo` / `getFocusable` ; focus du menu mobile (entrée/sortie + cycle Tab) ; Échap dropdown au niveau `<li>` ; focus + `prefers-reduced-motion` sur les ancres internes |
-| `theme/inc/navigation/class-navwalker.php` | préfixe d'`id` d'instance ; suppression `aria-haspopup` ; ajout `aria-controls` + `id` de panneau |
+| `theme/inc/navigation/class-header-nav-walker.php` | préfixe d'`id` d'instance ; suppression `aria-haspopup` ; ajout `aria-controls` + `id` de panneau |
 | `theme/template-parts/layout/header-content.php` | `<nav aria-label="Mobile">` ; `items_wrap` avec `<ul>` ; padding `p-2.5` (débordement burger, corrigé précédemment) |
 
 > Sorties de build (`theme/style.css`, `theme/js/*.min.js`) : régénérées par
