@@ -18,6 +18,9 @@
 
 @source "../../../plugins/ufo-post-carousel/src/**/*.php";
 
+/* ufo-modale : ses classes Tailwind sont regroupées dans ce seul fichier. */
+@source "../../../plugins/ufo-modale/src/ufo-modale/classes.js";
+
 /* Exclude the Markdown docs: their prose would otherwise generate classes. */
 @source not "../docs";
 @source not "../CLAUDE.md";
