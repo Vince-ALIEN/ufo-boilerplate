@@ -20,6 +20,7 @@
 
 /* Exclude the Markdown docs: their prose would otherwise generate classes. */
 @source not "../docs";
+@source not "../CLAUDE.md";
 
 /* Plugins Ufo optionnels (ufo-highlight, ufo-splide-blocks,
    ufo-horizontal-scroll-section, ufo-post-carousel) : ces plugins ne sont pas
