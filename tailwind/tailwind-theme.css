@@ -7,8 +7,16 @@
  /**
  * Add your plugins folder
  */
-@source "../../../plugins/ufo-blocks/src/**/*.js";
-@source "../../../plugins/ufo-blocks/src/**/*.php";
+@source "../../../plugins/ufo-tools-blocks/src/**/*.js";
+@source "../../../plugins/ufo-tools-blocks/src/**/*.php";
+
+@source "../../../plugins/ufo-tools-bento/src/**/*.js";
+@source "../../../plugins/ufo-tools-bento/src/**/*.php";
+
+@source "../../../plugins/ufo-tools-time/src/**/*.js";
+
+@source "../../../plugins/ufo-tools-logo-slider/src/**/*.js";
+@source "../../../plugins/ufo-tools-logo-slider/src/**/*.php";
 
 @source "../../../plugins/ufo-highlight/src/**/*.js";
 
@@ -29,7 +37,7 @@
    ufo-horizontal-scroll-section, ufo-post-carousel) : ces plugins ne sont pas
    installés dans cet environnement. Une fois un projet doté de l'un d'eux,
    ajoutez une ligne @source pointant vers son dossier src/, sur le modèle des
-   deux lignes ufo-blocks ci-dessus — ne pas mettre un glob contenant "**"
+   deux lignes ufo-tools-blocks ci-dessus — ne pas mettre un glob contenant "**"
    suivi de "/" dans un commentaire CSS, cela le termine prématurément. */
 
 @source inline("md:col-span-{1,2,3,4,5,6}");
